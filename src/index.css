@@ -20,15 +20,27 @@
     @apply max-w-none text-gray-700;
   }
   .prose-mei h2 {
-    @apply text-2xl font-bold text-mei-dark mt-8 mb-4;
+    @apply text-2xl font-bold text-mei-dark mt-8 mb-4 scroll-mt-24;
   }
   .prose-mei h3 {
-    @apply text-xl font-bold text-mei-dark mt-6 mb-3;
+    @apply text-xl font-semibold text-gray-800 mt-6 mb-3;
   }
   .prose-mei p {
     @apply mb-4 leading-relaxed;
   }
   .prose-mei ul {
     @apply list-disc pl-6 mb-6 space-y-2;
+  }
+  .prose-mei li {
+    @apply leading-relaxed;
+  }
+  .prose-mei strong {
+    @apply font-bold text-mei-dark;
+  }
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 }

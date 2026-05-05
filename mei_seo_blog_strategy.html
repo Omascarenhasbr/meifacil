@@ -1,0 +1,205 @@
+
+<h2 class="sr-only">Mapa estratégico de categorias de MEI, como pesquisam e quais artigos criar para ranquear no Google</h2>
+<style>
+.tab-btn { padding: 7px 16px; font-size: 13px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); cursor: pointer; background: transparent; color: var(--color-text-secondary); }
+.tab-btn.active { background: var(--color-background-secondary); color: var(--color-text-primary); font-weight: 500; border-color: var(--color-border-primary); }
+.cat-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 14px 16px; margin-bottom: 10px; }
+.cat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.cat-badge { font-size: 11px; padding: 2px 8px; border-radius: var(--border-radius-md); font-weight: 500; }
+.kw-tag { display: inline-block; font-size: 11px; padding: 3px 8px; border-radius: var(--border-radius-md); margin: 2px; background: var(--color-background-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border-tertiary); }
+.kw-tag.hot { background: #FAEEDA; color: #633806; border-color: #FAC775; }
+.article-row { display: flex; align-items: flex-start; gap: 8px; padding: 7px 0; border-top: 0.5px solid var(--color-border-tertiary); }
+.art-num { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); min-width: 20px; margin-top: 1px; }
+.art-title { font-size: 13px; color: var(--color-text-primary); flex: 1; line-height: 1.4; }
+.art-meta { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+.seo-rule { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; margin-bottom: 8px; }
+.rule-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; }
+.rule-body { font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.6; }
+.panel { display: none; }
+.panel.active { display: block; }
+.send-btn { font-size: 12px; padding: 5px 12px; margin-top: 10px; }
+</style>
+
+<div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px;">
+  <button class="tab-btn active" onclick="switchTab('categorias')">Categorias de MEI</button>
+  <button class="tab-btn" onclick="switchTab('blog')">Plano de blog</button>
+  <button class="tab-btn" onclick="switchTab('seo')">Regras de SEO</button>
+</div>
+
+<div id="tab-categorias" class="panel active">
+
+  <div class="cat-card">
+    <div class="cat-header">
+      <div style="width:32px;height:32px;border-radius:50%;background:#FAEEDA;display:flex;align-items:center;justify-content:center;font-size:14px;">🛵</div>
+      <div style="flex:1">
+        <p style="margin:0;font-size:14px;font-weight:500;color:var(--color-text-primary);">Motoristas e entregadores de app</p>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);">Uber, 99, iFood, Rappi, Loggi — maior volume de buscas</p>
+      </div>
+      <span class="cat-badge" style="background:#FAEEDA;color:#633806;">Prioridade 1</span>
+    </div>
+    <div style="margin-bottom:8px;">
+      <span class="kw-tag hot">MEI para Uber 2026</span>
+      <span class="kw-tag hot">DAS MEI motorista app</span>
+      <span class="kw-tag hot">CNPJ para dirigir Uber</span>
+      <span class="kw-tag">CNAE motorista aplicativo</span>
+      <span class="kw-tag">Uber aceita MEI</span>
+      <span class="kw-tag">limite faturamento MEI motorista</span>
+    </div>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Dor principal: precisam do CNPJ ativo para trabalhar nas plataformas. Buscam respostas urgentes e práticas. Alta intenção, baixíssima paciência para texto longo.</p>
+  </div>
+
+  <div class="cat-card">
+    <div class="cat-header">
+      <div style="width:32px;height:32px;border-radius:50%;background:#EAF3DE;display:flex;align-items:center;justify-content:center;font-size:14px;">🔧</div>
+      <div style="flex:1">
+        <p style="margin:0;font-size:14px;font-weight:500;color:var(--color-text-primary);">Autônomos e prestadores de serviço</p>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);">Eletricistas, pintores, cabeleireiros, diaristas, designers, TI</p>
+      </div>
+      <span class="cat-badge" style="background:#EAF3DE;color:#27500A;">Prioridade 2</span>
+    </div>
+    <div style="margin-bottom:8px;">
+      <span class="kw-tag hot">quanto cobrar por hora freelancer</span>
+      <span class="kw-tag hot">precificação serviço autônomo</span>
+      <span class="kw-tag">recibo de serviço MEI</span>
+      <span class="kw-tag">nota fiscal MEI serviço</span>
+      <span class="kw-tag">MEI pode emitir nota</span>
+    </div>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Dor principal: não sabem quanto cobrar e perdem dinheiro. Buscam calculadoras e modelos práticos. Ficam mais tempo no site — boa taxa de engajamento.</p>
+  </div>
+
+  <div class="cat-card">
+    <div class="cat-header">
+      <div style="width:32px;height:32px;border-radius:50%;background:#E6F1FB;display:flex;align-items:center;justify-content:center;font-size:14px;">🛒</div>
+      <div style="flex:1">
+        <p style="margin:0;font-size:14px;font-weight:500;color:var(--color-text-primary);">Comerciantes e revendedores</p>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);">Vendedores de marmita, artesãos, revendas, mercadinhos</p>
+      </div>
+      <span class="cat-badge" style="background:#E6F1FB;color:#0C447C;">Prioridade 3</span>
+    </div>
+    <div style="margin-bottom:8px;">
+      <span class="kw-tag hot">MEI pode vender pelo Instagram</span>
+      <span class="kw-tag">limite faturamento MEI comércio</span>
+      <span class="kw-tag">MEI marmita pode faturar quanto</span>
+      <span class="kw-tag">nota fiscal MEI venda produto</span>
+    </div>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Dor principal: dúvidas sobre o que pode e não pode vender como MEI, limite de faturamento e emissão de nota para marketplace (Mercado Livre, Shopee).</p>
+  </div>
+
+  <div class="cat-card">
+    <div class="cat-header">
+      <div style="width:32px;height:32px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-size:14px;">💻</div>
+      <div style="flex:1">
+        <p style="margin:0;font-size:14px;font-weight:500;color:var(--color-text-primary);">MEI digital e criativo</p>
+        <p style="margin:0;font-size:11px;color:var(--color-text-secondary);">Designers, devs, social media, influencers, criadores de conteúdo</p>
+      </div>
+      <span class="cat-badge" style="background:#EEEDFE;color:#3C3489;">Crescimento</span>
+    </div>
+    <div style="margin-bottom:8px;">
+      <span class="kw-tag hot">influencer pode ser MEI</span>
+      <span class="kw-tag hot">MEI para receber do exterior</span>
+      <span class="kw-tag">MEI designer freelancer</span>
+      <span class="kw-tag">como receber dólar como MEI</span>
+    </div>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin:0;">Dor principal: dúvidas sobre receber de plataformas internacionais (Hotmart, Kiwify, YouTube) e se podem ser MEI. Público jovem, busca muito por voz e mobile.</p>
+  </div>
+
+  <button class="send-btn" onclick="sendPrompt('Quero criar o primeiro artigo do blog para o público de motoristas de app MEI')">Criar artigo para motoristas ↗</button>
+</div>
+
+<div id="tab-blog" class="panel">
+  <p style="font-size:13px;color:var(--color-text-secondary);margin:0 0 12px;">Ordem de publicação recomendada — do mais urgente ao mais amplo:</p>
+
+  <div class="cat-card">
+    <p style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:0 0 8px;">MÊS 1 — Capturar tráfego urgente</p>
+    <div class="article-row">
+      <span class="art-num">#1</span>
+      <div><p class="art-title">MEI para Uber: por que o DAS precisa estar em dia para dirigir em 2026</p><p class="art-meta">URL: /blog/mei-uber-das-ativo · Keyword: "MEI para Uber 2026" · Alta urgência, baixa concorrência</p></div>
+    </div>
+    <div class="article-row">
+      <span class="art-num">#2</span>
+      <div><p class="art-title">CNAE para motorista de app: qual código usar no Uber, 99 e iFood</p><p class="art-meta">URL: /blog/cnae-motorista-aplicativo · Keyword: "CNAE motorista app" · Pergunta recorrente sem resposta clara</p></div>
+    </div>
+    <div class="article-row">
+      <span class="art-num">#3</span>
+      <div><p class="art-title">DASN-SIMEI 2026: o que é, prazo e como declarar sem erros</p><p class="art-meta">URL: /blog/dasn-simei-2026 · Keyword: "DASN SIMEI 2026" · Sazonal — explode em abril/maio</p></div>
+    </div>
+  </div>
+
+  <div class="cat-card">
+    <p style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:0 0 8px;">MÊS 2 — Expandir para autônomos</p>
+    <div class="article-row">
+      <span class="art-num">#4</span>
+      <div><p class="art-title">Como calcular quanto cobrar por hora como autônomo ou freelancer</p><p class="art-meta">URL: /blog/calcular-preco-hora-autonomo · Keyword: "quanto cobrar hora freelancer"</p></div>
+    </div>
+    <div class="article-row">
+      <span class="art-num">#5</span>
+      <div><p class="art-title">MEI pode emitir nota fiscal? Quando é obrigatório e como fazer</p><p class="art-meta">URL: /blog/mei-nota-fiscal · Keyword: "MEI nota fiscal obrigatório"</p></div>
+    </div>
+    <div class="article-row">
+      <span class="art-num">#6</span>
+      <div><p class="art-title">O que acontece se eu ultrapassar o limite de R$ 81 mil como MEI</p><p class="art-meta">URL: /blog/ultrapassar-limite-mei · Keyword: "ultrapassar limite MEI consequências"</p></div>
+    </div>
+  </div>
+
+  <div class="cat-card">
+    <p style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:0 0 8px;">MESES 3–4 — Autoridade e cauda longa</p>
+    <div class="article-row">
+      <span class="art-num">#7</span>
+      <div><p class="art-title">Influencer pode ser MEI? Como receber do YouTube, Hotmart e redes sociais</p><p class="art-meta">URL: /blog/influencer-mei · Keyword: "influencer MEI 2026"</p></div>
+    </div>
+    <div class="article-row">
+      <span class="art-num">#8</span>
+      <div><p class="art-title">MEI aposentadoria: quanto tempo precisa contribuir e como funciona</p><p class="art-meta">URL: /blog/aposentadoria-mei · Reforça a ferramenta de simulação já no site</p></div>
+    </div>
+    <div class="article-row">
+      <span class="art-num">#9</span>
+      <div><p class="art-title">Salário mínimo 2026 e o impacto no DAS MEI: quanto vai pagar</p><p class="art-meta">URL: /blog/das-mei-salario-minimo-2026 · Artigo sazonal — atualizar todo janeiro</p></div>
+    </div>
+  </div>
+
+  <button class="send-btn" onclick="sendPrompt('Escreva o artigo #1 completo: MEI para Uber - por que o DAS precisa estar em dia para dirigir em 2026, com SEO otimizado')">Escrever artigo #1 agora ↗</button>
+</div>
+
+<div id="tab-seo" class="panel">
+  <p style="font-size:13px;color:var(--color-text-secondary);margin:0 0 12px;">Regras que devem ser seguidas em TODOS os artigos do blog:</p>
+
+  <div class="seo-rule">
+    <p class="rule-title">H1 deve conter a keyword exata + ano</p>
+    <p class="rule-body">Ex: "MEI para Uber: por que o DAS precisa estar em dia em 2026". O Google usa o H1 como principal sinal de relevância. Sem keyword no H1 = artigo invisível.</p>
+  </div>
+  <div class="seo-rule">
+    <p class="rule-title">Responda a pergunta nos primeiros 100 palavras</p>
+    <p class="rule-body">O leitor MEI é impaciente. Se não encontrar a resposta no início, sai em 10 segundos. Alta taxa de rejeição = Google entende que o artigo é ruim.</p>
+  </div>
+  <div class="seo-rule">
+    <p class="rule-title">Inclua FAQ ao final com schema markup</p>
+    <p class="rule-body">Perguntas no formato "O que é...? / Quando...? / Quanto...?" aparecem em destaque no Google como "rich snippets". Aumentam muito o CTR sem precisar estar no top 1.</p>
+  </div>
+  <div class="seo-rule">
+    <p class="rule-title">Link interno para a ferramenta relacionada</p>
+    <p class="rule-body">Todo artigo sobre DAS deve linkar para a Calculadora DAS. Artigo sobre limite deve linkar para o Simulador de Limite. Isso mantém o leitor no site e aumenta o tempo de sessão.</p>
+  </div>
+  <div class="seo-rule">
+    <p class="rule-title">Meta description de 150 caracteres com CTA</p>
+    <p class="rule-body">Ex: "Saiba se o MEI precisa ter o DAS em dia para dirigir no Uber em 2026. Calcule seu DAS grátis e veja o valor atualizado." CTA no final aumenta o clique nos resultados.</p>
+  </div>
+  <div class="seo-rule">
+    <p class="rule-title">Comprimento ideal: 800 a 1.200 palavras</p>
+    <p class="rule-body">Para o público MEI, artigos curtos e diretos ranqueiam melhor que textos longos. O leitor não quer um manual — quer a resposta em 3 minutos de leitura.</p>
+  </div>
+  <div class="seo-rule">
+    <p class="rule-title">Atualizar artigos sazonais todo janeiro</p>
+    <p class="rule-body">DAS muda todo ano com o salário mínimo. Artigos com o ano correto no título têm CTR muito maior. "DAS MEI 2026" bate "DAS MEI 2024" em cliques sem esforço.</p>
+  </div>
+
+  <button class="send-btn" onclick="sendPrompt('Me dá um template HTML completo para os artigos do blog do meifacil.blog já com as regras de SEO aplicadas')">Criar template de artigo ↗</button>
+</div>
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
