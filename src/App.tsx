@@ -28,12 +28,65 @@ const menuItems = [
   { id: 'blog', label: 'Blog', icon: BookOpen, desc: 'Artigos & Guias' },
 ];
 
+/** Derive initial state from the current URL path */
+function parseInitialRoute(): { view: string; slug: string | null } {
+  const path = window.location.pathname;
+  // /blog/:slug
+  const postMatch = path.match(/^\/blog\/([^/]+)\/?$/);
+  if (postMatch) return { view: 'blog-post', slug: postMatch[1] };
+  // /blog
+  if (path === '/blog' || path === '/blog/') return { view: 'blog', slug: null };
+  // / or anything else → dashboard
+  return { view: 'home', slug: null };
+}
+
 export default function App() {
-  const [view, setView] = useState('home');
+  const initial = parseInitialRoute();
+  const [view, setViewState] = useState(initial.view);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState<string | null>(null);
-  const [blogSlug, setBlogSlug] = useState<string | null>(null);
+  const [blogSlug, setBlogSlugState] = useState<string | null>(initial.slug);
 
+  /** Canonical URL for each internal view */
+  function viewToPath(v: string, slug: string | null): string {
+    if (v === 'blog-post' && slug) return `/blog/${slug}`;
+    if (v === 'blog') return '/blog';
+    return '/';
+  }
+
+  /** Wrap setters so every navigation also updates the browser URL */
+  function setView(v: string) {
+    setViewState(v);
+    const path = viewToPath(v, blogSlug);
+    if (window.location.pathname !== path) {
+      window.history.pushState({ view: v, slug: blogSlug }, '', path);
+    }
+  }
+
+  function setBlogSlug(slug: string | null) {
+    setBlogSlugState(slug);
+  }
+
+  /** Combined helper used when navigating to a blog post */
+  function navigateToPost(slug: string) {
+    setBlogSlugState(slug);
+    setViewState('blog-post');
+    const path = `/blog/${slug}`;
+    if (window.location.pathname !== path) {
+      window.history.pushState({ view: 'blog-post', slug }, '', path);
+    }
+  }
+
+  /** Combined helper used when going back to the blog list */
+  function navigateToBlog() {
+    setBlogSlugState(null);
+    setViewState('blog');
+    if (window.location.pathname !== '/blog') {
+      window.history.pushState({ view: 'blog', slug: null }, '', '/blog');
+    }
+  }
+
+  // Scroll to top and update document title on every view change
   useEffect(() => {
     window.scrollTo(0, 0);
     
@@ -53,6 +106,32 @@ export default function App() {
       document.title = titles[view] || 'MEI Fácil — Hub de Ferramentas para MEI e Autônomo';
     }
   }, [view]);
+
+  // Keep URL in sync when pushState navigation happens (e.g. after setBlogSlug + setView)
+  useEffect(() => {
+    const path = viewToPath(view, blogSlug);
+    if (window.location.pathname !== path) {
+      window.history.replaceState({ view, slug: blogSlug }, '', path);
+    }
+  }, [view, blogSlug]);
+
+  // Handle browser back / forward
+  useEffect(() => {
+    const onPopState = (e: PopStateEvent) => {
+      const state = e.state as { view: string; slug: string | null } | null;
+      if (state) {
+        setBlogSlugState(state.slug);
+        setViewState(state.view);
+      } else {
+        // Fallback: re-parse from URL
+        const parsed = parseInitialRoute();
+        setBlogSlugState(parsed.slug);
+        setViewState(parsed.view);
+      }
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
 
   const modalData: Record<string, { title: string, content: ReactNode }> = {
     docs: {
@@ -231,7 +310,7 @@ export default function App() {
           </button>
           <button onClick={() => setActiveModal('docs')} className="hover:text-green-300 transition-colors uppercase">Guias & Docs</button>
           <button
-            onClick={() => { setBlogSlug(null); setView('blog'); }}
+            onClick={() => navigateToBlog()}
             className={`transition-colors hover:text-mei-light pb-1 ${view === 'blog' || view === 'blog-post' ? 'text-mei-light border-b-2 border-mei-light' : ''}`}
           >
             Blog
@@ -262,8 +341,8 @@ export default function App() {
                   <button
                     key={item.id}
                     onClick={() => { 
-                      if (item.id === 'blog') setBlogSlug(null);
-                      setView(item.id);
+                      if (item.id === 'blog') navigateToBlog();
+                      else setView(item.id);
                     }}
                     className={`w-full text-left p-3 rounded-xl flex items-center gap-3 transition-all group ${
                       isActive
@@ -306,8 +385,8 @@ export default function App() {
                   <button 
                     key={item.id} 
                     onClick={() => { 
-                      if (item.id === 'blog') setBlogSlug(null);
-                      setView(item.id); 
+                      if (item.id === 'blog') navigateToBlog();
+                      else setView(item.id); 
                       setIsMenuOpen(false); 
                     }}
                     className={`w-full flex items-center gap-4 p-5 rounded-2xl transition text-left font-bold ${view === item.id ? 'bg-mei-light text-mei-dark' : 'text-white hover:bg-green-800'}`}
@@ -336,7 +415,7 @@ export default function App() {
             <div>
               <p className="text-[10px] font-mono text-mei-light mb-1 italic uppercase tracking-widest font-bold">
                 {view === 'blog-post'
-                  ? <span>Home / <button onClick={() => { setBlogSlug(null); setView('blog'); }} className="hover:underline">Blog</button> / Artigo</span>
+                  ? <span>Home / <button onClick={() => navigateToBlog()} className="hover:underline">Blog</button> / Artigo</span>
                   : `Home / Ferramentas / ${menuItems.find(i => i.id === view)?.label || 'Dashboard'}`
                 }
               </p>
@@ -368,14 +447,14 @@ export default function App() {
             {view === 'aposentadoria' && <RetirementSimulator />}
             {view === 'blog' && (
               <BlogList
-                onNavigateToPost={(slug) => { setBlogSlug(slug); setView('blog-post'); }}
+                onNavigateToPost={(slug) => navigateToPost(slug)}
               />
             )}
             {view === 'blog-post' && blogSlug && (
               <BlogPost
                 slug={blogSlug}
-                onBack={() => { setBlogSlug(null); setView('blog'); }}
-                onNavigateToPost={(slug) => { setBlogSlug(slug); setView('blog-post'); }}
+                onBack={() => navigateToBlog()}
+                onNavigateToPost={(slug) => navigateToPost(slug)}
                 onNavigateTool={(toolId) => setView(toolId)}
               />
             )}
