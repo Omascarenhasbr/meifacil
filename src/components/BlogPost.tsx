@@ -5,11 +5,12 @@
 
 import { useEffect, useState, useMemo } from 'react';
 import { motion } from 'motion/react';
+import { useParams } from 'react-router-dom';
 import { ArrowLeft, Clock, Eye, ChevronRight, Hash, BookOpen, ExternalLink, Flame } from 'lucide-react';
 import { posts, getCategoryStyle, formatDate, getRelatedPosts } from '../data/posts';
 
 interface BlogPostProps {
-  slug: string;
+  slug?: string;
   onBack: () => void;
   onNavigateToPost: (slug: string) => void;
   onNavigateTool: (toolId: string) => void;
@@ -25,7 +26,9 @@ function extractH2Headings(html: string): { id: string; text: string }[] {
   return headings;
 }
 
-export function BlogPost({ slug, onBack, onNavigateToPost, onNavigateTool }: BlogPostProps) {
+export function BlogPost({ slug: slugProp, onBack, onNavigateToPost, onNavigateTool }: BlogPostProps) {
+  const { slug: slugParam } = useParams<{ slug: string }>();
+  const slug = slugProp ?? slugParam ?? '';
   const post = posts.find(p => p.slug === slug);
   const [views, setViews] = useState(post?.views ?? 0);
 

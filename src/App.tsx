@@ -5,8 +5,9 @@
 
 import { useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
+import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { Calculator, TrendingUp, Clock, Receipt, CheckSquare, UserRound, Menu, X, ChevronRight, LayoutDashboard, BookOpen } from 'lucide-react';
+import { Calculator, TrendingUp, Clock, Receipt, CheckSquare, UserRound, Menu, X, LayoutDashboard, BookOpen } from 'lucide-react';
 import { Home } from './components/Home';
 import { DasCalculator } from './components/DasCalculator';
 import { LimitSimulator } from './components/LimitSimulator';
@@ -18,120 +19,68 @@ import { BlogList } from './components/BlogList';
 import { BlogPost } from './components/BlogPost';
 
 const menuItems = [
-  { id: 'home', label: 'Dashboard', icon: LayoutDashboard },
-  { id: 'das', label: 'Calculadora DAS', icon: Calculator, desc: 'Impostos Mensais' },
-  { id: 'limite', label: 'Limite de Receita', icon: TrendingUp, desc: 'Faturamento Anual' },
-  { id: 'preco', label: 'Precificação PJ', icon: Clock, desc: 'Cálculo de Lucro' },
-  { id: 'recibo', label: 'Emissor de Recibo', icon: Receipt, desc: 'Documentos' },
-  { id: 'obrigacoes', label: 'Checklist Mensal', icon: CheckSquare, desc: 'Agenda Fiscal' },
-  { id: 'aposentadoria', label: 'Aposentadoria', icon: UserRound, desc: 'Previdência' },
-  { id: 'blog', label: 'Blog', icon: BookOpen, desc: 'Artigos & Guias' },
+  { id: 'home',          label: 'Dashboard',         path: '/',                                        icon: LayoutDashboard },
+  { id: 'das',           label: 'Calculadora DAS',    path: '/calculadora-das-mei',                     icon: Calculator,    desc: 'Impostos Mensais' },
+  { id: 'limite',        label: 'Limite de Receita',  path: '/limite-faturamento-mei',                  icon: TrendingUp,    desc: 'Faturamento Anual' },
+  { id: 'preco',         label: 'Precificação PJ',    path: '/calculadora-preco-hora-autonomo',         icon: Clock,         desc: 'Cálculo de Lucro' },
+  { id: 'recibo',        label: 'Emissor de Recibo',  path: '/emissor-recibo-mei',                      icon: Receipt,       desc: 'Documentos' },
+  { id: 'obrigacoes',    label: 'Checklist Mensal',   path: '/checklist-mensal-mei',                    icon: CheckSquare,   desc: 'Agenda Fiscal' },
+  { id: 'aposentadoria', label: 'Aposentadoria',      path: '/simulador-aposentadoria-mei',             icon: UserRound,     desc: 'Previdência' },
+  { id: 'blog',          label: 'Blog',               path: '/blog',                                    icon: BookOpen,      desc: 'Artigos & Guias' },
 ];
 
-/** Derive initial state from the current URL path */
-function parseInitialRoute(): { view: string; slug: string | null } {
-  const path = window.location.pathname;
-  // /blog/:slug
-  const postMatch = path.match(/^\/blog\/([^/]+)\/?$/);
-  if (postMatch) return { view: 'blog-post', slug: postMatch[1] };
-  // /blog
-  if (path === '/blog' || path === '/blog/') return { view: 'blog', slug: null };
-  // / or anything else → dashboard
-  return { view: 'home', slug: null };
-}
+const pageTitles: Record<string, string> = {
+  '/':                                       'MEI Fácil | Dashboard de Gestão',
+  '/calculadora-das-mei':                    'Calculadora DAS MEI 2026 | Técnico',
+  '/limite-faturamento-mei':                 'Limite de Faturamento MEI | Monitoramento',
+  '/calculadora-preco-hora-autonomo':        'Precificação Autônomo | Ferramenta Profissional',
+  '/emissor-recibo-mei':                     'Emissor de Recibos Profissionais',
+  '/checklist-mensal-mei':                   'Checklist Fiscal MEI 2026',
+  '/simulador-aposentadoria-mei':            'Simulador Previdenciário MEI',
+  '/blog':                                   'Blog MEI Fácil | Artigos e Dicas para MEI',
+};
 
 export default function App() {
-  const initial = parseInitialRoute();
-  const [view, setViewState] = useState(initial.view);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState<string | null>(null);
-  const [blogSlug, setBlogSlugState] = useState<string | null>(initial.slug);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  /** Canonical URL for each internal view */
-  function viewToPath(v: string, slug: string | null): string {
-    if (v === 'blog-post' && slug) return `/blog/${slug}`;
-    if (v === 'blog') return '/blog';
-    return '/';
-  }
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
-  /** Wrap setters so every navigation also updates the browser URL */
-  function setView(v: string) {
-    setViewState(v);
-    const path = viewToPath(v, blogSlug);
-    if (window.location.pathname !== path) {
-      window.history.pushState({ view: v, slug: blogSlug }, '', path);
-    }
-  }
-
-  function setBlogSlug(slug: string | null) {
-    setBlogSlugState(slug);
-  }
-
-  /** Combined helper used when navigating to a blog post */
-  function navigateToPost(slug: string) {
-    setBlogSlugState(slug);
-    setViewState('blog-post');
-    const path = `/blog/${slug}`;
-    if (window.location.pathname !== path) {
-      window.history.pushState({ view: 'blog-post', slug }, '', path);
-    }
-  }
-
-  /** Combined helper used when going back to the blog list */
-  function navigateToBlog() {
-    setBlogSlugState(null);
-    setViewState('blog');
-    if (window.location.pathname !== '/blog') {
-      window.history.pushState({ view: 'blog', slug: null }, '', '/blog');
-    }
-  }
-
-  // Scroll to top and update document title on every view change
+  // Update document title on route change
   useEffect(() => {
     window.scrollTo(0, 0);
-    
-    const titles: Record<string, string> = {
-      home: 'MEI Fácil | Dashboard de Gestão',
-      das: 'Calculadora DAS MEI 2026 | Técnico',
-      limite: 'Limite de Faturamento MEI | Monitoramento',
-      preco: 'Precificação Autônomo | Ferramenta Profissional',
-      recibo: 'Emissor de Recibos Profissionais',
-      obrigacoes: 'Checklist Fiscal MEI 2026',
-      aposentadoria: 'Simulador Previdenciário MEI',
-      blog: 'Blog MEI Fácil | Artigos e Dicas para MEI',
-    };
-    
-    // blog-post title is set dynamically inside BlogPost component
-    if (view !== 'blog-post') {
-      document.title = titles[view] || 'MEI Fácil — Hub de Ferramentas para MEI e Autônomo';
+    // Blog posts set their own title inside BlogPost component
+    if (!location.pathname.startsWith('/blog/')) {
+      document.title = pageTitles[location.pathname] || 'MEI Fácil — Hub de Ferramentas para MEI e Autônomo';
     }
-  }, [view]);
+  }, [location.pathname]);
 
-  // Keep URL in sync when pushState navigation happens (e.g. after setBlogSlug + setView)
-  useEffect(() => {
-    const path = viewToPath(view, blogSlug);
-    if (window.location.pathname !== path) {
-      window.history.replaceState({ view, slug: blogSlug }, '', path);
-    }
-  }, [view, blogSlug]);
+  // Determine which menu item is active for sidebar highlight
+  const activeMenuId = (() => {
+    if (location.pathname === '/') return 'home';
+    if (location.pathname.startsWith('/blog')) return 'blog';
+    const found = menuItems.find(item => item.path === location.pathname);
+    return found?.id ?? 'home';
+  })();
 
-  // Handle browser back / forward
-  useEffect(() => {
-    const onPopState = (e: PopStateEvent) => {
-      const state = e.state as { view: string; slug: string | null } | null;
-      if (state) {
-        setBlogSlugState(state.slug);
-        setViewState(state.view);
-      } else {
-        // Fallback: re-parse from URL
-        const parsed = parseInitialRoute();
-        setBlogSlugState(parsed.slug);
-        setViewState(parsed.view);
-      }
-    };
-    window.addEventListener('popstate', onPopState);
-    return () => window.removeEventListener('popstate', onPopState);
-  }, []);
+  // Breadcrumb label
+  const breadcrumbLabel = (() => {
+    if (location.pathname.startsWith('/blog/')) return null; // blog post
+    const found = menuItems.find(item => item.path === location.pathname);
+    return found?.label ?? 'Dashboard';
+  })();
+
+  // Page heading
+  const pageHeading = (() => {
+    if (location.pathname.startsWith('/blog/')) return 'Artigo';
+    const found = menuItems.find(item => item.path === location.pathname);
+    return found?.label ?? 'Hub MEI Fácil';
+  })();
 
   const modalData: Record<string, { title: string, content: ReactNode }> = {
     docs: {
@@ -289,9 +238,9 @@ export default function App() {
       {/* Top Header Bar */}
       <header className="h-16 md:h-18 bg-mei-dark text-white flex items-center justify-between px-4 md:px-8 border-b-2 border-mei-light sticky top-0 z-50">
         <div className="flex items-center gap-3">
-          <button onClick={() => setView('home')} className="bg-mei-light p-1.5 rounded-lg transition-transform hover:rotate-6">
+          <Link to="/" className="bg-mei-light p-1.5 rounded-lg transition-transform hover:rotate-6">
             <Calculator className="w-6 h-6 text-mei-dark" />
-          </button>
+          </Link>
           <div className="hidden sm:block">
             <h1 className="text-xl font-bold tracking-tight leading-none uppercase flex items-center">
               MEI FÁCIL <span className="text-mei-light text-[10px] font-mono ml-2 border border-mei-light px-1.5 py-0.5 rounded uppercase">v2026.1</span>
@@ -302,19 +251,19 @@ export default function App() {
         </div>
 
         <nav className="hidden lg:flex gap-8 text-[10px] font-bold uppercase tracking-wider items-center">
-          <button 
-            onClick={() => setView('home')} 
-            className={`transition-colors hover:text-mei-light pb-1 ${view === 'home' ? 'text-mei-light border-b-2 border-mei-light' : ''}`}
+          <Link 
+            to="/" 
+            className={`transition-colors hover:text-mei-light pb-1 ${location.pathname === '/' ? 'text-mei-light border-b-2 border-mei-light' : ''}`}
           >
             Dashboard
-          </button>
+          </Link>
           <button onClick={() => setActiveModal('docs')} className="hover:text-green-300 transition-colors uppercase">Guias & Docs</button>
-          <button
-            onClick={() => navigateToBlog()}
-            className={`transition-colors hover:text-mei-light pb-1 ${view === 'blog' || view === 'blog-post' ? 'text-mei-light border-b-2 border-mei-light' : ''}`}
+          <Link
+            to="/blog"
+            className={`transition-colors hover:text-mei-light pb-1 ${location.pathname.startsWith('/blog') ? 'text-mei-light border-b-2 border-mei-light' : ''}`}
           >
             Blog
-          </button>
+          </Link>
           <button onClick={() => setActiveModal('support')} className="hover:text-green-300 transition-colors uppercase">Suporte</button>
         </nav>
 
@@ -336,14 +285,11 @@ export default function App() {
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-6 px-3">Sessões Ativas</p>
             <nav className="space-y-1">
               {menuItems.map((item) => {
-                const isActive = view === item.id || (item.id === 'blog' && view === 'blog-post');
+                const isActive = activeMenuId === item.id;
                 return (
-                  <button
+                  <Link
                     key={item.id}
-                    onClick={() => { 
-                      if (item.id === 'blog') navigateToBlog();
-                      else setView(item.id);
-                    }}
+                    to={item.path}
                     className={`w-full text-left p-3 rounded-xl flex items-center gap-3 transition-all group ${
                       isActive
                       ? 'bg-green-50 text-mei-dark border-l-4 border-mei-dark shadow-sm' 
@@ -355,7 +301,7 @@ export default function App() {
                       <span className="text-xs font-bold block">{item.label}</span>
                       <span className="text-[9px] font-medium opacity-60">{item.desc}</span>
                     </div>
-                  </button>
+                  </Link>
                 );
               })}
             </nav>
@@ -382,21 +328,17 @@ export default function App() {
             >
               <div className="p-6 space-y-4">
                 {menuItems.map(item => (
-                  <button 
-                    key={item.id} 
-                    onClick={() => { 
-                      if (item.id === 'blog') navigateToBlog();
-                      else setView(item.id); 
-                      setIsMenuOpen(false); 
-                    }}
-                    className={`w-full flex items-center gap-4 p-5 rounded-2xl transition text-left font-bold ${view === item.id ? 'bg-mei-light text-mei-dark' : 'text-white hover:bg-green-800'}`}
+                  <Link
+                    key={item.id}
+                    to={item.path}
+                    className={`w-full flex items-center gap-4 p-5 rounded-2xl transition text-left font-bold ${activeMenuId === item.id ? 'bg-mei-light text-mei-dark' : 'text-white hover:bg-green-800'}`}
                   >
                     <item.icon className="w-6 h-6" />
                     <div className="flex flex-col">
                       <span className="text-sm">{item.label}</span>
                       <span className="text-[10px] opacity-60 font-medium">{item.desc}</span>
                     </div>
-                  </button>
+                  </Link>
                 ))}
                 
                 <div className="pt-6 border-t border-green-800 space-y-2 mt-4 text-xs font-bold uppercase tracking-widest text-mei-light">
@@ -414,16 +356,16 @@ export default function App() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
               <p className="text-[10px] font-mono text-mei-light mb-1 italic uppercase tracking-widest font-bold">
-                {view === 'blog-post'
-                  ? <span>Home / <button onClick={() => navigateToBlog()} className="hover:underline">Blog</button> / Artigo</span>
-                  : `Home / Ferramentas / ${menuItems.find(i => i.id === view)?.label || 'Dashboard'}`
+                {location.pathname.startsWith('/blog/')
+                  ? <span>Home / <Link to="/blog" className="hover:underline">Blog</Link> / Artigo</span>
+                  : `Home / Ferramentas / ${breadcrumbLabel}`
                 }
               </p>
               <h2 className="text-3xl md:text-4xl font-serif italic text-mei-dark">
-                {view === 'blog-post' ? 'Artigo' : (menuItems.find(i => i.id === view)?.label || 'Hub MEI Fácil')}
+                {pageHeading}
               </h2>
             </div>
-            {view !== 'home' && view !== 'blog' && view !== 'blog-post' && (
+            {location.pathname !== '/' && !location.pathname.startsWith('/blog') && (
               <div className="bg-white px-5 py-2 rounded-full border border-gray-200 flex items-center gap-3 shadow-sm self-start">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
                 <span className="text-[10px] font-black uppercase tracking-tighter">Vencimento DAS: 20 de cada mês</span>
@@ -432,32 +374,24 @@ export default function App() {
           </div>
 
           <motion.div
-             key={view === 'blog-post' ? `blog-post-${blogSlug}` : view}
-             initial={{ opacity: 0, y: 10 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.3 }}
-             className="flex-1"
+            key={location.pathname}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="flex-1"
           >
-            {view === 'home' && <Home onNavigate={setView} />}
-            {view === 'das' && <DasCalculator />}
-            {view === 'limite' && <LimitSimulator />}
-            {view === 'preco' && <PricingCalculator />}
-            {view === 'recibo' && <ReceiptGenerator />}
-            {view === 'obrigacoes' && <Checklist />}
-            {view === 'aposentadoria' && <RetirementSimulator />}
-            {view === 'blog' && (
-              <BlogList
-                onNavigateToPost={(slug) => navigateToPost(slug)}
-              />
-            )}
-            {view === 'blog-post' && blogSlug && (
-              <BlogPost
-                slug={blogSlug}
-                onBack={() => navigateToBlog()}
-                onNavigateToPost={(slug) => navigateToPost(slug)}
-                onNavigateTool={(toolId) => setView(toolId)}
-              />
-            )}
+            <Routes>
+              <Route path="/"                                 element={<Home onNavigate={(id) => { const item = menuItems.find(m => m.id === id); if (item) navigate(item.path); }} />} />
+              <Route path="/calculadora-das-mei"             element={<DasCalculator />} />
+              <Route path="/limite-faturamento-mei"          element={<LimitSimulator />} />
+              <Route path="/calculadora-preco-hora-autonomo" element={<PricingCalculator />} />
+              <Route path="/emissor-recibo-mei"              element={<ReceiptGenerator />} />
+              <Route path="/checklist-mensal-mei"            element={<Checklist />} />
+              <Route path="/simulador-aposentadoria-mei"     element={<RetirementSimulator />} />
+              <Route path="/blog"                            element={<BlogList onNavigateToPost={(slug) => navigate(`/blog/${slug}`)} />} />
+              <Route path="/blog/:slug"                      element={<BlogPost onBack={() => navigate('/blog')} onNavigateToPost={(slug) => navigate(`/blog/${slug}`)} onNavigateTool={(toolId) => { const item = menuItems.find(m => m.id === toolId); if (item) navigate(item.path); }} />} />
+              <Route path="*"                                element={<Home onNavigate={(id) => { const item = menuItems.find(m => m.id === id); if (item) navigate(item.path); }} />} />
+            </Routes>
           </motion.div>
 
           {/* Global Footer Ad */}
@@ -486,4 +420,3 @@ export default function App() {
     </div>
   );
 }
-
