@@ -1,8 +1,13 @@
+"use client";
+
+import { useRouter } from 'next/navigation';
 import { Calculator, TrendingUp, Clock, Receipt, CheckSquare, UserRound, ArrowRight, ShieldCheck, Zap, Info } from 'lucide-react';
 import { motion } from 'motion/react';
+import { menuItems } from './ClientLayout';
+
 
 interface HomeProps {
-  onNavigate: (view: string) => void;
+  onNavigate?: (view: string) => void;
 }
 
 const tools = [
@@ -57,6 +62,12 @@ const tools = [
 ];
 
 export function Home({ onNavigate }: HomeProps) {
+  const router = useRouter();
+  const handleNavigate = (id: string) => {
+    if (onNavigate) { onNavigate(id); return; }
+    const item = menuItems.find(m => m.id === id);
+    if (item) router.push(item.path);
+  };
   return (
     <div className="space-y-8 pb-12">
       {/* Hero Welcome Section */}
@@ -75,7 +86,7 @@ export function Home({ onNavigate }: HomeProps) {
           </p>
           <div className="flex flex-wrap gap-4">
             <button 
-              onClick={() => onNavigate('das')}
+              onClick={() => handleNavigate('das')}
               className="bg-mei-light text-mei-dark px-8 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:brightness-105 transition shadow-lg"
             >
               Começar agora
@@ -112,7 +123,7 @@ export function Home({ onNavigate }: HomeProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            onClick={() => onNavigate(tool.id)}
+            onClick={() => handleNavigate(tool.id)}
             className="group bg-white p-6 rounded-3xl border border-gray-200 shadow-sm hover:shadow-xl hover:border-mei-light transition-all cursor-pointer flex flex-col h-full"
           >
             <div className={`w-14 h-14 rounded-2xl ${tool.color} border flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-3`}>

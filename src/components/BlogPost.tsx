@@ -3,9 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+"use client";
+
 import { useEffect, useState, useMemo } from 'react';
 import { motion } from 'motion/react';
-import { useParams } from 'react-router-dom';
 import { ArrowLeft, Clock, Eye, ChevronRight, Hash, BookOpen, ExternalLink, Flame } from 'lucide-react';
 import { posts, getCategoryStyle, formatDate, getRelatedPosts } from '../data/posts';
 
@@ -26,9 +27,8 @@ function extractH2Headings(html: string): { id: string; text: string }[] {
   return headings;
 }
 
-export function BlogPost({ slug: slugProp, onBack, onNavigateToPost, onNavigateTool }: BlogPostProps) {
-  const { slug: slugParam } = useParams<{ slug: string }>();
-  const slug = slugProp ?? slugParam ?? '';
+export function BlogPost({ slug: slugProp = '', onBack, onNavigateToPost, onNavigateTool }: BlogPostProps) {
+  const slug = slugProp;
   const post = posts.find(p => p.slug === slug);
   const [views, setViews] = useState(post?.views ?? 0);
 
@@ -36,21 +36,6 @@ export function BlogPost({ slug: slugProp, onBack, onNavigateToPost, onNavigateT
     if (!post) return;
     // Increment views counter (simulated)
     setViews(v => v + 1);
-    // Update SEO meta tags
-    document.title = post.seo.metaTitle;
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', post.seo.metaDescription);
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = post.seo.metaDescription;
-      document.head.appendChild(meta);
-    }
-
-    return () => {
-      document.title = 'MEI Fácil | Dashboard de Gestão';
-    };
   }, [slug, post]);
 
   const headings = useMemo(() => (post ? extractH2Headings(post.content) : []), [post]);

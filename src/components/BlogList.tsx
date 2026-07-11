@@ -3,15 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+"use client";
+
 import { useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import { Search, Clock, Eye, TrendingUp, BookOpen, ChevronRight, Flame } from 'lucide-react';
 import { posts, categories, getCategoryStyle, formatDate } from '../data/posts';
 import type { Post } from '../data/posts';
-
-interface BlogListProps {
-  onNavigateToPost: (slug: string) => void;
-}
 
 type SortOrder = 'recent' | 'popular';
 
@@ -26,7 +25,12 @@ function getCategoryCounts() {
   return counts;
 }
 
-export function BlogList({ onNavigateToPost }: BlogListProps) {
+export function BlogList({ onNavigateToPost }: { onNavigateToPost?: (slug: string) => void }) {
+  const router = useRouter();
+  const navigate = (slug: string) => {
+    if (onNavigateToPost) onNavigateToPost(slug);
+    else router.push(`/blog/${slug}`);
+  };
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder>('recent');
@@ -67,7 +71,7 @@ export function BlogList({ onNavigateToPost }: BlogListProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="relative bg-mei-dark text-white rounded-[2rem] overflow-hidden mb-10 cursor-pointer group shadow-2xl"
-          onClick={() => onNavigateToPost(featuredPost.slug)}
+          onClick={() => navigate(featuredPost.slug)}
         >
           {/* Background decoration */}
           <div className="absolute inset-0 bg-gradient-to-br from-green-900 via-mei-dark to-black opacity-90" />
@@ -184,7 +188,7 @@ export function BlogList({ onNavigateToPost }: BlogListProps) {
                     post={post}
                     index={index}
                     isHot={topViewsIds.includes(post.id)}
-                    onNavigate={onNavigateToPost}
+                    onNavigate={navigate}
                   />
                 </div>
               ))}
@@ -206,7 +210,7 @@ export function BlogList({ onNavigateToPost }: BlogListProps) {
               {top5ByViews.map((post, i) => (
                 <button
                   key={post.slug}
-                  onClick={() => onNavigateToPost(post.slug)}
+                  onClick={() => navigate(post.slug)}
                   className="w-full text-left p-3 rounded-xl hover:bg-green-50 transition-all group flex items-start gap-3"
                 >
                   <span className="text-2xl font-black text-gray-100 group-hover:text-mei-light transition-colors leading-none mt-0.5 w-6 shrink-0">
