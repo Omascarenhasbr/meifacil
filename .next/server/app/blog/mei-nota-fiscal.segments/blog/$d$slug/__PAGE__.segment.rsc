@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-3:I[2019,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/29xhuiz1oy1ai.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js","/_next/static/chunks/2et5tcj0lzx1z.js"],"BlogPostClient"]
-4:I[97367,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/29xhuiz1oy1ai.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js"],"OutletBoundary"]
+3:I[2019,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/18cx9j-vpxizj.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js","/_next/static/chunks/3h2__-83p82xz.js"],"BlogPostClient"]
+4:I[97367,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/18cx9j-vpxizj.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js"],"OutletBoundary"]
 5:"$Sreact.suspense"
 2:T7ac,
       <h2 id="mei-pode-emitir-nota">MEI pode emitir nota fiscal?</h2>
@@ -17,5 +17,5 @@
       <p>Não há imposto adicional. O MEI já paga o DAS mensal que cobre todos os impostos. A nota fiscal não gera tributação extra, exceto em casos de ultrapassagem do limite anual.</p>
       <h3>Posso emitir recibo em vez de nota fiscal?</h3>
       <p>O recibo vale como comprovante de pagamento, mas não substitui a nota fiscal para fins contábeis do cliente pessoa jurídica. Use o Emissor de Recibos do MEI Fácil para recibos rápidos e profissionais.</p>
-    0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"sr-only","aria-hidden":"false","children":[["$","h1",null,{"children":"MEI pode emitir nota fiscal? Quando é obrigatório e como fazer em 2026"}],["$","p",null,{"children":"Entenda em quais situações o MEI precisa emitir nota fiscal, quais tipos existem e como emitir sem pagar nada."}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],["$","$L3",null,{"slug":"mei-nota-fiscal"}]],[["$","script","script-0",{"src":"/_next/static/chunks/2et5tcj0lzx1z.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ly90mGMEBvVwZZI6Hf9Xw"}
+    0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"sr-only","aria-hidden":"false","children":[["$","h1",null,{"children":"MEI pode emitir nota fiscal? Quando é obrigatório e como fazer em 2026"}],["$","p",null,{"children":"Entenda em quais situações o MEI precisa emitir nota fiscal, quais tipos existem e como emitir sem pagar nada."}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],["$","$L3",null,{"slug":"mei-nota-fiscal"}]],[["$","script","script-0",{"src":"/_next/static/chunks/3h2__-83p82xz.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"fmlGjoumxQ0jH8zD79yKY"}
 6:null

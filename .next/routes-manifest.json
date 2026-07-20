@@ -81,6 +81,12 @@
       "namedRegex": "^/emissor\\-recibo\\-mei(?:/)?$"
     },
     {
+      "page": "/guia-iniciante",
+      "regex": "^/guia\\-iniciante(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/guia\\-iniciante(?:/)?$"
+    },
+    {
       "page": "/limite-faturamento-mei",
       "regex": "^/limite\\-faturamento\\-mei(?:/)?$",
       "routeKeys": {},

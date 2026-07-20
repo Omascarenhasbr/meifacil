@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-3:I[2019,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/29xhuiz1oy1ai.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js","/_next/static/chunks/2et5tcj0lzx1z.js"],"BlogPostClient"]
-4:I[97367,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/29xhuiz1oy1ai.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js"],"OutletBoundary"]
+3:I[2019,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/18cx9j-vpxizj.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js","/_next/static/chunks/3h2__-83p82xz.js"],"BlogPostClient"]
+4:I[97367,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/18cx9j-vpxizj.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js"],"OutletBoundary"]
 5:"$Sreact.suspense"
 2:T75b,
       <h2 id="mei-tem-direito-aposentadoria">MEI tem direito à aposentadoria?</h2>
@@ -16,5 +16,5 @@
       <p>Sim, cada mês com DAS pago conta como 1 mês de contribuição ao INSS. Anos anteriores como CLT também somam ao tempo total.</p>
       <h3>MEI tem acesso ao auxílio-doença?</h3>
       <p>Sim, após 12 meses consecutivos de contribuição (carência). O valor é de 1 salário mínimo para quem não complementou a contribuição.</p>
-    0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"sr-only","aria-hidden":"false","children":[["$","h1",null,{"children":"MEI aposentadoria 2026: quanto tempo precisa contribuir e como funciona"}],["$","p",null,{"children":"O MEI tem direito à aposentadoria pelo INSS através do DAS. Entenda as regras, tempo de contribuição e como calcular o benefício."}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],["$","$L3",null,{"slug":"aposentadoria-mei"}]],[["$","script","script-0",{"src":"/_next/static/chunks/2et5tcj0lzx1z.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ly90mGMEBvVwZZI6Hf9Xw"}
+    0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"sr-only","aria-hidden":"false","children":[["$","h1",null,{"children":"MEI aposentadoria 2026: quanto tempo precisa contribuir e como funciona"}],["$","p",null,{"children":"O MEI tem direito à aposentadoria pelo INSS através do DAS. Entenda as regras, tempo de contribuição e como calcular o benefício."}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],["$","$L3",null,{"slug":"aposentadoria-mei"}]],[["$","script","script-0",{"src":"/_next/static/chunks/3h2__-83p82xz.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"fmlGjoumxQ0jH8zD79yKY"}
 6:null

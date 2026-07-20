@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-3:I[2019,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/29xhuiz1oy1ai.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js","/_next/static/chunks/2et5tcj0lzx1z.js"],"BlogPostClient"]
-4:I[97367,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/29xhuiz1oy1ai.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js"],"OutletBoundary"]
+3:I[2019,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/18cx9j-vpxizj.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js","/_next/static/chunks/3h2__-83p82xz.js"],"BlogPostClient"]
+4:I[97367,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/18cx9j-vpxizj.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js"],"OutletBoundary"]
 5:"$Sreact.suspense"
 2:T74c,
       <h2 id="novo-salario-minimo-2026">Salário mínimo 2026: qual o novo valor?</h2>
@@ -18,5 +18,5 @@
       <p>Sim. O DAS é reajustado todo janeiro junto com o salário mínimo. Volte aqui em janeiro de 2027 para os valores atualizados.</p>
       <h3>O DAS MEI inclui o IRPF?</h3>
       <p>Não. O MEI é isento de Imposto de Renda sobre o lucro da empresa. Apenas se o pró-labore (salário do sócio) superar a faixa de isenção da tabela do IR pessoal, há tributação na declaração individual.</p>
-    0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"sr-only","aria-hidden":"false","children":[["$","h1",null,{"children":"Salário mínimo 2026 e o impacto no DAS MEI: quanto você vai pagar"}],["$","p",null,{"children":"Com o novo salário mínimo de R$ 1.621 em 2026, o valor do DAS MEI mudou. Veja os novos valores para cada tipo de atividade."}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],["$","$L3",null,{"slug":"das-mei-salario-minimo-2026"}]],[["$","script","script-0",{"src":"/_next/static/chunks/2et5tcj0lzx1z.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ly90mGMEBvVwZZI6Hf9Xw"}
+    0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"sr-only","aria-hidden":"false","children":[["$","h1",null,{"children":"Salário mínimo 2026 e o impacto no DAS MEI: quanto você vai pagar"}],["$","p",null,{"children":"Com o novo salário mínimo de R$ 1.621 em 2026, o valor do DAS MEI mudou. Veja os novos valores para cada tipo de atividade."}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],["$","$L3",null,{"slug":"das-mei-salario-minimo-2026"}]],[["$","script","script-0",{"src":"/_next/static/chunks/3h2__-83p82xz.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"fmlGjoumxQ0jH8zD79yKY"}
 6:null

@@ -5,10 +5,11 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import { Calculator, TrendingUp, Clock, Receipt, CheckSquare, UserRound, Menu, X, LayoutDashboard, BookOpen } from 'lucide-react';
+import { Calculator, TrendingUp, Clock, Receipt, CheckSquare, UserRound, Menu, X, LayoutDashboard, BookOpen, Map } from 'lucide-react';
 
 export const menuItems = [
   { id: 'home',          label: 'Dashboard',         path: '/',                                        icon: LayoutDashboard },
+  { id: 'guias',         label: 'Trilha do MEI',     path: '/guia-iniciante',                          icon: Map,           desc: 'Passo a Passo' },
   { id: 'das',           label: 'Calculadora DAS',    path: '/calculadora-das-mei',                     icon: Calculator,    desc: 'Impostos Mensais' },
   { id: 'limite',        label: 'Limite de Receita',  path: '/limite-faturamento-mei',                  icon: TrendingUp,    desc: 'Faturamento Anual' },
   { id: 'preco',         label: 'Precificação PJ',    path: '/calculadora-preco-hora-autonomo',         icon: Clock,         desc: 'Cálculo de Lucro' },

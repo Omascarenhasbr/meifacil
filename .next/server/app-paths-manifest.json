@@ -7,6 +7,7 @@
   "/calculadora-preco-hora-autonomo/page": "app/calculadora-preco-hora-autonomo/page.js",
   "/checklist-mensal-mei/page": "app/checklist-mensal-mei/page.js",
   "/emissor-recibo-mei/page": "app/emissor-recibo-mei/page.js",
+  "/guia-iniciante/page": "app/guia-iniciante/page.js",
   "/limite-faturamento-mei/page": "app/limite-faturamento-mei/page.js",
   "/page": "app/page.js",
   "/simulador-aposentadoria-mei/page": "app/simulador-aposentadoria-mei/page.js"

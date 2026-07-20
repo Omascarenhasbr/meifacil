@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-3:I[2019,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/29xhuiz1oy1ai.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js","/_next/static/chunks/2et5tcj0lzx1z.js"],"BlogPostClient"]
-4:I[97367,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/29xhuiz1oy1ai.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js"],"OutletBoundary"]
+3:I[2019,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/18cx9j-vpxizj.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js","/_next/static/chunks/3h2__-83p82xz.js"],"BlogPostClient"]
+4:I[97367,["/_next/static/chunks/2ynhpsd-1i1m_.js","/_next/static/chunks/18cx9j-vpxizj.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0vokiadnpqopv.js"],"OutletBoundary"]
 5:"$Sreact.suspense"
 2:T718,
       <h2 id="influencer-pode-ser-mei">Influencer pode ser MEI?</h2>
@@ -16,5 +16,5 @@
       <p>Não. O MEI exige que o titular tenha no mínimo 18 anos. Menores de idade precisam de representante legal e não podem ser MEI.</p>
       <h3>Preciso declarar o que ganho nas redes como MEI?</h3>
       <p>Sim. Todo faturamento — incluindo permutas, brindes e patrocínios — entra no cálculo do limite anual do MEI e deve ser declarado na DASN-SIMEI.</p>
-    0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"sr-only","aria-hidden":"false","children":[["$","h1",null,{"children":"Influencer pode ser MEI? Como receber do YouTube, Hotmart e redes sociais em 2026"}],["$","p",null,{"children":"Criadores de conteúdo e influencers podem abrir MEI para receber de plataformas digitais — mas há limitações importantes que você precisa conhecer."}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],["$","$L3",null,{"slug":"influencer-mei"}]],[["$","script","script-0",{"src":"/_next/static/chunks/2et5tcj0lzx1z.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ly90mGMEBvVwZZI6Hf9Xw"}
+    0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"sr-only","aria-hidden":"false","children":[["$","h1",null,{"children":"Influencer pode ser MEI? Como receber do YouTube, Hotmart e redes sociais em 2026"}],["$","p",null,{"children":"Criadores de conteúdo e influencers podem abrir MEI para receber de plataformas digitais — mas há limitações importantes que você precisa conhecer."}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],["$","$L3",null,{"slug":"influencer-mei"}]],[["$","script","script-0",{"src":"/_next/static/chunks/3h2__-83p82xz.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"fmlGjoumxQ0jH8zD79yKY"}
 6:null
