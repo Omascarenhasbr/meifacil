@@ -6,16 +6,11 @@
 "use client";
 
 import { useState, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { motion } from 'motion/react';
-import { Search, Clock, Eye, TrendingUp, BookOpen, ChevronRight, Flame } from 'lucide-react';
+import { Search, Clock, BookOpen, ChevronRight, Flame } from 'lucide-react';
 import { posts, categories, getCategoryStyle, formatDate } from '../data/posts';
 import type { Post } from '../data/posts';
-
-type SortOrder = 'recent' | 'popular';
-
-const topViewsIds = [...posts].sort((a, b) => b.views - a.views).slice(0, 3).map(p => p.id);
-const top5ByViews = [...posts].sort((a, b) => b.views - a.views).slice(0, 5);
 
 function getCategoryCounts() {
   const counts: Record<string, number> = {};
@@ -25,15 +20,9 @@ function getCategoryCounts() {
   return counts;
 }
 
-export function BlogList({ onNavigateToPost }: { onNavigateToPost?: (slug: string) => void }) {
-  const router = useRouter();
-  const navigate = (slug: string) => {
-    if (onNavigateToPost) onNavigateToPost(slug);
-    else router.push(`/blog/${slug}`);
-  };
+export function BlogList() {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [sortOrder, setSortOrder] = useState<SortOrder>('recent');
 
   const categoryCounts = useMemo(() => getCategoryCounts(), []);
 
@@ -51,27 +40,26 @@ export function BlogList({ onNavigateToPost }: { onNavigateToPost?: (slug: strin
       );
     }
 
-    if (sortOrder === 'popular') {
-      result.sort((a, b) => b.views - a.views);
-    } else {
-      result.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    }
+    result.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
 
     return result;
-  }, [search, activeCategory, sortOrder]);
+  }, [search, activeCategory]);
 
   const featuredPost = posts.find(p => p.featured) || posts[0];
   const gridPosts = filteredPosts.filter(p => !p.featured || search || activeCategory);
 
   return (
     <div className="pb-12">
+      <header className="mb-8 max-w-3xl">
+        <p className="text-[10px] font-black text-green-700 uppercase tracking-[0.24em] mb-3">Conteúdo revisado e aplicado</p>
+        <h1 className="text-3xl md:text-5xl font-serif italic text-mei-dark mb-4">Guias práticos para a jornada do MEI</h1>
+        <p className="text-gray-600 leading-relaxed">Entenda obrigações, decisões financeiras e previdência com contexto, limitações e links para as fontes responsáveis.</p>
+      </header>
       {/* Hero Featured Article */}
       {!search && !activeCategory && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <Link
+          href={`/blog/${featuredPost.slug}`}
           className="relative bg-mei-dark text-white rounded-[2rem] overflow-hidden mb-10 cursor-pointer group shadow-2xl"
-          onClick={() => navigate(featuredPost.slug)}
         >
           {/* Background decoration */}
           <div className="absolute inset-0 bg-gradient-to-br from-green-900 via-mei-dark to-black opacity-90" />
@@ -104,12 +92,11 @@ export function BlogList({ onNavigateToPost }: { onNavigateToPost?: (slug: strin
               </button>
               <div className="flex items-center gap-4 text-[11px] text-green-200/70 font-bold">
                 <span className="flex items-center gap-1.5"><Clock size={12} />{featuredPost.readTime} min de leitura</span>
-                <span className="flex items-center gap-1.5"><Eye size={12} />{featuredPost.views.toLocaleString('pt-BR')} leituras</span>
-                <span>{formatDate(featuredPost.date)}</span>
+                <span>Revisado em {formatDate(featuredPost.updatedAt)}</span>
               </div>
             </div>
           </div>
-        </motion.div>
+        </Link>
       )}
 
       {/* Filter & Sort Bar */}
@@ -146,16 +133,7 @@ export function BlogList({ onNavigateToPost }: { onNavigateToPost?: (slug: strin
           })}
         </div>
 
-        <div className="ml-auto flex items-center gap-2">
-          <select
-            value={sortOrder}
-            onChange={e => setSortOrder(e.target.value as SortOrder)}
-            className="px-4 py-2 rounded-xl text-[11px] font-bold border border-gray-200 bg-white text-gray-700 outline-none focus:border-mei-dark cursor-pointer"
-          >
-            <option value="recent">Mais recentes</option>
-            <option value="popular">Mais lidos</option>
-          </select>
-        </div>
+        <p className="ml-auto text-xs text-gray-500 self-center">Ordenados pela revisão mais recente</p>
       </div>
 
       {/* Two-column layout: articles + sidebar */}
@@ -187,8 +165,6 @@ export function BlogList({ onNavigateToPost }: { onNavigateToPost?: (slug: strin
                   <ArticleCardWithAd
                     post={post}
                     index={index}
-                    isHot={topViewsIds.includes(post.id)}
-                    onNavigate={navigate}
                   />
                 </div>
               ))}
@@ -198,34 +174,17 @@ export function BlogList({ onNavigateToPost }: { onNavigateToPost?: (slug: strin
 
         {/* Sidebar (30%) */}
         <aside className="hidden lg:block w-72 shrink-0 space-y-6">
-          {/* Most read widget */}
+          {/* Editorial widget */}
           <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
             <div className="bg-mei-dark text-white px-5 py-4">
               <h3 className="text-[11px] font-black uppercase tracking-widest flex items-center gap-2">
-                <TrendingUp size={14} className="text-mei-light" />
-                Mais lidos
+                <BookOpen size={14} className="text-mei-light" />
+                Como revisamos
               </h3>
             </div>
-            <div className="p-4 space-y-1">
-              {top5ByViews.map((post, i) => (
-                <button
-                  key={post.slug}
-                  onClick={() => navigate(post.slug)}
-                  className="w-full text-left p-3 rounded-xl hover:bg-green-50 transition-all group flex items-start gap-3"
-                >
-                  <span className="text-2xl font-black text-gray-100 group-hover:text-mei-light transition-colors leading-none mt-0.5 w-6 shrink-0">
-                    {i + 1}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-xs font-bold text-gray-700 group-hover:text-mei-dark transition-colors leading-snug line-clamp-2">
-                      {post.title}
-                    </p>
-                    <p className="text-[10px] text-gray-400 mt-1 flex items-center gap-1">
-                      <Eye size={9} /> {post.views.toLocaleString('pt-BR')}
-                    </p>
-                  </div>
-                </button>
-              ))}
+            <div className="p-5">
+              <p className="text-xs text-gray-600 leading-relaxed mb-4">Cada guia mostra autoria, data de revisão e fontes consultadas. Regras oficiais prevalecem sobre nossas simulações.</p>
+              <a href="/politica-editorial" className="text-xs font-black text-green-800 underline underline-offset-2">Ler política editorial</a>
             </div>
           </div>
 
@@ -263,14 +222,6 @@ export function BlogList({ onNavigateToPost }: { onNavigateToPost?: (slug: strin
             </div>
           </div>
 
-          {/* AdSense sidebar */}
-          <div className="bg-mei-bg border-2 border-dashed border-gray-200 rounded-2xl p-4 flex flex-col items-center gap-2">
-            <p className="text-[8px] font-black text-gray-300 uppercase tracking-widest">Publicidade</p>
-            {/* ADSENSE: sidebar 300x250 */}
-            <div className="w-full h-[250px] flex items-center justify-center text-[10px] text-gray-300 font-mono bg-gray-50 rounded-xl border border-dashed border-gray-200">
-              [ ADSENSE 300×250 ]
-            </div>
-          </div>
         </aside>
       </div>
     </div>
@@ -282,42 +233,24 @@ export function BlogList({ onNavigateToPost }: { onNavigateToPost?: (slug: strin
 interface ArticleCardProps {
   post: Post;
   index: number;
-  isHot: boolean;
-  onNavigate: (slug: string) => void;
 }
 
-function ArticleCardWithAd({ post, index, isHot, onNavigate }: ArticleCardProps) {
+function ArticleCardWithAd({ post, index }: ArticleCardProps) {
   const catStyle = getCategoryStyle(post.category);
-  const showAd = index > 0 && index % 3 === 0;
 
   return (
-    <>
-      {showAd && (
-        <div className="bg-mei-bg border-2 border-dashed border-gray-200 rounded-2xl p-4 flex flex-col items-center gap-2">
-          <p className="text-[8px] font-black text-gray-300 uppercase tracking-widest">Publicidade</p>
-          {/* ADSENSE: in-feed 300x250 */}
-          <div className="w-[300px] h-[100px] flex items-center justify-center text-[10px] text-gray-300 font-mono">
-            [ ADSENSE - in-feed 300×250 ]
-          </div>
-        </div>
-      )}
-
+    <Link href={`/blog/${post.slug}`} className="block">
       <motion.article
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={false}
+        animate={{ opacity: 1 }}
         transition={{ delay: index * 0.04 }}
-        onClick={() => onNavigate(post.slug)}
         className="bg-white border border-gray-200 rounded-2xl p-6 cursor-pointer hover:border-mei-light hover:shadow-xl transition-all group"
       >
         <div className="flex flex-wrap items-center gap-2 mb-3">
           <span className={`text-[10px] font-bold px-3 py-1 rounded-full border ${catStyle.color}`}>
             {post.category}
           </span>
-          {isHot && (
-            <span className="inline-flex items-center gap-1 text-[10px] font-black text-orange-600 bg-orange-50 border border-orange-200 px-2.5 py-1 rounded-full">
-              <Flame size={10} /> Em alta
-            </span>
-          )}
+          <span className="text-[10px] font-bold text-gray-400">Revisado</span>
         </div>
 
         <h3 className="text-lg font-bold text-mei-dark mb-2 leading-snug group-hover:text-green-700 transition-colors line-clamp-2">
@@ -331,14 +264,13 @@ function ArticleCardWithAd({ post, index, isHot, onNavigate }: ArticleCardProps)
         <div className="flex items-center justify-between pt-4 border-t border-gray-100">
           <div className="flex items-center gap-4 text-[10px] text-gray-400 font-bold">
             <span className="flex items-center gap-1"><Clock size={10} /> {post.readTime} min</span>
-            <span className="flex items-center gap-1"><Eye size={10} /> {post.views.toLocaleString('pt-BR')}</span>
-            <span>{formatDate(post.date)}</span>
+            <span>{formatDate(post.updatedAt)}</span>
           </div>
           <span className="text-[10px] font-black text-mei-dark opacity-0 group-hover:opacity-100 transition-all flex items-center gap-1">
             Ler <ChevronRight size={12} />
           </span>
         </div>
       </motion.article>
-    </>
+    </Link>
   );
 }

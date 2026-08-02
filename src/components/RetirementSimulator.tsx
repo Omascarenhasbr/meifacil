@@ -30,7 +30,7 @@ export const RetirementSimulator = () => {
     <div className="max-w-4xl mx-auto space-y-12 animate-fadeIn pb-20">
       <div className="text-center">
         <h1 className="text-3xl md:text-5xl font-serif italic text-mei-dark mb-4">Simulador de Aposentadoria MEI</h1>
-        <p className="text-gray-500 font-medium">Calcule seu horizonte previdenciário com base nas regras vigentes de 2026.</p>
+        <p className="text-gray-500 font-medium">Faça uma projeção simplificada e confirme seu histórico no CNIS e no Meu INSS.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -98,7 +98,7 @@ export const RetirementSimulator = () => {
               {canRetire ? 'OK' : remaining}
             </motion.div>
             <p className="text-xl font-bold text-mei-light relative z-10 uppercase tracking-widest">
-              {canRetire ? 'Aptidão Alcançada' : 'Anos para Descanso'}
+              {canRetire ? 'Referência atingida' : 'Anos na projeção'}
             </p>
             
             <div className="w-full grid grid-cols-2 gap-8 mt-12 pt-10 border-t border-green-900 relative z-10">
@@ -118,11 +118,11 @@ export const RetirementSimulator = () => {
               <Heart className="w-7 h-7" />
             </div>
             <div>
-              <p className="font-black text-mei-dark uppercase text-xs tracking-widest mb-1 italic">Diagnóstico Previdenciário</p>
+              <p className="font-black text-mei-dark uppercase text-xs tracking-widest mb-1 italic">Leitura simplificada</p>
               <p className="text-xs text-gray-500 leading-relaxed font-medium">
                 {canRetire 
-                 ? 'Você já cumpre os requisitos mínimos de idade e contribuição para solicitar sua aposentadoria por idade.' 
-                 : `Sua previsão de faturamento previdenciário é atingir a idade mínima aos ${minAge} anos com pelo menos ${minContrib} anos pagos.`}
+                 ? 'Pelos dados informados, você pode ter atingido idade e contribuição mínimas. Confirme vínculos, carência e regra aplicável no Meu INSS.'
+                 : `Nesta projeção simplificada, a referência é atingir ${minAge} anos com pelo menos ${minContrib} anos pagos. Confirme seu histórico no CNIS.`}
               </p>
             </div>
           </div>
@@ -134,7 +134,7 @@ export const RetirementSimulator = () => {
           <Info className="text-mei-light w-6 h-6" />
           <h2 className="text-2xl font-bold text-mei-dark m-0">Regras da Aposentadoria MEI</h2>
         </div>
-        <p>A contribuição do MEI (5% do mínimo) dá direito apenas à **Aposentadoria por Idade**. Você não pode se aposentar apenas por tempo de contribuição como MEI padrão.</p>
+        <p>A contribuição reduzida do MEI (5% do salário mínimo) dá cobertura previdenciária, mas não conta sozinha para aposentadoria por tempo de contribuição. Regras de transição e históricos anteriores precisam de análise no Meu INSS.</p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           <div className="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">

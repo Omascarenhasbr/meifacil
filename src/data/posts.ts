@@ -1,20 +1,21 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+export interface Source {
+  name: string;
+  url: string;
+}
 
 export interface Post {
   id: number;
   slug: string;
   title: string;
   summary: string;
-  content: string; // HTML completo do artigo
+  content: string;
   category: string;
   tags: string[];
   date: string;
-  readTime: number; // minutos
+  updatedAt: string;
+  readTime: number;
   featured: boolean;
-  views: number; // simulado para "mais lidos"
+  sources: Source[];
   relatedTool: {
     name: string;
     path: string;
@@ -28,311 +29,375 @@ export interface Post {
 export const posts: Post[] = [
   {
     id: 1,
-    slug: "mei-uber-das-ativo-2026",
-    title: "MEI para Uber: por que o DAS precisa estar em dia para dirigir em 2026",
-    summary: "Entenda por que motoristas de aplicativo precisam manter o CNPJ regularizado e o DAS pago para não perder o acesso às plataformas.",
+    slug: "dasn-simei-2026",
+    title: "DASN-SIMEI 2026: prazo, passo a passo e como corrigir erros",
+    summary: "Guia para declarar o faturamento de 2025, inclusive sem receita, entender a multa por atraso e guardar o recibo corretamente.",
     content: `
-      <h2 id="por-que-uber-exige-mei">Por que o Uber exige MEI ativo?</h2>
-      <p>Desde 2024, o Uber e outras plataformas de transporte passaram a exigir que motoristas parceiros mantenham o CNPJ MEI regularizado como condição para continuar operando. Isso significa que qualquer pendência no pagamento do DAS pode resultar na suspensão do acesso ao aplicativo.</p>
-      <h2 id="das-atrasado">O que acontece se o DAS estiver atrasado?</h2>
-      <p>Quando o DAS fica em atraso, o CNPJ MEI entra em situação irregular perante a Receita Federal. As plataformas cruzam esses dados periodicamente e podem suspender o cadastro do motorista até a regularização.</p>
-      <h2 id="como-regularizar">Como regularizar o DAS atrasado?</h2>
-      <p>Acesse o portal gov.br/mei, emita os boletos em atraso (com juros e multa calculados automaticamente) e pague. A regularização é processada em até 2 dias úteis.</p>
-      <h2 id="quanto-custa-das">Quanto custa o DAS para motorista de app em 2026?</h2>
-      <p>O valor do DAS para motoristas de aplicativo (CNAE 5229-0/99) em 2026 é de R$ 86,05 por mês, já incluindo INSS e ISS.</p>
-      <h2 id="perguntas-frequentes">Perguntas frequentes</h2>
-      <h3>O Uber verifica o DAS todo mês?</h3>
-      <p>A verificação não é diária, mas as plataformas fazem checagens periódicas. Manter o DAS em dia evita surpresas.</p>
-      <h3>Posso dirigir no Uber sem MEI?</h3>
-      <p>Depende da modalidade. Para transporte de passageiros por app, o MEI é fortemente recomendado e exigido pela maioria das plataformas.</p>
+      <p>A DASN-SIMEI é a declaração anual em que o Microempreendedor Individual informa a receita bruta total do ano anterior e se teve empregado. Em 2026, a declaração se refere ao movimento de 2025. Ela não substitui o pagamento mensal do DAS nem a declaração de Imposto de Renda da pessoa física.</p>
+
+      <h2 id="quem-precisa-entregar">Quem precisa entregar a DASN-SIMEI em 2026?</h2>
+      <p>Deve declarar quem foi optante pelo Simei em qualquer período de 2025. A obrigação continua existindo quando o CNPJ não teve faturamento, ficou ativo por poucos meses ou foi baixado durante o ano. Sem receita, os campos de faturamento são informados com valor zero.</p>
+      <p>Antes de começar, reúna o relatório mensal de receitas, notas fiscais emitidas e comprovantes das vendas feitas sem nota. Some a receita bruta: use o valor total das vendas e dos serviços, sem descontar DAS, taxas de cartão, combustível, aluguel ou outras despesas.</p>
+
+      <h2 id="prazo-e-multa">Qual foi o prazo e o que acontece com o atraso?</h2>
+      <p>O prazo regular de 2026 terminou em <strong>31 de maio</strong>. Quem ainda não entregou deve transmitir a declaração assim que possível. O sistema gera a Multa por Atraso na Entrega da Declaração (MAED): 2% ao mês-calendário ou fração, limitada a 20% dos tributos declarados, com valor mínimo de R$ 50.</p>
+      <p>Na entrega espontânea há redução de 50% da multa. A notificação e o documento para pagamento são emitidos junto com o recibo. Atrasar a DASN não cancela automaticamente o CNPJ, mas mantém uma obrigação pendente e pode impedir a emissão de DAS de períodos seguintes até a regularização.</p>
+
+      <h2 id="passo-a-passo">Como preencher sem misturar receita e lucro</h2>
+      <ol>
+        <li>Acesse o serviço oficial da DASN-SIMEI no Portal do Simples Nacional ou no App MEI.</li>
+        <li>Informe o CNPJ e escolha o ano-calendário de 2025.</li>
+        <li>Separe a receita de comércio/indústria da receita de prestação de serviços. Quem exerceu as duas atividades preenche os dois campos.</li>
+        <li>Informe se houve empregado no período.</li>
+        <li>Revise os totais, transmita e salve o recibo e a declaração completa.</li>
+      </ol>
+      <p><strong>Exemplo:</strong> um MEI recebeu R$ 48.000 de clientes, pagou R$ 3.000 em taxas e teve R$ 12.000 de despesas. Na DASN-SIMEI, informa R$ 48.000. A declaração pede receita bruta, não lucro.</p>
+
+      <h2 id="erros-comuns">Erros que merecem uma segunda conferência</h2>
+      <ul>
+        <li>Declarar apenas valores cobertos por nota fiscal e esquecer vendas a pessoa física.</li>
+        <li>Informar saldo bancário ou transferências entre contas como se fossem faturamento.</li>
+        <li>Descontar despesas antes de preencher a receita.</li>
+        <li>Somar salário de emprego CLT ou outros rendimentos pessoais à receita do CNPJ.</li>
+        <li>Ignorar o limite proporcional quando o CNPJ foi aberto durante 2025.</li>
+      </ul>
+
+      <h2 id="retificar">Enviei um valor errado. Posso retificar?</h2>
+      <p>Sim. A declaração pode ser retificada no mesmo sistema, selecionando o ano e a opção retificadora. Use o número do recibo anterior quando solicitado e guarde o novo comprovante. Se a correção revelar faturamento acima do limite do MEI, procure orientação contábil antes de concluir os recolhimentos, porque os efeitos variam conforme o tamanho do excesso e o ano de abertura.</p>
+
+      <h2 id="checklist-final">Checklist depois da transmissão</h2>
+      <ul>
+        <li>Baixe o recibo e mantenha uma cópia fora do celular.</li>
+        <li>Confira se todos os DAS de 2025 aparecem como pagos ou parcelados.</li>
+        <li>Compare a receita declarada com seus controles mensais.</li>
+        <li>Verifique separadamente se você precisa entregar a declaração de Imposto de Renda da pessoa física.</li>
+      </ul>
+      <p>Este guia é educativo e foi revisado com base nos canais oficiais. Situações com excesso de receita, baixa retroativa ou divergência de dados pedem análise individual.</p>
     `,
-    category: "Motoristas de App",
-    tags: ["uber", "das", "cnpj", "motorista"],
-    date: "2026-05-04",
-    readTime: 4,
+    category: "Obrigações MEI",
+    tags: ["DASN-SIMEI", "declaração anual", "faturamento", "multa"],
+    date: "2026-05-12",
+    updatedAt: "2026-08-02",
+    readTime: 7,
     featured: true,
-    views: 1250,
-    relatedTool: { name: "Calculadora DAS", path: "das" },
+    sources: [
+      { name: "Portal do Empreendedor — Declaração Anual de Faturamento", url: "https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei/declaracao-anual-de-faturamento" },
+      { name: "Gov.br — Declarar receita bruta anual para o MEI", url: "https://www.gov.br/pt-br/servicos/declarar-receita-bruta-anual-para-o-mei" }
+    ],
+    relatedTool: { name: "Checklist Mensal", path: "obrigacoes" },
     seo: {
-      metaTitle: "MEI para Uber 2026: DAS precisa estar em dia para dirigir",
-      metaDescription: "Saiba por que motoristas Uber precisam do DAS em dia em 2026. Calcule seu DAS grátis e evite suspensão do cadastro."
+      metaTitle: "DASN-SIMEI 2026: prazo, multa e passo a passo",
+      metaDescription: "Veja quem deve entregar a DASN-SIMEI 2026, como informar o faturamento de 2025, corrigir erros e calcular a multa por atraso."
     }
   },
   {
     id: 2,
-    slug: "cnae-motorista-aplicativo",
-    title: "CNAE para motorista de app: qual código usar no Uber, 99 e iFood em 2026",
-    summary: "Descubra o CNAE correto para cada plataforma e evite problemas na emissão de nota fiscal e na declaração anual.",
+    slug: "calcular-preco-hora-autonomo",
+    title: "Como calcular o preço por hora como autônomo: fórmula e exemplo",
+    summary: "Uma metodologia transparente para transformar renda desejada, custos, horas faturáveis, férias e margem de segurança em um preço sustentável.",
     content: `
-      <h2 id="o-que-e-cnae">O que é CNAE e por que importa para o MEI?</h2>
-      <p>O CNAE (Código Nacional de Atividades Econômicas) define sua atividade no cadastro MEI. Escolher o código errado pode causar problemas na emissão de nota fiscal e até no acesso às plataformas.</p>
-      <h2 id="cnae-uber-99">CNAE para motorista Uber e 99</h2>
-      <p>Para transporte de passageiros por aplicativo, o código correto é <strong>5229-0/99</strong> — Motorista (por aplicativo ou não) independente. DAS mensal: R$ 86,05.</p>
-      <h2 id="cnae-ifood-rappi">CNAE para entregador iFood e Rappi</h2>
-      <p>Para entregas rápidas, use o código <strong>5320-2/01</strong> — Entregador de encomendas independente. DAS mensal: R$ 82,05.</p>
-      <h2 id="dois-cnaes">Posso ter os dois CNAEs?</h2>
-      <p>Sim. O MEI permite até 15 atividades secundárias. Se você dirige no Uber e entrega no iFood, adicione os dois códigos no Portal do Empreendedor gratuitamente.</p>
+      <p>Preço por hora não é o salário desejado dividido por todas as horas do mês. O valor precisa pagar o trabalho entregue ao cliente e também o tempo de orçamento, administração, estudo, cobrança e descanso. A conta abaixo é um ponto de partida; mercado, especialização, urgência e risco do projeto também influenciam a proposta final.</p>
+
+      <h2 id="custos-pessoais-e-negocio">1. Separe retirada pessoal e custos do negócio</h2>
+      <p>Comece pela retirada mensal que você precisa receber. Depois liste custos do negócio: DAS, internet, ferramentas, contador, equipamentos, taxas bancárias, marketing e uma reserva para manutenção. Não trate o DAS como um percentual genérico: para o MEI comum ele é um valor mensal fixo, atualizado com o salário mínimo e acrescido de ISS e/ou ICMS conforme a atividade.</p>
+
+      <h2 id="horas-faturaveis">2. Calcule horas realmente faturáveis</h2>
+      <p>Se você trabalha 160 horas por mês, nem todas podem ser vendidas. Reuniões comerciais, elaboração de propostas, emissão de notas, aprendizado e intervalos consomem parte da agenda. Registre seu tempo durante quatro semanas para descobrir sua realidade. Enquanto não tiver histórico, use uma estimativa conservadora e ajuste depois.</p>
+      <p><strong>Exemplo:</strong> 160 horas disponíveis menos 45 horas administrativas e 15 horas de reserva resultam em 100 horas faturáveis. Dividir por 160 faria você cobrar abaixo do necessário.</p>
+
+      <h2 id="formula">3. Use uma fórmula que possa ser auditada</h2>
+      <p><strong>Preço-base por hora = (retirada desejada + custos mensais + reservas) ÷ horas faturáveis.</strong></p>
+      <p>Considere uma retirada de R$ 5.000, custos de R$ 900 e reservas de R$ 600, com 100 horas faturáveis. O preço-base é R$ 65 por hora. Se o projeto tiver escopo incerto ou exigir responsabilidade adicional, a margem de risco deve ser calculada sobre esse preço, não escondida em uma estimativa aleatória.</p>
+
+      <h2 id="ferias-decimo-terceiro">4. Inclua férias, períodos sem projeto e benefícios</h2>
+      <p>Quem trabalha por conta própria não recebe férias remuneradas nem décimo terceiro automaticamente. Uma forma simples é calcular quanto precisa retirar ao longo do ano, acrescentar a reserva anual desejada e dividir pelos meses efetivamente trabalhados. Se pretende trabalhar 11 meses, os custos dos 12 meses precisam ser cobertos pela receita desses 11.</p>
+      <p>Também crie uma reserva para inadimplência e ociosidade. Ela não é lucro: é proteção para meses com menos trabalho. O lucro vem depois de pagar sua retirada, custos e reservas.</p>
+
+      <h2 id="projeto-fechado">5. Converta a hora interna em preço de projeto</h2>
+      <p>Você não precisa mostrar preço por hora ao cliente. Estime as horas de produção, revisão, reunião e gestão, multiplique pelo preço-base e detalhe o que está incluído. Defina quantidade de revisões, prazo, forma de pagamento e valor de mudanças fora do escopo.</p>
+      <p>Exemplo: 18 horas de produção + 4 horas de reunião e revisão = 22 horas. A R$ 65, o piso técnico é R$ 1.430. Acrescente custos exclusivos do projeto e, quando fizer sentido, margem pelo valor e risco assumidos.</p>
+
+      <h2 id="validar-preco">Como saber se o preço funciona na prática?</h2>
+      <ul>
+        <li>Compare o preço calculado com propostas aceitas e recusadas, sem copiar concorrentes cegamente.</li>
+        <li>Revise as horas estimadas ao final de cada projeto.</li>
+        <li>Atualize custos sempre que uma ferramenta, imposto ou rotina mudar.</li>
+        <li>Não prometa escopo aberto por preço fixo.</li>
+        <li>Se a demanda estiver cheia por meses, reavalie preço, prazo e posicionamento.</li>
+      </ul>
+
+      <h2 id="limites-calculadora">O que a calculadora consegue — e o que não consegue</h2>
+      <p>A calculadora do MEI Fácil organiza os componentes matemáticos e mostra o impacto de cada premissa. Ela não determina o preço de mercado, não mede sua experiência e não substitui uma proposta comercial. Use o resultado como piso de sustentabilidade e registre suas premissas para poder revisá-las.</p>
     `,
-    category: "Motoristas de App",
-    tags: ["cnae", "uber", "ifood", "motorista"],
-    date: "2026-05-03",
-    readTime: 3,
+    category: "Gestão financeira",
+    tags: ["precificação", "freelancer", "custos", "preço por hora"],
+    date: "2026-04-28",
+    updatedAt: "2026-08-02",
+    readTime: 7,
     featured: false,
-    views: 890,
-    relatedTool: { name: "Calculadora DAS", path: "das" },
+    sources: [
+      { name: "Sebrae — Como formar preços para MEI", url: "https://sebrae.com.br/Sebrae/Portal%20Sebrae/UFs/BA/Anexos/Infogr%C3%A1fico%20-%20como%20formar%20pre%C3%A7os%20para%20MEI.pdf" },
+      { name: "Portal do Empreendedor — Pagamento da contribuição mensal", url: "https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei/pagamento-de-contribuicao-mensal/pagamento-da-contribuicao-mensal-das" }
+    ],
+    relatedTool: { name: "Calculadora de Precificação", path: "preco" },
     seo: {
-      metaTitle: "CNAE para motorista de app 2026: Uber, 99 e iFood",
-      metaDescription: "Qual CNAE usar no MEI para dirigir Uber, 99 ou entregar no iFood? Veja os códigos corretos e o valor do DAS de cada um."
+      metaTitle: "Preço por hora do autônomo: fórmula e exemplo",
+      metaDescription: "Calcule seu preço por hora com retirada, custos, horas faturáveis, férias e margem de segurança. Veja fórmula e exemplo prático."
     }
   },
   {
     id: 3,
-    slug: "dasn-simei-2026",
-    title: "DASN-SIMEI 2026: o que é, prazo final e como declarar sem erros",
-    summary: "A declaração anual do MEI vence em 31 de maio. Veja o passo a passo para declarar corretamente e evitar multa de R$ 50.",
+    slug: "mei-nota-fiscal",
+    title: "Nota fiscal para MEI: quando é obrigatória e como emitir em 2026",
+    summary: "Entenda as regras para pessoa física e jurídica, a diferença entre produto e serviço e o uso do Emissor Nacional de NFS-e.",
     content: `
-      <h2 id="o-que-e-dasn">O que é a DASN-SIMEI?</h2>
-      <p>A DASN-SIMEI é a Declaração Anual do Simples Nacional para MEI. É obrigatória para todos os MEIs, mesmo quem não faturou nada no ano.</p>
-      <h2 id="prazo-2026">Prazo 2026</h2>
-      <p>O prazo para declarar o faturamento de 2025 é <strong>31 de maio de 2026</strong>. Não há prorrogação.</p>
-      <h2 id="o-que-acontece">O que acontece se não declarar?</h2>
-      <p>Multa mínima de R$ 50. CNPJ pode ser suspenso. Perda de benefícios como auxílio-doença e salário-maternidade.</p>
-      <h2 id="como-declarar">Como declarar passo a passo</h2>
-      <p>1. Acesse gov.br/mei com sua conta Gov.br. 2. Clique em "Declaração Anual (DASN-SIMEI)". 3. Informe o faturamento bruto de 2025. 4. Confirme e imprima o recibo.</p>
+      <p>O MEI pode emitir nota fiscal e, em algumas operações, é obrigado a fazê-lo. A regra não depende de a venda passar de R$ 200. O que importa é quem recebe, o tipo de operação e situações como envio de mercadoria.</p>
+
+      <h2 id="quando-obrigatoria">Quando o MEI precisa emitir nota fiscal?</h2>
+      <p>Em regra, a nota é obrigatória ao vender ou prestar serviço para outra pessoa jurídica, inclusive governo. Há exceções específicas, como a operação em que o destinatário emite nota fiscal de entrada. Para consumidor pessoa física, o MEI costuma ser dispensado, mas deve emitir quando o cliente solicitar.</p>
+      <p>Na venda de produtos com envio ao cliente — por internet, telefone ou catálogo — o documento fiscal acompanha a circulação da mercadoria. Como regras estaduais podem variar, o comerciante deve conferir a orientação da Secretaria da Fazenda do seu estado.</p>
+
+      <h2 id="produto-ou-servico">NF-e, nota avulsa ou NFS-e: qual documento usar?</h2>
+      <ul>
+        <li><strong>Prestação de serviço:</strong> usa NFS-e. Desde setembro de 2023, o MEI prestador utiliza o padrão nacional, pelo site ou aplicativo NFS-e Mobile.</li>
+        <li><strong>Venda de produto:</strong> normalmente usa documento fiscal autorizado pela Secretaria da Fazenda estadual, que pode oferecer NF-e, NFC-e ou nota avulsa conforme o estado e a operação.</li>
+        <li><strong>Atividade mista:</strong> pode precisar de documentos diferentes para serviço e mercadoria.</li>
+      </ul>
+      <p>Recibo comprova pagamento, mas não substitui nota fiscal quando a legislação exige o documento fiscal.</p>
+
+      <h2 id="emitir-nfse">Como emitir NFS-e de serviço pelo padrão nacional</h2>
+      <ol>
+        <li>Acesse o Emissor Nacional de NFS-e e faça o primeiro acesso com conta Gov.br ou uma das formas aceitas pelo portal.</li>
+        <li>Cadastre os dados do serviço e, se quiser usar a emissão simplificada, configure os serviços favoritos.</li>
+        <li>Informe tomador, data, descrição, valor e local da prestação conforme a operação real.</li>
+        <li>Revise antes de emitir. Baixe o DANFSe e envie ao cliente.</li>
+      </ol>
+      <p>O MEI não precisa de certificado digital para usar o emissor nacional. Não invente uma atividade para fazer a nota caber no cadastro: a descrição precisa ser compatível com a ocupação registrada.</p>
+
+      <h2 id="imposto-adicional">Emitir nota aumenta o DAS?</h2>
+      <p>Para o MEI dentro das regras do Simei, a emissão da nota não cria um imposto percentual separado sobre cada operação. O DAS mensal continua fixo conforme a atividade. Porém, toda receita documentada entra no faturamento anual e conta para o limite do regime. O excesso pode gerar complemento e desenquadramento.</p>
+
+      <h2 id="guardar-documentos">Quais documentos guardar?</h2>
+      <p>Mantenha notas emitidas e recebidas, comprovantes de cancelamento, relatório mensal de receitas e documentos de compra. Organize por mês e faça cópia de segurança. Esses registros ajudam a preencher a DASN-SIMEI e a explicar diferenças entre movimentação bancária e faturamento.</p>
+
+      <h2 id="erros-comuns">Erros comuns na emissão</h2>
+      <ul>
+        <li>Usar recibo quando o cliente CNPJ precisa de nota.</li>
+        <li>Emitir NFS-e municipal antiga quando o MEI prestador deve usar o padrão nacional.</li>
+        <li>Escolher código ou descrição incompatível com a atividade cadastrada.</li>
+        <li>Confundir valor recebido com valor líquido após taxa da plataforma.</li>
+        <li>Cancelar a nota sem verificar se a operação também foi desfeita.</li>
+      </ul>
+
+      <h2 id="casos-especiais">Quando buscar orientação local?</h2>
+      <p>Venda interestadual, substituição tributária, devolução, exportação, marketplace e transporte de mercadorias podem ter regras próprias. Para produto, consulte a Sefaz do estado; para serviço, use os canais do Emissor Nacional e, se necessário, o atendimento do Sebrae. Este texto não substitui análise fiscal individual.</p>
     `,
     category: "Obrigações MEI",
-    tags: ["dasn", "declaração", "prazo", "obrigações"],
-    date: "2026-05-01",
-    readTime: 3,
+    tags: ["nota fiscal", "NFS-e", "NF-e", "recibo"],
+    date: "2026-04-25",
+    updatedAt: "2026-08-02",
+    readTime: 8,
     featured: false,
-    views: 2100,
-    relatedTool: { name: "Checklist Mensal", path: "obrigacoes" },
+    sources: [
+      { name: "Portal do Empreendedor — Nota Fiscal", url: "https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei/nota-fiscal" },
+      { name: "Portal NFS-e — Perguntas frequentes para MEI", url: "https://www.gov.br/nfse/pt-br/copy_of_perguntas-frequentes" }
+    ],
+    relatedTool: { name: "Emissor de Recibos", path: "recibo" },
     seo: {
-      metaTitle: "DASN-SIMEI 2026: prazo, como declarar e evitar multa",
-      metaDescription: "Declaração anual MEI 2026 vence em 31 de maio. Veja como declarar em 5 minutos e evitar multa de R$50."
+      metaTitle: "Nota fiscal MEI 2026: quando e como emitir",
+      metaDescription: "Saiba quando o MEI deve emitir nota para pessoa física ou jurídica e como usar a NFS-e nacional para serviços em 2026."
     }
   },
   {
     id: 4,
-    slug: "calcular-preco-hora-autonomo",
-    title: "Como calcular quanto cobrar por hora como autônomo ou freelancer em 2026",
-    summary: "Descubra a fórmula correta para precificar seu trabalho, incluir impostos MEI e garantir o lucro desejado no fim do mês.",
+    slug: "ultrapassar-limite-mei",
+    title: "Limite do MEI em 2026: o que acontece ao ultrapassar R$ 81 mil",
+    summary: "Veja como funciona o limite proporcional, a faixa de até 20%, o desenquadramento retroativo e quais providências tomar.",
     content: `
-      <h2 id="por-que-maioria-cobra-errado">Por que a maioria dos autônomos cobra errado?</h2>
-      <p>A resposta rápida: a maioria dos freelancers calcula o preço pela hora de trabalho executado, mas esquece de incluir horas não produtivas, impostos, férias e lucro. O resultado é trabalhar muito e sobrar pouco.</p>
-      <h2 id="formula-preco-hora">A fórmula do preço por hora correto</h2>
-      <p>O preço mínimo por hora deve cobrir: <strong>salário desejado ÷ horas produtivas mensais + encargos MEI + margem de lucro</strong>. Veja o exemplo:</p>
-      <p>Se você quer receber R$ 5.000/mês e trabalha 160 horas, mas apenas 100 são produtivas (com clientes pagantes), seu custo base é R$ 50/hora. Adicione 10% de encargos (DAS + reservas) = R$ 55/hora mínimo.</p>
-      <h2 id="horas-nao-pagas">O que são horas não pagas?</h2>
-      <p>Prospecção de clientes, reuniões sem contrato, emissão de nota fiscal, deslocamento, aprendizado — tudo isso é trabalho real que não gera receita direta. Um autônomo típico tem 30% a 40% do tempo em atividades não faturáveis.</p>
-      <h2 id="incluir-ferias-mei">Como incluir férias no preço?</h2>
-      <p>Divida o salário desejado anual por 11 meses (reservando 1 mês para férias) em vez de 12. Isso embute automaticamente o direito ao descanso no seu preço hora.</p>
-      <h2 id="use-calculadora">Use a calculadora de precificação</h2>
-      <p>O MEI Fácil tem uma calculadora de precificação que faz todo esse cálculo automaticamente. Insira seu salário desejado, horas disponíveis e margem de lucro — e veja o preço mínimo por hora ou projeto.</p>
-      <h2 id="faq-preco-hora">Perguntas frequentes</h2>
-      <h3>Quanto cobra um freelancer de design por hora em 2026?</h3>
-      <p>A média no Brasil vai de R$ 60 a R$ 180/hora dependendo da experiência e especialização. Iniciantes ficam em R$ 40–80/hora; seniores com portfólio consolidado chegam a R$ 200+.</p>
-      <h3>Posso cobrar menos para pegar mais clientes?</h3>
-      <p>Cobrar abaixo do mínimo sustentável gera prejuízo no longo prazo. É melhor ter menos clientes pagando um valor justo do que muitos clientes que inviabilizam o negócio.</p>
+      <p>Em agosto de 2026, o limite anual vigente para o MEI comum é de <strong>R$ 81.000</strong>. Projetos de mudança e cronogramas futuros não alteram a regra aplicável ao faturamento atual até sua entrada em vigor. Para o MEI Caminhoneiro, existem valores e contribuição próprios, não tratados neste guia.</p>
+
+      <h2 id="receita-bruta">O que entra na conta do limite?</h2>
+      <p>Some a receita bruta de vendas e serviços do CNPJ no ano-calendário. Não desconte taxa de cartão, comissão de marketplace, combustível, materiais ou outras despesas. Em regra, transferências entre contas próprias e empréstimos não são receita de venda, mas devem estar documentados para não se confundirem com faturamento.</p>
+
+      <h2 id="limite-proporcional">Como funciona no ano de abertura?</h2>
+      <p>No primeiro ano, o limite é proporcional aos meses entre a abertura e dezembro, contando o mês de abertura. A referência é R$ 6.750 por mês. Um CNPJ aberto em julho, por exemplo, tem seis meses no cálculo e limite proporcional de R$ 40.500 naquele ano.</p>
+
+      <h2 id="ate-vinte">Excesso de até 20%: entre R$ 81 mil e R$ 97.200</h2>
+      <p>Para empresa que não está no primeiro ano, o desenquadramento produz efeitos a partir de 1º de janeiro do ano seguinte. Na DASN-SIMEI, o sistema calcula tributos sobre o valor excedente. O empreendedor deve organizar a migração e buscar apoio contábil, porque passará a cumprir as regras aplicáveis à microempresa.</p>
+      <p>“Até 20%” não é um novo teto para continuar indefinidamente como MEI. É uma faixa que muda a data dos efeitos e a forma de regularização do excesso.</p>
+
+      <h2 id="mais-vinte">Excesso superior a 20%: acima de R$ 97.200</h2>
+      <p>Fora do ano de abertura, os efeitos do desenquadramento voltam a 1º de janeiro do próprio ano em que ocorreu o excesso. Isso exige apurar e recolher tributos pelas regras do Simples Nacional desde o início do ano. No primeiro ano de atividade, o efeito pode retroagir à data de abertura.</p>
+      <p>É por isso que esperar dezembro pode sair caro: o problema não começa apenas no mês em que o total passou do limite.</p>
+
+      <h2 id="o-que-fazer">O que fazer ao perceber que vai ultrapassar</h2>
+      <ol>
+        <li>Feche a receita bruta acumulada com documentos, mês a mês.</li>
+        <li>Projete contratos já assinados e vendas prováveis até dezembro.</li>
+        <li>Não deixe de faturar nem desvie receita para outro CNPJ apenas para permanecer no regime.</li>
+        <li>Converse com profissional de contabilidade antes do excesso, especialmente se a projeção estiver próxima de R$ 97.200.</li>
+        <li>Planeje preço, fluxo de caixa e obrigações da futura microempresa.</li>
+      </ol>
+
+      <h2 id="exemplo">Exemplo prático</h2>
+      <p>Um MEI já existente faturou R$ 90.000 em 2026. O excesso de R$ 9.000 ficou dentro de 20%; ele informa o total na DASN-SIMEI, recolhe o complemento gerado e passa a atuar fora do Simei em 2027. Se tivesse faturado R$ 105.000, o efeito seria retroativo a janeiro de 2026 e a apuração precisaria ser refeita como microempresa.</p>
+
+      <h2 id="monitoramento">Como usar o simulador com segurança</h2>
+      <p>O simulador ajuda a visualizar percentual consumido e projeção, mas depende dos números informados. Atualize o faturamento ao menos uma vez por mês e compare com notas, vendas sem nota e extratos. Ele não executa desenquadramento nem calcula todos os tributos retroativos.</p>
+
+      <p>Regras tributárias podem mudar. Antes de tomar decisão de enquadramento, confira a página oficial e peça orientação individual para o seu histórico.</p>
     `,
-    category: "Prestadores de Serviço",
-    tags: ["precificação", "freelancer", "autônomo", "hora"],
-    date: "2026-04-28",
-    readTime: 5,
+    category: "Obrigações MEI",
+    tags: ["limite do MEI", "faturamento", "desenquadramento", "Simples Nacional"],
+    date: "2026-06-30",
+    updatedAt: "2026-08-02",
+    readTime: 8,
     featured: false,
-    views: 760,
-    relatedTool: { name: "Calculadora de Precificação", path: "preco" },
+    sources: [
+      { name: "Portal do Empreendedor — Quero crescer (desenquadramento)", url: "https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei/quero-crescer-desenquadramento" },
+      { name: "Portal do Empreendedor — Data de efeito do desenquadramento", url: "https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/perguntas-frequentes/desenquadramento/a-partir-de-que-data" }
+    ],
+    relatedTool: { name: "Simulador de Limite", path: "limite" },
     seo: {
-      metaTitle: "Quanto cobrar por hora como autônomo em 2026: fórmula completa",
-      metaDescription: "Aprenda a calcular o preço por hora correto como freelancer em 2026. Use nossa calculadora grátis e pare de cobrar barato."
+      metaTitle: "Limite MEI 2026: excesso e desenquadramento",
+      metaDescription: "Entenda o limite de R$ 81 mil, a faixa de 20%, o cálculo proporcional e os efeitos do desenquadramento do MEI em 2026."
     }
   },
   {
     id: 5,
-    slug: "mei-nota-fiscal",
-    title: "MEI pode emitir nota fiscal? Quando é obrigatório e como fazer em 2026",
-    summary: "Entenda em quais situações o MEI precisa emitir nota fiscal, quais tipos existem e como emitir sem pagar nada.",
+    slug: "aposentadoria-mei",
+    title: "Aposentadoria do MEI em 2026: contribuição, idade e complementação",
+    summary: "Entenda o que os 5% do DAS cobrem, as carências, a regra por idade e quando a complementação previdenciária pode ser necessária.",
     content: `
-      <h2 id="mei-pode-emitir-nota">MEI pode emitir nota fiscal?</h2>
-      <p>Sim. O MEI pode e deve emitir nota fiscal quando solicitado por pessoa jurídica (empresa) ou quando o valor da venda/serviço superar R$ 200. Para pessoa física, a emissão é opcional, mas recomendada para profissionalizar o negócio.</p>
-      <h2 id="quando-obrigatorio">Quando a nota fiscal é obrigatória para o MEI?</h2>
-      <p>A nota fiscal é obrigatória para o MEI em três situações: <strong>1)</strong> Quando o cliente é pessoa jurídica (CNPJ). <strong>2)</strong> Quando o valor do serviço ou produto supera R$ 200. <strong>3)</strong> Quando o cliente solicitar, independente do valor.</p>
-      <h2 id="tipos-nota-fiscal">Tipos de nota fiscal para MEI</h2>
-      <p><strong>NFS-e (Nota Fiscal de Serviço Eletrônica):</strong> para quem presta serviços. Emitida pelo site ou app da prefeitura do seu município. Gratuita.</p>
-      <p><strong>NF-e (Nota Fiscal Eletrônica):</strong> para quem vende produtos (comércio). Emitida pelo portal da Receita Federal ou app do governo. Gratuita.</p>
-      <h2 id="como-emitir">Como emitir nota fiscal como MEI?</h2>
-      <p>Para serviços: acesse o site da prefeitura da sua cidade, faça login com CNPJ, preencha os dados do cliente e do serviço, e emita. O processo leva menos de 5 minutos após o primeiro cadastro.</p>
-      <h2 id="faq-nota-fiscal">Perguntas frequentes</h2>
-      <h3>MEI precisa pagar imposto na nota fiscal?</h3>
-      <p>Não há imposto adicional. O MEI já paga o DAS mensal que cobre todos os impostos. A nota fiscal não gera tributação extra, exceto em casos de ultrapassagem do limite anual.</p>
-      <h3>Posso emitir recibo em vez de nota fiscal?</h3>
-      <p>O recibo vale como comprovante de pagamento, mas não substitui a nota fiscal para fins contábeis do cliente pessoa jurídica. Use o Emissor de Recibos do MEI Fácil para recibos rápidos e profissionais.</p>
+      <p>Ao pagar o DAS, o MEI destina 5% do salário mínimo ao INSS e mantém proteção previdenciária, desde que cumpra os requisitos de cada benefício. O pagamento não significa aposentadoria imediata nem garante, sozinho, todas as modalidades.</p>
+
+      <h2 id="o-que-das-cobre">Quais benefícios a contribuição do MEI pode gerar?</h2>
+      <p>Com contribuições válidas e carência cumprida, o segurado pode ter acesso a aposentadoria por idade, benefício por incapacidade temporária ou permanente e salário-maternidade. Dependentes podem ter direito a pensão por morte e auxílio-reclusão, conforme as regras do INSS.</p>
+      <p>DAS em atraso pode ser regularizado, mas pagamento tardio nem sempre conta automaticamente para carência. Antes de pagar períodos antigos apenas para “completar tempo”, consulte o CNIS e confirme o tratamento aplicável.</p>
+
+      <h2 id="idade-tempo-minimo">Idade e tempo mínimo de contribuição</h2>
+      <p>Na regra geral informada pelo INSS para trabalhadores que começaram após a Reforma da Previdência, a idade é de 65 anos para homens e 62 para mulheres. O tempo mínimo é de 20 anos para homens e 15 para mulheres. Quem já contribuía antes de novembro de 2019 pode entrar em regras de transição diferentes.</p>
+      <p>Por isso, um simulador baseado apenas em idade e número de DAS pagos oferece estimativa, não decisão do INSS. Vínculos CLT, contribuições como autônomo, períodos rurais e lacunas no CNIS podem alterar o resultado.</p>
+
+      <h2 id="tempo-contribuicao">O DAS de 5% dá aposentadoria por tempo de contribuição?</h2>
+      <p>A contribuição reduzida do MEI não vale, por si só, para aposentadoria por tempo de contribuição nem para emissão de Certidão de Tempo de Contribuição. Como essa aposentadoria foi extinta para novos segurados, a complementação interessa principalmente a quem se enquadra em direito adquirido ou regra de transição e precisa usar aqueles meses para essa finalidade.</p>
+
+      <h2 id="complementacao">Como funciona a complementação?</h2>
+      <p>Em situações cabíveis, complementa-se a diferença entre os 5% já recolhidos no DAS e a alíquota de 20%, equivalente a mais 15% sobre o salário mínimo da competência, com os encargos aplicáveis se houver atraso. Não faça pagamentos em massa sem confirmar código, competência e necessidade no Meu INSS ou com profissional previdenciário.</p>
+      <p>Complementar não aumenta automaticamente a aposentadoria para um valor escolhido. O cálculo considera o histórico contributivo e as regras válidas para o segurado.</p>
+
+      <h2 id="valor-beneficio">O MEI sempre se aposenta com um salário mínimo?</h2>
+      <p>Quando todo o histórico está no piso, o benefício tende ao valor mínimo. Mas uma pessoa pode ter salários de contribuição anteriores como empregada ou contribuinte individual. O valor final depende da média e da regra aplicada, respeitado o piso previdenciário. Dizer que todo MEI receberá exatamente um salário mínimo ignora esses históricos mistos.</p>
+
+      <h2 id="conferir-cnis">Checklist para conferir sua situação</h2>
+      <ol>
+        <li>Acesse o Meu INSS e baixe o Extrato de Contribuição (CNIS).</li>
+        <li>Compare as competências com seus comprovantes de DAS.</li>
+        <li>Identifique vínculos sem data de saída, remunerações ausentes e pagamentos abaixo do mínimo.</li>
+        <li>Use o serviço oficial “Simular Aposentadoria” como referência inicial.</li>
+        <li>Peça correção de dados antes de protocolar o benefício quando houver divergência.</li>
+      </ol>
+
+      <h2 id="limites-simulador">Como interpretar nossa simulação</h2>
+      <p>O simulador do MEI Fácil faz uma projeção educativa a partir dos dados digitados e não consulta o CNIS. Ele não verifica direito adquirido, atividade especial, deficiência, contribuição rural ou regras específicas. Para decisão financeira ou pedido de benefício, confirme no Meu INSS.</p>
     `,
-    category: "Prestadores de Serviço",
-    tags: ["nota fiscal", "nfs-e", "serviço", "mei"],
-    date: "2026-04-25",
-    readTime: 4,
+    category: "Previdência",
+    tags: ["aposentadoria", "INSS", "CNIS", "contribuição"],
+    date: "2026-01-22",
+    updatedAt: "2026-08-02",
+    readTime: 8,
     featured: false,
-    views: 640,
-    relatedTool: { name: "Emissor de Recibo", path: "recibo" },
+    sources: [
+      { name: "INSS — MEIs e autônomos: contribuição e benefícios", url: "https://www.gov.br/inss/pt-br/assuntos/saiba-como-meis-e-autonomos-podem-contribuir-e-regularizar-pendencias-com-o-inss" },
+      { name: "INSS — Microempreendedor Individual", url: "https://www.gov.br/inss/pt-br/saiba-mais/seus-direitos-e-deveres/categorias-de-segurados/microempreendedor-individual" }
+    ],
+    relatedTool: { name: "Simulador de Aposentadoria", path: "aposentadoria" },
     seo: {
-      metaTitle: "MEI pode emitir nota fiscal em 2026? Quando é obrigatório",
-      metaDescription: "Saiba quando o MEI precisa emitir nota fiscal, os tipos disponíveis e como emitir gratuitamente em 2026. Guia prático e atualizado."
+      metaTitle: "Aposentadoria MEI 2026: idade e contribuição",
+      metaDescription: "Veja como os 5% do DAS contam no INSS, idade e tempo mínimo, valor do benefício e quando avaliar a complementação do MEI."
     }
   },
   {
     id: 6,
-    slug: "ultrapassar-limite-mei",
-    title: "O que acontece se eu ultrapassar o limite de R$ 81 mil como MEI em 2026",
-    summary: "Ultrapassar o teto do MEI tem consequências sérias. Entenda o que acontece, quando o desenquadramento é obrigatório e como se planejar.",
+    slug: "das-mei-salario-minimo-2026",
+    title: "DAS MEI 2026: valores, vencimento e como pagar com segurança",
+    summary: "Confira a composição do DAS com salário mínimo de R$ 1.621, as diferenças por atividade e os cuidados com boletos falsos.",
     content: `
-      <h2 id="qual-o-limite-mei">Qual é o limite de faturamento do MEI em 2026?</h2>
-      <p>O limite anual do MEI em 2026 é de <strong>R$ 81.000,00</strong>, o equivalente a R$ 6.750 por mês. Este valor é o faturamento bruto total — somas de todas as vendas e serviços prestados no ano-calendário.</p>
-      <h2 id="o-que-acontece-ultrapassa">O que acontece se ultrapassar o limite?</h2>
-      <p>Se o faturamento superar R$ 81.000 em até 20% (até R$ 97.200), o MEI é desenquadrado somente no ano seguinte, retroagindo a janeiro. Se ultrapassar mais de 20% no mesmo ano, o desenquadramento é imediato a partir do mês do excesso.</p>
-      <h2 id="consequencias-desenquadramento">Quais são as consequências do desenquadramento?</h2>
-      <p>O CNPJ passa para Microempresa (ME) no Simples Nacional. Isso significa: <strong>1)</strong> Aumento de impostos — alíquota pode subir de ~5% para 6–15% dependendo do faturamento. <strong>2)</strong> Necessidade de contador obrigatório. <strong>3)</strong> Declaração de IR empresarial mais complexa.</p>
-      <h2 id="como-se-planejar">Como se planejar para não ultrapassar?</h2>
-      <p>Use o Simulador de Limite do MEI Fácil para monitorar seu faturamento mês a mês. Com 70% do limite atingido, é hora de avaliar se vale a pena migrar para ME ou ajustar o ritmo de faturamento.</p>
-      <h2 id="faq-limite-mei">Perguntas frequentes</h2>
-      <h3>Posso dividir faturamento com outra empresa para não passar do limite?</h3>
-      <p>Não. Isso é considerado "pejotização" ilegal. O faturamento deve refletir a realidade da operação do MEI.</p>
-      <h3>O limite do MEI vai aumentar em 2026?</h3>
-      <p>Há discussões no Congresso sobre elevação do teto, mas até maio de 2026, o limite permanece em R$ 81.000 anuais. Acompanhe o blog para atualizações.</p>
+      <p>O DAS reúne a contribuição previdenciária e, conforme a atividade, ISS e/ou ICMS. Em 2026, o salário mínimo é R$ 1.621 e a parcela previdenciária do MEI comum corresponde a 5%, ou R$ 81,05 por mês.</p>
+
+      <h2 id="valores-2026">Quanto o MEI comum paga em 2026?</h2>
+      <ul>
+        <li><strong>Comércio ou indústria:</strong> R$ 81,05 de INSS + R$ 1 de ICMS = R$ 82,05.</li>
+        <li><strong>Prestação de serviços:</strong> R$ 81,05 de INSS + R$ 5 de ISS = R$ 86,05.</li>
+        <li><strong>Comércio e serviços:</strong> R$ 81,05 + R$ 1 + R$ 5 = R$ 87,05.</li>
+      </ul>
+      <p>O MEI Caminhoneiro segue contribuição previdenciária de 12% do salário mínimo e tem valores diferentes. A calculadora desta página é destinada ao MEI comum.</p>
+
+      <h2 id="vencimento">Quando vence o DAS?</h2>
+      <p>O vencimento mensal é, em regra, no dia 20 do mês seguinte ao da competência. Se a data não for dia útil bancário, consulte o documento emitido pelo sistema oficial para confirmar o vencimento aplicável. O DAS é devido mesmo quando o CNPJ não faturou naquele mês.</p>
+
+      <h2 id="onde-emitir">Onde emitir sem cair em boleto falso</h2>
+      <p>Use o Portal do Empreendedor, o PGMEI no Portal do Simples Nacional ou o App MEI oficial. A abertura do MEI é gratuita e o governo não envia cobranças de associações privadas como se fossem obrigatórias.</p>
+      <p>Antes de pagar, confira CNPJ, período de apuração, valor e favorecido. Links patrocinados e mensagens por WhatsApp podem imitar páginas oficiais. Prefira iniciar pelo endereço gov.br, não por um link recebido.</p>
+
+      <h2 id="atraso">Como emitir o DAS atrasado?</h2>
+      <p>No PGMEI, selecione os períodos pendentes e gere a guia atualizada. O sistema calcula multa e juros até a data prevista de pagamento. Se houver muitos meses em aberto, verifique as opções oficiais de parcelamento e compare o impacto no fluxo de caixa.</p>
+      <p>O pagamento em atraso pode afetar carência e manutenção da qualidade de segurado. Quitar hoje não significa que todo período antigo produzirá imediatamente o mesmo efeito previdenciário de uma contribuição paga no prazo.</p>
+
+      <h2 id="debito-automatico">Pix, débito automático e comprovantes</h2>
+      <p>As formas disponíveis aparecem nos canais oficiais e podem incluir código de barras, Pix e débito automático. Guarde o comprovante até o pagamento constar no extrato do PGMEI. Um comprovante bancário isolado não corrige guia emitida para CNPJ ou competência errados.</p>
+
+      <h2 id="dasnao-inclui">O que o DAS não resolve sozinho?</h2>
+      <ul>
+        <li>Não entrega a DASN-SIMEI anual.</li>
+        <li>Não substitui nota fiscal quando ela é obrigatória.</li>
+        <li>Não regulariza atividade não permitida ou excesso de faturamento.</li>
+        <li>Não quita impostos pessoais eventualmente devidos na declaração de Imposto de Renda.</li>
+      </ul>
+
+      <h2 id="usar-calculadora">Como usar a calculadora do MEI Fácil</h2>
+      <p>Selecione a atividade para visualizar a composição prevista do DAS. Use o resultado para conferência e planejamento; gere a cobrança apenas no canal oficial. A ferramenta não emite boleto, não recebe pagamento e não acessa dados do seu CNPJ.</p>
     `,
     category: "Obrigações MEI",
-    tags: ["limite", "faturamento", "desenquadramento", "mei"],
-    date: "2026-04-20",
-    readTime: 4,
-    featured: false,
-    views: 1050,
-    relatedTool: { name: "Simulador de Limite", path: "limite" },
-    seo: {
-      metaTitle: "Ultrapassar limite MEI 2026: o que acontece e como evitar",
-      metaDescription: "Ultrapassar R$ 81 mil como MEI em 2026 pode causar desenquadramento imediato. Entenda as consequências e use o simulador grátis."
-    }
-  },
-  {
-    id: 7,
-    slug: "influencer-mei",
-    title: "Influencer pode ser MEI? Como receber do YouTube, Hotmart e redes sociais em 2026",
-    summary: "Criadores de conteúdo e influencers podem abrir MEI para receber de plataformas digitais — mas há limitações importantes que você precisa conhecer.",
-    content: `
-      <h2 id="influencer-pode-ser-mei">Influencer pode ser MEI?</h2>
-      <p>Sim, com ressalvas. Criadores de conteúdo que monetizam canais no YouTube, vendem cursos na Hotmart ou recebem por publicidade podem abrir MEI — desde que o faturamento anual não ultrapasse R$ 81.000 e a atividade esteja prevista no CNAE permitido.</p>
-      <h2 id="cnae-para-influencer">Qual CNAE usar para influencer e criador de conteúdo?</h2>
-      <p>O CNAE mais indicado para criadores de conteúdo é <strong>7490-1/04</strong> — Atividades de intermediação e agenciamento de serviços e negócios em geral. Para quem produz conteúdo audiovisual: <strong>5911-1/99</strong>.</p>
-      <h2 id="receber-do-exterior">Como receber do YouTube e plataformas estrangeiras como MEI?</h2>
-      <p>Receber do exterior como MEI é possível, mas complexo. O dinheiro entra como "exportação de serviços" e pode ser isento de ISS. Porém, o câmbio e remessa internacional exigem conta em corretora habilitada (como Wise ou Remessa Online).</p>
-      <h2 id="hotmart-kiwify-mei">MEI pode vender cursos na Hotmart e Kiwify?</h2>
-      <p>Sim. A venda de infoprodutos (cursos, ebooks, mentorias) é permitida para MEI. O CNAE para ensino à distância é o <strong>8599-6/04</strong>. Fique atento ao limite de faturamento anual.</p>
-      <h2 id="faq-influencer-mei">Perguntas frequentes</h2>
-      <h3>Influencer com menos de 18 anos pode abrir MEI?</h3>
-      <p>Não. O MEI exige que o titular tenha no mínimo 18 anos. Menores de idade precisam de representante legal e não podem ser MEI.</p>
-      <h3>Preciso declarar o que ganho nas redes como MEI?</h3>
-      <p>Sim. Todo faturamento — incluindo permutas, brindes e patrocínios — entra no cálculo do limite anual do MEI e deve ser declarado na DASN-SIMEI.</p>
-    `,
-    category: "MEI Digital",
-    tags: ["influencer", "youtube", "hotmart", "criador de conteúdo"],
-    date: "2026-04-15",
-    readTime: 5,
-    featured: false,
-    views: 920,
-    relatedTool: { name: "Simulador de Limite", path: "limite" },
-    seo: {
-      metaTitle: "Influencer pode ser MEI em 2026? YouTube, Hotmart e redes sociais",
-      metaDescription: "Saiba se influencers e criadores de conteúdo podem ser MEI em 2026, qual CNAE usar e como receber do exterior legalmente."
-    }
-  },
-  {
-    id: 8,
-    slug: "aposentadoria-mei",
-    title: "MEI aposentadoria 2026: quanto tempo precisa contribuir e como funciona",
-    summary: "O MEI tem direito à aposentadoria pelo INSS através do DAS. Entenda as regras, tempo de contribuição e como calcular o benefício.",
-    content: `
-      <h2 id="mei-tem-direito-aposentadoria">MEI tem direito à aposentadoria?</h2>
-      <p>Sim. Ao pagar o DAS mensalmente, o MEI contribui automaticamente para o INSS como segurado individual. Isso garante acesso à aposentadoria por idade, auxílio-doença, salário-maternidade e pensão por morte.</p>
-      <h2 id="tempo-contribuicao-aposentadoria">Quanto tempo precisa contribuir para se aposentar?</h2>
-      <p>Pela regra de transição vigente em 2026, homens precisam de <strong>35 anos de contribuição</strong> e mulheres <strong>30 anos</strong> para aposentadoria por tempo de contribuição. Para aposentadoria por idade: 65 anos (homem) ou 62 anos (mulher), com mínimo de 15 anos de contribuição.</p>
-      <h2 id="valor-aposentadoria-mei">Qual o valor da aposentadoria do MEI?</h2>
-      <p>O MEI contribui com 5% do salário mínimo (R$ 81,05/mês em 2026). Essa alíquota reduzida garante apenas a aposentadoria por idade no valor de <strong>1 salário mínimo (R$ 1.621,00)</strong>. Para aposentadoria maior, é necessário complementar a contribuição para 20%.</p>
-      <h2 id="como-complementar-contribuicao">Como complementar a contribuição do MEI?</h2>
-      <p>Acesse o site do INSS ou app Meu INSS, emita uma GPS (Guia de Previdência Social) complementar com a diferença entre 5% e 20% do salário mínimo. O valor da complementação em 2026 é de R$ 243,15/mês.</p>
-      <h2 id="faq-aposentadoria-mei">Perguntas frequentes</h2>
-      <h3>O tempo como MEI conta para aposentadoria?</h3>
-      <p>Sim, cada mês com DAS pago conta como 1 mês de contribuição ao INSS. Anos anteriores como CLT também somam ao tempo total.</p>
-      <h3>MEI tem acesso ao auxílio-doença?</h3>
-      <p>Sim, após 12 meses consecutivos de contribuição (carência). O valor é de 1 salário mínimo para quem não complementou a contribuição.</p>
-    `,
-    category: "Finanças",
-    tags: ["aposentadoria", "inss", "previdência", "benefícios"],
-    date: "2026-04-10",
-    readTime: 5,
-    featured: false,
-    views: 830,
-    relatedTool: { name: "Simulador de Aposentadoria", path: "aposentadoria" },
-    seo: {
-      metaTitle: "Aposentadoria MEI 2026: tempo de contribuição e valor do benefício",
-      metaDescription: "Entenda como funciona a aposentadoria do MEI em 2026, quanto tempo contribuir e como complementar para receber mais. Simule grátis."
-    }
-  },
-  {
-    id: 9,
-    slug: "das-mei-salario-minimo-2026",
-    title: "Salário mínimo 2026 e o impacto no DAS MEI: quanto você vai pagar",
-    summary: "Com o novo salário mínimo de R$ 1.621 em 2026, o valor do DAS MEI mudou. Veja os novos valores para cada tipo de atividade.",
-    content: `
-      <h2 id="novo-salario-minimo-2026">Salário mínimo 2026: qual o novo valor?</h2>
-      <p>O salário mínimo em 2026 é de <strong>R$ 1.621,00</strong>, reajustado com base na política de valorização que combina inflação (IPCA) e crescimento do PIB de dois anos anteriores. Esse valor afeta diretamente o DAS MEI.</p>
-      <h2 id="como-das-muda-salario-minimo">Como o salário mínimo afeta o DAS MEI?</h2>
-      <p>O DAS MEI é calculado como percentual do salário mínimo: 5% de INSS + alíquota de ISS (1%) ou ICMS (0,5%) dependendo da atividade. Com o salário mínimo de R$ 1.621,00, o INSS fixo é de R$ 81,05/mês.</p>
-      <h2 id="tabela-das-2026">Tabela do DAS MEI 2026 por atividade</h2>
-      <p><strong>Prestador de serviços (ISS):</strong> R$ 81,05 (INSS) + R$ 5,00 (ISS) = <strong>R$ 86,05/mês</strong></p>
-      <p><strong>Comércio e indústria (ICMS):</strong> R$ 81,05 (INSS) + R$ 1,00 (ICMS) = <strong>R$ 82,05/mês</strong></p>
-      <p><strong>Serviços + Comércio (ambos):</strong> R$ 81,05 + R$ 5,00 + R$ 1,00 = <strong>R$ 87,05/mês</strong></p>
-      <h2 id="quando-vence-das">Quando vence o DAS MEI?</h2>
-      <p>O DAS vence sempre no dia 20 de cada mês. Pagamentos após o vencimento geram multa de 0,33% ao dia (máximo 20%) e juros Selic. Use a Calculadora DAS do MEI Fácil para emitir o boleto atualizado.</p>
-      <h2 id="faq-das-2026">Perguntas frequentes</h2>
-      <h3>O DAS MEI vai mudar em 2027?</h3>
-      <p>Sim. O DAS é reajustado todo janeiro junto com o salário mínimo. Volte aqui em janeiro de 2027 para os valores atualizados.</p>
-      <h3>O DAS MEI inclui o IRPF?</h3>
-      <p>Não. O MEI é isento de Imposto de Renda sobre o lucro da empresa. Apenas se o pró-labore (salário do sócio) superar a faixa de isenção da tabela do IR pessoal, há tributação na declaração individual.</p>
-    `,
-    category: "Novidades",
-    tags: ["das", "salário mínimo", "2026", "tabela"],
+    tags: ["DAS", "salário mínimo", "INSS", "pagamento"],
     date: "2026-01-10",
-    readTime: 3,
+    updatedAt: "2026-08-02",
+    readTime: 7,
     featured: false,
-    views: 1840,
+    sources: [
+      { name: "Decreto nº 12.797/2025 — salário mínimo de 2026", url: "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/d12797.htm" },
+      { name: "Portal do Empreendedor — Pagamento da contribuição mensal", url: "https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei/pagamento-de-contribuicao-mensal/pagamento-da-contribuicao-mensal-das" },
+      { name: "INSS — contribuição de MEIs e autônomos", url: "https://www.gov.br/inss/pt-br/assuntos/saiba-como-meis-e-autonomos-podem-contribuir-e-regularizar-pendencias-com-o-inss" }
+    ],
     relatedTool: { name: "Calculadora DAS", path: "das" },
     seo: {
-      metaTitle: "DAS MEI 2026: novo valor com salário mínimo de R$ 1.621",
-      metaDescription: "Veja quanto custa o DAS MEI em 2026 com o novo salário mínimo de R$1.621. Tabela completa por atividade e calculadora grátis."
+      metaTitle: "DAS MEI 2026: valores e como pagar",
+      metaDescription: "Confira os valores do DAS MEI 2026 para comércio, serviço e atividade mista, vencimento, atraso e canais oficiais de pagamento."
     }
   }
 ];
 
 export const categories = [
-  { name: "Motoristas de App", color: "bg-amber-100 text-amber-800 border-amber-200", dot: "bg-amber-500" },
-  { name: "Prestadores de Serviço", color: "bg-teal-100 text-teal-800 border-teal-200", dot: "bg-teal-500" },
   { name: "Obrigações MEI", color: "bg-orange-100 text-orange-800 border-orange-200", dot: "bg-orange-500" },
-  { name: "Finanças", color: "bg-blue-100 text-blue-800 border-blue-200", dot: "bg-blue-500" },
-  { name: "MEI Digital", color: "bg-purple-100 text-purple-800 border-purple-200", dot: "bg-purple-500" },
-  { name: "Novidades", color: "bg-rose-100 text-rose-800 border-rose-200", dot: "bg-rose-500" },
+  { name: "Gestão financeira", color: "bg-blue-100 text-blue-800 border-blue-200", dot: "bg-blue-500" },
+  { name: "Previdência", color: "bg-indigo-100 text-indigo-800 border-indigo-200", dot: "bg-indigo-500" }
 ];
 
 export function getCategoryStyle(category: string) {
-  return categories.find(c => c.name === category) || categories[0];
+  return categories.find((item) => item.name === category) || categories[0];
 }
 
 export function formatDate(dateStr: string): string {
   const [year, month, day] = dateStr.split('-').map(Number);
-  const date = new Date(year, month - 1, day);
-  return date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  return new Date(year, month - 1, day).toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
 }
 
 export function getRelatedPosts(current: Post, all: Post[]): Post[] {
-  return all
-    .filter(p => p.id !== current.id && p.category === current.category)
-    .slice(0, 3);
+  const sameCategory = all.filter((post) => post.id !== current.id && post.category === current.category);
+  const otherCategories = all.filter((post) => post.id !== current.id && post.category !== current.category);
+  return [...sameCategory, ...otherCategories].slice(0, 3);
 }

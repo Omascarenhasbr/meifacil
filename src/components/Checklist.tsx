@@ -9,10 +9,10 @@ import { CheckSquare, AlertTriangle, Info, Calendar, Bell } from 'lucide-react';
 
 export const Checklist = () => {
   const [tasks, setTasks] = useState([
-    { id: 1, title: 'Pagamento do Mensal (DAS)', desc: 'Vence todo dia 20. Garante sua previdência.', done: false, priority: 'high' },
+    { id: 1, title: 'Pagamento mensal do DAS', desc: 'Vence, em regra, no dia 20. Confirme a competência e a data na guia.', done: false, priority: 'high' },
     { id: 2, title: 'Preencher Relatório Mensal', desc: 'Anote o faturamento bruto total do mês anterior.', done: false, priority: 'medium' },
     { id: 3, title: 'DASN-SIMEI (Declaração Anual)', desc: 'Prazo até 31 de maio. Uma vez ao ano.', done: false, priority: 'high' },
-    { id: 4, title: 'Emitir NF para clientes PJ', desc: 'Sempre obrigatório vender para outras empresas.', done: false, priority: 'medium' },
+    { id: 4, title: 'Conferir obrigação de nota fiscal', desc: 'Em regra, emitir para clientes PJ e quando consumidor pessoa física solicitar.', done: false, priority: 'medium' },
     { id: 5, title: 'Conferir Limite de Faturamento', desc: 'Monitorar para não passar dos R$ 81 mil/ano.', done: false, priority: 'medium' },
     { id: 6, title: 'Regularizar Funcionário', desc: 'Geração de guia de FGTS e folha (se houver).', done: false, priority: 'low' }
   ]);
@@ -61,7 +61,7 @@ export const Checklist = () => {
                     <CheckSquare size={40} className="text-mei-dark" />
                   </div>
                   <h3 className="text-3xl font-serif italic mb-2">Tudo em Dia!</h3>
-                  <p className="text-sm font-medium text-green-200 opacity-80 max-w-xs mb-8 italic">Você concluiu todas as obrigações para este período conforme as normas vigentes de 2026.</p>
+                  <p className="text-sm font-medium text-green-200 opacity-80 max-w-xs mb-8 italic">Você marcou todas as tarefas desta lista. Confirme comprovantes e situações específicas nos canais oficiais.</p>
                   <button 
                     onClick={() => setTasks(tasks.map(t => ({ ...t, done: false })))}
                     className="px-8 py-4 bg-white text-mei-dark font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-green-50 transition-all active:scale-95"
@@ -75,7 +75,7 @@ export const Checklist = () => {
             <div className="p-8 border-b border-gray-100 flex items-center justify-between bg-gray-50 bg-opacity-50">
                <div>
                   <h3 className="font-bold text-xl text-mei-dark">Tarefas de Controle</h3>
-                  <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">Sincronizado com regras 2026</p>
+                  <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">Lista educativa · revisão 2026</p>
                </div>
                <div className="text-right">
                   <div className="text-2xl font-black text-mei-light">{completedCount}/{tasks.length}</div>
@@ -131,7 +131,7 @@ export const Checklist = () => {
               <Bell className="w-6 h-6" />
             </div>
             <h4 className="font-bold text-red-800 leading-tight">DASN-SIMEI 2026</h4>
-            <p className="text-sm text-red-700 leading-relaxed font-medium">O prazo final para declarar seu faturamento bruto é **31 de maio**. A não entrega gera multa e bloqueio do DAS.</p>
+            <p className="text-sm text-red-700 leading-relaxed font-medium">O prazo regular é 31 de maio. A entrega em atraso gera multa e mantém a obrigação pendente.</p>
             <a href="https://www.gov.br/mei" target="_blank" rel="noreferrer" className="block text-center py-3 bg-red-600 text-white rounded-xl text-xs font-bold hover:bg-red-700 transition">Portal Oficial</a>
           </div>
 
@@ -141,7 +141,7 @@ export const Checklist = () => {
              <div className="space-y-4">
                 <div className="flex items-center gap-3">
                    <div className="w-2 h-2 rounded-full bg-mei-light" />
-                   <span className="text-xs font-medium text-gray-600">Todo dia 20: Vencimento DAS</span>
+                   <span className="text-xs font-medium text-gray-600">Em regra, dia 20: vencimento do DAS</span>
                 </div>
                 <div className="flex items-center gap-3">
                    <div className="w-2 h-2 rounded-full bg-gray-300" />

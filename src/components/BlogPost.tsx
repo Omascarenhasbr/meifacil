@@ -5,9 +5,9 @@
 
 "use client";
 
-import { useEffect, useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Clock, Eye, ChevronRight, Hash, BookOpen, ExternalLink, Flame } from 'lucide-react';
+import { ArrowLeft, CalendarCheck, ChevronRight, Hash, BookOpen, ExternalLink, UserRound, Link as LinkIcon } from 'lucide-react';
 import { posts, getCategoryStyle, formatDate, getRelatedPosts } from '../data/posts';
 
 interface BlogPostProps {
@@ -30,14 +30,6 @@ function extractH2Headings(html: string): { id: string; text: string }[] {
 export function BlogPost({ slug: slugProp = '', onBack, onNavigateToPost, onNavigateTool }: BlogPostProps) {
   const slug = slugProp;
   const post = posts.find(p => p.slug === slug);
-  const [views, setViews] = useState(post?.views ?? 0);
-
-  useEffect(() => {
-    if (!post) return;
-    // Increment views counter (simulated)
-    setViews(v => v + 1);
-  }, [slug, post]);
-
   const headings = useMemo(() => (post ? extractH2Headings(post.content) : []), [post]);
   const relatedPosts = useMemo(() => (post ? getRelatedPosts(post, posts) : []), [post]);
   const catStyle = post ? getCategoryStyle(post.category) : getCategoryStyle('');
@@ -55,11 +47,7 @@ export function BlogPost({ slug: slugProp = '', onBack, onNavigateToPost, onNavi
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="pb-12"
-    >
+    <motion.div initial={false} animate={{ opacity: 1 }} className="pb-12">
       {/* Back button */}
       <button
         onClick={onBack}
@@ -78,10 +66,7 @@ export function BlogPost({ slug: slugProp = '', onBack, onNavigateToPost, onNavi
               <span className={`text-[10px] font-bold px-3 py-1.5 rounded-full border ${catStyle.color}`}>
                 {post.category}
               </span>
-              <div className="flex items-center gap-1 text-[10px] font-black text-orange-500">
-                <Flame size={10} />
-                <span>Em alta</span>
-              </div>
+              <span className="text-[10px] font-bold text-gray-500">Conteúdo revisado</span>
             </div>
 
             <h1 className="text-3xl md:text-4xl font-serif italic text-mei-dark leading-tight mb-6">
@@ -90,14 +75,14 @@ export function BlogPost({ slug: slugProp = '', onBack, onNavigateToPost, onNavi
 
             <div className="flex flex-wrap items-center gap-6 pb-6 border-b border-gray-200">
               <span className="flex items-center gap-1.5 text-[11px] text-gray-500 font-bold">
-                <Clock size={12} className="text-mei-light" />
-                {post.readTime} min de leitura
+                <UserRound size={12} className="text-mei-light" />
+                Equipe Editorial MEI Fácil
               </span>
+              <span className="text-[11px] text-gray-500 font-bold">Publicado em {formatDate(post.date)}</span>
               <span className="flex items-center gap-1.5 text-[11px] text-gray-500 font-bold">
-                <Eye size={12} className="text-mei-light" />
-                {views.toLocaleString('pt-BR')} leituras
+                <CalendarCheck size={12} className="text-mei-light" />
+                Revisado em {formatDate(post.updatedAt)} · {post.readTime} min
               </span>
-              <span className="text-[11px] text-gray-500 font-bold">{formatDate(post.date)}</span>
             </div>
 
             {/* Summary / lead */}
@@ -111,6 +96,35 @@ export function BlogPost({ slug: slugProp = '', onBack, onNavigateToPost, onNavi
             className="prose-mei"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
+
+          <section className="mt-10 p-6 bg-white border border-gray-200 rounded-2xl" aria-labelledby="fontes-do-artigo">
+            <h2 id="fontes-do-artigo" className="!mt-0 text-lg! flex items-center gap-2">
+              <LinkIcon size={18} aria-hidden="true" /> Fontes consultadas
+            </h2>
+            <p className="text-sm text-gray-500">Links oficiais ou de referência verificados na última revisão deste guia.</p>
+            <ul className="!mb-0">
+              {post.sources.map((source) => (
+                <li key={source.url}>
+                  <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-green-700 underline underline-offset-2">
+                    {source.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="mt-6 p-6 bg-green-50 border border-green-100 rounded-2xl">
+            <div className="flex gap-4">
+              <span className="w-10 h-10 rounded-full bg-mei-dark text-white flex items-center justify-center shrink-0">
+                <UserRound size={18} aria-hidden="true" />
+              </span>
+              <div>
+                <h2 className="!mt-0 !mb-2 text-base!">Sobre a autoria</h2>
+                <p className="text-sm !mb-2">Publicado pela Equipe Editorial MEI Fácil, com revisão de fontes e das premissas exibidas nas ferramentas.</p>
+                <a href="/politica-editorial" className="text-sm font-bold text-green-800 underline underline-offset-2">Conheça nossa política editorial</a>
+              </div>
+            </div>
+          </section>
 
           {/* Tags */}
           {post.tags.length > 0 && (
@@ -126,14 +140,6 @@ export function BlogPost({ slug: slugProp = '', onBack, onNavigateToPost, onNavi
             </div>
           )}
 
-          {/* Bottom ad */}
-          <div className="mt-10 bg-mei-bg border-2 border-dashed border-gray-200 rounded-2xl p-4 flex flex-col items-center gap-2">
-            <p className="text-[8px] font-black text-gray-300 uppercase tracking-widest">Publicidade</p>
-            {/* ADSENSE: article bottom 728x90 */}
-            <div className="w-full h-[90px] flex items-center justify-center text-[10px] text-gray-300 font-mono bg-gray-50 rounded-xl border border-dashed border-gray-200">
-              [ ADSENSE - article bottom 728×90 ]
-            </div>
-          </div>
         </article>
 
         {/* Sidebar */}
@@ -202,22 +208,13 @@ export function BlogPost({ slug: slugProp = '', onBack, onNavigateToPost, onNavi
                       {rel.title}
                     </p>
                     <p className="text-[10px] text-gray-400 flex items-center gap-1">
-                      <Clock size={9} /> {rel.readTime} min
+                      {rel.readTime} min de leitura
                     </p>
                   </button>
                 ))}
               </div>
             </div>
           )}
-
-          {/* AdSense sidebar */}
-          <div className="bg-mei-bg border-2 border-dashed border-gray-200 rounded-2xl p-4 flex flex-col items-center gap-2">
-            <p className="text-[8px] font-black text-gray-300 uppercase tracking-widest">Publicidade</p>
-            {/* ADSENSE: sidebar 300x250 */}
-            <div className="w-full h-[250px] flex items-center justify-center text-[10px] text-gray-300 font-mono bg-gray-50 rounded-xl border border-dashed border-gray-200">
-              [ ADSENSE 300×250 ]
-            </div>
-          </div>
         </aside>
       </div>
     </motion.div>
