@@ -30,8 +30,8 @@ export const LimitSimulator = () => {
   const remaining = Math.max(currentLimit - revenue, 0);
 
   const getStatus = () => {
-    if (revenue > currentLimit * 1.2) return { label: 'CRÍTICO', color: 'bg-red-600', text: 'Desenquadramento retroativo imediato!', theme: 'red' };
-    if (revenue > currentLimit) return { label: 'LIMITE CASSAÇÃO', color: 'bg-orange-600', text: 'Desenquadramento em Jan/2027.', theme: 'orange' };
+    if (revenue > currentLimit * 1.2) return { label: 'ACIMA DE 20%', color: 'bg-red-600', text: 'Pode haver efeito retroativo. Procure orientação contábil imediatamente.', theme: 'red' };
+    if (revenue > currentLimit) return { label: 'LIMITE EXCEDIDO', color: 'bg-orange-600', text: 'Excesso de até 20%: prepare a transição para o ano seguinte.', theme: 'orange' };
     if (usagePercent > 90) return { label: 'ALERTA MÁXIMO', color: 'bg-red-500', text: 'Risco iminente de desenquadramento.', theme: 'red' };
     if (usagePercent > 70) return { label: 'ZONA DE ATENÇÃO', color: 'bg-yellow-500', text: 'Monitoramento contábil sugerido.', theme: 'yellow' };
     return { label: 'OPERACIONAL', color: 'bg-green-500', text: 'Faturamento dentro da zona segura.', theme: 'green' };
@@ -41,6 +41,11 @@ export const LimitSimulator = () => {
 
   return (
     <div className="space-y-8 animate-fadeIn">
+      <header className="max-w-3xl">
+        <p className="text-[10px] font-black text-green-700 uppercase tracking-[0.22em] mb-3">Planejamento de receita</p>
+        <h1 className="text-3xl md:text-5xl font-serif italic text-mei-dark mb-4">Limite de Faturamento MEI</h1>
+        <p className="text-gray-600 leading-relaxed">Compare a receita bruta informada com o teto de referência e com o limite proporcional do primeiro ano.</p>
+      </header>
       {/* Simulation Grid */}
       <div className="grid grid-cols-12 gap-6">
         
@@ -107,7 +112,7 @@ export const LimitSimulator = () => {
           <div className="bg-mei-bg p-8 rounded-3xl border border-gray-100 flex flex-col justify-center items-center text-center">
             <Calendar className="text-mei-light mb-4" size={32} />
             <h4 className="text-sm font-bold text-mei-dark mb-1">Ciclo de Renovação</h4>
-            <p className="text-xs text-gray-500 font-medium">Os limites zeram anualmente em 01 de Janeiro.</p>
+            <p className="text-xs text-gray-500 font-medium">A apuração recomeça em 1º de janeiro de cada ano.</p>
           </div>
         </div>
 
@@ -162,7 +167,7 @@ export const LimitSimulator = () => {
                   <AlertCircle size={20} className={status.color.replace('bg-', 'text-')} />
                 </div>
                 <div>
-                  <p className="font-black text-mei-dark text-sm uppercase tracking-tighter mb-1">Diagnóstico do Algoritmo</p>
+                  <p className="font-black text-mei-dark text-sm uppercase tracking-tighter mb-1">Leitura da simulação</p>
                   <p className="text-xs text-gray-600 font-bold leading-relaxed">{status.text}</p>
                 </div>
               </div>
@@ -170,14 +175,12 @@ export const LimitSimulator = () => {
           </div>
 
           <a 
-            href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei/desenquadramento-do-mei" 
-            target="_blank" 
-            rel="noopener noreferrer"
+            href="/blog/ultrapassar-limite-mei"
             className="bg-mei-dark text-white p-8 rounded-[2rem] shadow-xl flex items-center justify-between group cursor-pointer overflow-hidden relative block no-underline"
           >
             <div className="relative z-10">
               <h4 className="text-xs font-black text-mei-light uppercase tracking-widest mb-2 italic">Dúvidas Fiscais?</h4>
-              <p className="text-sm font-serif italic opacity-90 max-w-xs">Aprenda as regras de excesso de faturamento no nosso guia técnico.</p>
+              <p className="text-sm font-serif italic opacity-90 max-w-xs">Entenda datas de efeito e providências no nosso guia revisado.</p>
             </div>
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-mei-dark transition-transform group-hover:scale-110 relative z-10 shrink-0">
               <ArrowRight size={24} />
@@ -201,7 +204,7 @@ export const LimitSimulator = () => {
             <section>
               <h4 className="text-mei-dark font-black text-xs uppercase tracking-[0.2em] mb-4">A Regra Proporcional</h4>
               <p className="text-sm text-gray-600 leading-loose">
-                O limite absoluto é <strong>R$ 81.000,00</strong>. No entanto, se o seu CNPJ foi aberto no meio do ano, você só tem direito a <strong>R$ 6.750,00 por mês</strong> de faturamento autorizado até o fim do ciclo anual.
+                O limite anual vigente é <strong>R$ 81.000,00</strong>. No ano de abertura, o teto total é proporcional a <strong>R$ 6.750,00 por mês contado entre a abertura e dezembro</strong>. Isso não cria um teto isolado para cada mês.
               </p>
             </section>
             <div className="bg-mei-bg border border-gray-100 p-6 rounded-2xl">
@@ -223,7 +226,7 @@ export const LimitSimulator = () => {
                 </li>
                 <li className="flex gap-4">
                   <div className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 shrink-0" />
-                  <p className="text-xs text-gray-600"><strong>Mais de 20% acima:</strong> Desenquadramento imediato com pagamento de impostos retroativos sobre todo o faturamento acumulado.</p>
+                  <p className="text-xs text-gray-600"><strong>Mais de 20% acima:</strong> Os efeitos podem retroagir ao início do ano ou à abertura, exigindo apuração do Simples Nacional no período.</p>
                 </li>
               </ul>
             </section>

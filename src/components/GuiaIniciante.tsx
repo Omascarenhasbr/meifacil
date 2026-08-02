@@ -128,7 +128,7 @@ export default function GuiaIniciante() {
                 number={1} 
                 icon={<Wallet className="text-mei-dark w-6 h-6" />}
                 title="Pagar o DAS Mensalmente (Obrigatório)" 
-                desc="Todo dia 20 vence o boleto DAS. Esse boleto garante a sua aposentadoria (INSS) e recolhe os impostos (ICMS/ISS). Você deve pagá-lo MESMO SE NÃO TIVER FATURADO NADA no mês. Use a nossa Calculadora DAS no menu para conferir o valor."
+                desc="O DAS vence mensalmente, em regra no dia 20, e reúne INSS e ICMS/ISS conforme a atividade. Benefícios dependem de carência e outros requisitos. O DAS é devido mesmo sem faturamento no mês."
               />
               <StepCard 
                 number={2} 
@@ -152,7 +152,7 @@ export default function GuiaIniciante() {
                 number={5} 
                 icon={<Receipt className="text-mei-dark w-6 h-6" />}
                 title="Emissão de Notas Fiscais" 
-                desc="Você só é obrigado a emitir Nota Fiscal quando vender ou prestar serviço para outra EMPRESA (CNPJ). Se o cliente for Pessoa Física, não é obrigatório, mas você deve registrar a venda mesmo assim. O governo tem um app e um portal nacional para emissão gratuita de NF de serviço."
+                desc="Em regra, o MEI emite nota ao vender ou prestar serviço para pessoa jurídica e também quando o consumidor pessoa física solicitar. Venda de produto com envio e regras estaduais podem exigir documento próprio. Para serviço, o MEI usa o Emissor Nacional de NFS-e."
               />
             </div>
             

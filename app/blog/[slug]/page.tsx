@@ -29,6 +29,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.seo.metaDescription,
       type: 'article',
       publishedTime: post.date,
+      modifiedTime: post.updatedAt,
+      authors: ['Equipe Editorial MEI Fácil'],
+      url: `/blog/${post.slug}`,
       tags: post.tags,
     },
   };
@@ -39,16 +42,30 @@ export default async function BlogPostPage({ params }: Props) {
   const post = posts.find((p) => p.slug === slug);
   if (!post) notFound();
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.summary,
+    datePublished: post.date,
+    dateModified: post.updatedAt,
+    mainEntityOfPage: `https://meifacil.blog/blog/${post.slug}`,
+    author: {
+      '@type': 'Organization',
+      name: 'Equipe Editorial MEI Fácil',
+      url: 'https://meifacil.blog/sobre'
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'MEI Fácil',
+      url: 'https://meifacil.blog/'
+    },
+    citation: post.sources.map((source) => source.url)
+  };
+
   return (
     <>
-      {/* Static HTML content for crawlers — visible before JS loads */}
-      <div className="sr-only" aria-hidden="false">
-        <h1>{post.title}</h1>
-        <p>{post.summary}</p>
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
-      </div>
-
-      {/* Interactive client component */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <BlogPostClient slug={slug} />
     </>
   );

@@ -133,7 +133,7 @@ export const DasCalculator = () => {
           </div>
           <div>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Preencha os dados</p>
-            <h3 className="text-lg font-serif italic text-mei-dark leading-tight">Calculadora DAS MEI 2026</h3>
+            <h1 className="text-2xl md:text-3xl font-serif italic text-mei-dark leading-tight">Calculadora DAS MEI 2026</h1>
           </div>
         </div>
 
@@ -180,9 +180,9 @@ export const DasCalculator = () => {
             </p>
           </div>
 
-          {/* Receita últimos 12 meses */}
+          {/* Receita do ano-calendário */}
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Receita últimos 12 meses</label>
+            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Receita no ano-calendário</label>
             <div className="relative">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-black text-gray-400">R$</span>
               <input
@@ -258,7 +258,7 @@ export const DasCalculator = () => {
                     <div className="text-6xl md:text-7xl font-mono tracking-tighter mb-1 group-hover:scale-105 transition-transform duration-500 origin-left">
                       R$ {formatBRL(result.dasMensal)}
                     </div>
-                    <p className="text-xs text-green-300 font-medium opacity-80">Vence todo dia 20 do mês</p>
+                    <p className="text-xs text-green-300 font-medium opacity-80">Vencimento mensal: em regra, dia 20</p>
                   </div>
                   <div className="border-t border-green-800 pt-6 mt-6 relative z-10">
                     <p className="text-[10px] font-black uppercase text-mei-light mb-3 italic tracking-widest">Composição</p>
@@ -344,19 +344,19 @@ export const DasCalculator = () => {
                   <div className="bg-green-50 p-6 rounded-3xl border-2 border-mei-light border-dashed flex flex-col justify-between">
                     <div className="flex items-center gap-2 mb-3">
                       <ShieldCheck size={14} className="text-mei-dark" />
-                      <h3 className="text-[10px] font-black text-mei-dark uppercase tracking-widest">O DAS garante</h3>
+                      <h3 className="text-[10px] font-black text-mei-dark uppercase tracking-widest">Proteção previdenciária</h3>
                     </div>
                     <ul className="text-[10px] text-mei-dark font-bold space-y-1 opacity-80">
-                      <li>✓ Aposentadoria por idade</li>
-                      <li>✓ Auxílio-doença (após 12 meses)</li>
-                      <li>✓ Salário-maternidade</li>
+                      <li>✓ Benefícios dependem de requisitos e carência</li>
+                      <li>✓ Aposentadoria por idade, quando elegível</li>
+                      <li>✓ Incapacidade e salário-maternidade, conforme regras</li>
                     </ul>
                   </div>
                 </div>
 
                 {/* CTA */}
                 <a
-                  href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei/pagamento-de-contribuicao-mensal"
+                  href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei/pagamento-de-contribuicao-mensal/pagamento-da-contribuicao-mensal-das"
                   target="_blank"
                   rel="noreferrer"
                   className="w-full py-4 bg-mei-light text-mei-dark rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-lg hover:brightness-105 active:scale-95 transition text-center flex items-center justify-center gap-3"
@@ -398,7 +398,7 @@ export const DasCalculator = () => {
           <div className="bg-mei-bg p-8 rounded-3xl border border-gray-100 self-start">
             <h4 className="text-mei-dark font-black text-xs uppercase tracking-widest mb-4 italic">Calendário Fiscal</h4>
             <p className="text-sm text-gray-600 leading-loose">
-              O vencimento ocorre no <strong>dia 20 de cada mês</strong>.
+              O vencimento ocorre, em regra, no <strong>dia 20 de cada mês</strong>. Confirme a data na guia oficial.
               A falta de pagamento pode acarretar em multas e perda de benefícios como auxílio-doença e salário-maternidade.
             </p>
           </div>

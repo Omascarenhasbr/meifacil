@@ -61,7 +61,7 @@ export const ReceiptGenerator = () => {
       <div className="no-print space-y-4">
         <div>
           <h1 className="text-3xl md:text-5xl font-serif italic text-mei-dark mb-2">Emissor de Recibo Profissional</h1>
-          <p className="text-gray-500 font-medium">Documente seus serviços de forma elegante e técnica em segundos.</p>
+          <p className="text-gray-500 font-medium">Monte um comprovante de pagamento no navegador. Recibo não substitui nota fiscal quando ela é obrigatória.</p>
         </div>
       </div>
 
@@ -151,7 +151,7 @@ export const ReceiptGenerator = () => {
       <div className="no-print flex items-center gap-3 bg-blue-50 p-6 rounded-3xl border border-blue-100">
         <FileText className="text-blue-500 shrink-0" />
         <p className="text-xs text-blue-700 font-medium leading-relaxed">
-          <strong>Dica Técnica:</strong> Ao clicar em imprimir, escolha a opção "Salvar como PDF" no destino da impressora para gerar o arquivo digital.
+          <strong>Antes de emitir:</strong> confira nomes, documento, valor, descrição e se o pagamento foi realmente recebido. Ao imprimir, você pode escolher “Salvar como PDF”.
         </p>
       </div>
 

@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import { Calculator, TrendingUp, Clock, Receipt, CheckSquare, UserRound, ArrowRight, ShieldCheck, Zap, Info } from 'lucide-react';
-import { motion } from 'motion/react';
+import Link from 'next/link';
+import { Calculator, TrendingUp, Clock, Receipt, CheckSquare, UserRound, ArrowRight, ShieldCheck, Zap, Info, Rocket, BriefcaseBusiness, Landmark } from 'lucide-react';
 import { menuItems } from './ClientLayout';
 
 
@@ -15,7 +15,7 @@ const tools = [
     id: 'das', 
     label: 'Calculadora DAS', 
     icon: Calculator, 
-    desc: 'Cálculo mensal do boleto DAS MEI atualizado para 2026.',
+    desc: 'Confira a composição estimada do DAS MEI com as referências de 2026.',
     color: 'bg-blue-50 text-blue-600 border-blue-100',
     stats: 'Incluso: INSS + ISS/ICMS'
   },
@@ -23,7 +23,7 @@ const tools = [
     id: 'limite', 
     label: 'Limite de Receita', 
     icon: TrendingUp, 
-    desc: 'Simule seu faturamento e evite o desenquadramento do MEI.',
+    desc: 'Acompanhe o faturamento e identifique cedo o risco de ultrapassar o teto.',
     color: 'bg-green-50 text-green-600 border-green-100',
     stats: 'Teto 2026: R$ 81.000,00'
   },
@@ -39,7 +39,7 @@ const tools = [
     id: 'recibo', 
     label: 'Gerador de Recibos', 
     icon: Receipt, 
-    desc: 'Emita recibos profissionais em segundos para seus clientes.',
+    desc: 'Monte, revise e imprima um comprovante simples de pagamento.',
     color: 'bg-orange-50 text-orange-600 border-orange-100',
     stats: 'Exportação em PDF/Print'
   },
@@ -47,7 +47,7 @@ const tools = [
     id: 'obrigacoes', 
     label: 'Agenda Fiscal', 
     icon: CheckSquare, 
-    desc: 'Não perca prazos! Checklist completo de obrigações anuais.',
+    desc: 'Organize rotinas mensais e anuais sem confundir marcação com transmissão.',
     color: 'bg-red-50 text-red-600 border-red-100',
     stats: 'DASN-SIMEI + Mensal'
   },
@@ -55,9 +55,9 @@ const tools = [
     id: 'aposentadoria', 
     label: 'Aposentadoria', 
     icon: UserRound, 
-    desc: 'Simulador de tempo e valor para MEIs.',
+    desc: 'Projeção educativa de idade e contribuições para comparar com o Meu INSS.',
     color: 'bg-indigo-50 text-indigo-600 border-indigo-100',
-    stats: 'Regras da Previdência'
+    stats: 'Não consulta o CNIS'
   },
 ];
 
@@ -81,19 +81,19 @@ export function Home({ onNavigate }: HomeProps) {
             Gestão simplificada para quem faz o Brasil girar.
           </h1>
           <p className="text-green-100 text-lg mb-8 opacity-90 leading-relaxed font-medium">
-            Ferramentas técnicas projetadas para o Microempreendedor Moderno. 
-            Cálculos precisos, alertas fiscais e produtividade em um só lugar.
+            Simulações com premissas visíveis, guias com fontes e atalhos para os canais oficiais.
+            Organize os números antes de cumprir a obrigação no portal responsável.
           </p>
           <div className="flex flex-wrap gap-4">
             <button 
-              onClick={() => handleNavigate('das')}
+              onClick={() => handleNavigate('quero-ser-mei')}
               className="bg-mei-light text-mei-dark px-8 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:brightness-105 transition shadow-lg"
             >
-              Começar agora
+              Escolher minha jornada
             </button>
             <div className="flex items-center gap-2 px-4 text-[10px] uppercase font-bold tracking-tighter opacity-80 border border-green-700 rounded-xl">
               <ShieldCheck size={16} className="text-mei-light" />
-              Baseado em dados oficiais
+              Fontes e revisão identificadas
             </div>
           </div>
         </div>
@@ -103,11 +103,39 @@ export function Home({ onNavigate }: HomeProps) {
         <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-mei-light rounded-full opacity-10 blur-3xl pointer-events-none" />
       </section>
 
+      <section aria-labelledby="escolha-jornada" className="space-y-5">
+        <div className="px-2">
+          <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">Comece pelo seu momento</p>
+          <h2 id="escolha-jornada" className="text-3xl font-serif italic text-mei-dark">O que você precisa resolver hoje?</h2>
+          <p className="text-sm text-gray-600 mt-2 max-w-2xl leading-relaxed">A ordem importa: primeiro entenda a etapa, depois use a ferramenta e conclua a obrigação no canal oficial.</p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-5">
+          <Link href="/quero-ser-mei" className="group bg-white border-2 border-green-200 hover:border-mei-light rounded-3xl p-7 md:p-8 transition shadow-sm hover:shadow-xl">
+            <div className="w-12 h-12 bg-green-100 text-green-800 rounded-2xl flex items-center justify-center mb-5"><Rocket aria-hidden="true" /></div>
+            <p className="text-[10px] font-black uppercase tracking-wider text-green-700 mb-2">Antes do CNPJ</p>
+            <h3 className="text-2xl font-bold text-mei-dark mb-3">Quero ser MEI</h3>
+            <p className="text-sm text-gray-600 leading-relaxed mb-6">Confira se pode ser MEI, planeje atividade e preço, formalize gratuitamente e organize os primeiros passos.</p>
+            <span className="inline-flex items-center gap-2 text-sm font-black text-green-800">Seguir esta jornada <ArrowRight size={16} className="group-hover:translate-x-1 transition" aria-hidden="true" /></span>
+          </Link>
+          <Link href="/ja-sou-mei" className="group bg-white border-2 border-blue-100 hover:border-blue-300 rounded-3xl p-7 md:p-8 transition shadow-sm hover:shadow-xl">
+            <div className="w-12 h-12 bg-blue-50 text-blue-700 rounded-2xl flex items-center justify-center mb-5"><BriefcaseBusiness aria-hidden="true" /></div>
+            <p className="text-[10px] font-black uppercase tracking-wider text-blue-700 mb-2">CNPJ em atividade</p>
+            <h3 className="text-2xl font-bold text-mei-dark mb-3">Já sou MEI</h3>
+            <p className="text-sm text-gray-600 leading-relaxed mb-6">Organize DAS, receita, nota fiscal, declaração anual, previdência e o crescimento do negócio.</p>
+            <span className="inline-flex items-center gap-2 text-sm font-black text-blue-800">Abrir meu painel <ArrowRight size={16} className="group-hover:translate-x-1 transition" aria-hidden="true" /></span>
+          </Link>
+        </div>
+        <Link href="/servicos-oficiais" className="bg-gray-900 text-white rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-black transition">
+          <span className="flex gap-3 items-center"><Landmark className="text-mei-light" aria-hidden="true" /><span><strong className="block">Precisa emitir ou transmitir algo agora?</strong><span className="text-xs text-gray-300">Use nossa central de links conferidos para os serviços oficiais.</span></span></span>
+          <span className="text-xs font-black uppercase tracking-wider flex items-center gap-2">Abrir central <ArrowRight size={15} aria-hidden="true" /></span>
+        </Link>
+      </section>
+
       {/* Grid Header */}
       <div className="flex items-center justify-between px-2">
         <div>
-          <h3 className="text-xs font-black text-gray-400 uppercase tracking-[0.3em] mb-1">Painel Técnico</h3>
-          <p className="text-sm font-bold text-mei-dark font-serif italic">Selecione uma ferramenta p/ processar dados</p>
+          <h2 className="text-xs font-black text-gray-400 uppercase tracking-[0.3em] mb-1">Ferramentas gratuitas</h2>
+          <p className="text-sm font-bold text-mei-dark font-serif italic">Calcule, organize e entenda o próximo passo</p>
         </div>
         <div className="flex gap-2">
           <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
@@ -117,14 +145,11 @@ export function Home({ onNavigate }: HomeProps) {
 
       {/* Tool Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {tools.map((tool, index) => (
-          <motion.div
+        {tools.map((tool) => (
+          <Link
             key={tool.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
-            onClick={() => handleNavigate(tool.id)}
-            className="group bg-white p-6 rounded-3xl border border-gray-200 shadow-sm hover:shadow-xl hover:border-mei-light transition-all cursor-pointer flex flex-col h-full"
+            href={menuItems.find((item) => item.id === tool.id)?.path || '/'}
+            className="group bg-white p-6 rounded-3xl border border-gray-200 shadow-sm hover:shadow-xl hover:border-mei-light transition-all cursor-pointer flex flex-col h-full text-left"
           >
             <div className={`w-14 h-14 rounded-2xl ${tool.color} border flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-3`}>
               <tool.icon className="w-7 h-7" />
@@ -145,9 +170,32 @@ export function Home({ onNavigate }: HomeProps) {
                 {tool.stats}
               </span>
             </div>
-          </motion.div>
+          </Link>
         ))}
       </div>
+
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-5" aria-labelledby="como-usar">
+        <div className="md:col-span-3 px-2">
+          <h2 id="como-usar" className="text-2xl font-serif italic text-mei-dark">Como usar o MEI Fácil com segurança</h2>
+        </div>
+        <div className="bg-white border border-gray-200 rounded-2xl p-6">
+          <strong className="text-mei-dark block mb-2">1. Entenda a premissa</strong>
+          <p className="text-sm text-gray-600 leading-relaxed">Veja quais valores e regras entram no cálculo. Resultado sem premissa clara não deve orientar uma decisão.</p>
+        </div>
+        <div className="bg-white border border-gray-200 rounded-2xl p-6">
+          <strong className="text-mei-dark block mb-2">2. Confira o guia</strong>
+          <p className="text-sm text-gray-600 leading-relaxed">Nossos artigos mostram data de revisão, autoria editorial, limitações e links para as fontes consultadas.</p>
+        </div>
+        <div className="bg-white border border-gray-200 rounded-2xl p-6">
+          <strong className="text-mei-dark block mb-2">3. Conclua no canal oficial</strong>
+          <p className="text-sm text-gray-600 leading-relaxed">Boletos, declarações e benefícios são emitidos nos serviços responsáveis. Nós não recebemos tributos nem acessamos seu CNPJ.</p>
+        </div>
+        <div className="md:col-span-3 flex flex-wrap gap-4 px-2 pt-2">
+          <Link href="/blog" className="text-sm font-black text-green-800 underline underline-offset-4">Ler guias revisados</Link>
+          <Link href="/politica-editorial" className="text-sm font-black text-green-800 underline underline-offset-4">Ver política editorial</Link>
+          <Link href="/sobre" className="text-sm font-black text-green-800 underline underline-offset-4">Conhecer o projeto</Link>
+        </div>
+      </section>
 
       {/* Info Banner */}
       <section className="bg-white border-2 border-mei-dark border-dashed rounded-3xl p-8 flex flex-col md:flex-row items-center gap-8 shadow-sm">
