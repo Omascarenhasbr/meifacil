@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Calculator, TrendingUp, Clock, Receipt, CheckSquare, UserRound, ArrowRight, ShieldCheck, Zap, Info, Rocket, BriefcaseBusiness, Landmark } from 'lucide-react';
+import { Calculator, TrendingUp, Clock, Receipt, CheckSquare, UserRound, ArrowRight, ShieldCheck, Zap, Info, Rocket, BriefcaseBusiness, Landmark, Lightbulb } from 'lucide-react';
 import { menuItems } from './ClientLayout';
 
 
@@ -59,6 +59,12 @@ const tools = [
     color: 'bg-indigo-50 text-indigo-600 border-indigo-100',
     stats: 'Não consulta o CNIS'
   },
+];
+
+const featuredIdeas = [
+  { slug: 'marmitas-por-encomenda', category: 'Alimentação', title: 'Marmitas por encomenda', detail: 'Cardápio mínimo, custo por porção e primeiras 20 vendas.' },
+  { slug: 'costura-e-ajustes-sob-medida', category: 'Serviços locais', title: 'Costura e ajustes', detail: 'Serviços simples, tempo real e portfólio do bairro.' },
+  { slug: 'pet-sitter-cuidador-de-animais', category: 'Cuidados', title: 'Pet sitter', detail: 'Protocolo seguro, raio de atendimento e confiança.' }
 ];
 
 export function Home({ onNavigate }: HomeProps) {
@@ -131,6 +137,27 @@ export function Home({ onNavigate }: HomeProps) {
         </Link>
       </section>
 
+      <section className="bg-emerald-950 text-white rounded-[2rem] p-7 md:p-9" aria-labelledby="ideias-em-destaque">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+          <div className="max-w-2xl">
+            <p className="text-[10px] font-black text-mei-light uppercase tracking-[0.25em] mb-2 flex items-center gap-2"><Lightbulb size={14} /> Antes de abrir o CNPJ</p>
+            <h2 id="ideias-em-destaque" className="text-3xl font-serif italic mb-2">Teste uma oferta pequena com clientes reais</h2>
+            <p className="text-sm text-green-100 leading-relaxed">Planos com ocupação MEI de referência, cenário transparente de investimento e uma meta de validação paga.</p>
+          </div>
+          <Link href="/ideias-de-negocios" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-mei-light hover:text-white">Ver todas as ideias <ArrowRight size={15} /></Link>
+        </div>
+        <div className="grid md:grid-cols-3 gap-4">
+          {featuredIdeas.map((idea) => (
+            <Link key={idea.slug} href={`/ideias-de-negocios/${idea.slug}`} className="group bg-white/8 border border-white/15 hover:bg-white/12 rounded-2xl p-5 transition">
+              <span className="text-[9px] font-black uppercase tracking-wider text-mei-light">{idea.category}</span>
+              <h3 className="text-lg font-bold mt-2 mb-2">{idea.title}</h3>
+              <p className="text-xs text-green-100 leading-relaxed mb-4">{idea.detail}</p>
+              <span className="text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-1">Abrir plano <ArrowRight size={12} className="group-hover:translate-x-1 transition" /></span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Grid Header */}
       <div className="flex items-center justify-between px-2">
         <div>
@@ -192,6 +219,7 @@ export function Home({ onNavigate }: HomeProps) {
         </div>
         <div className="md:col-span-3 flex flex-wrap gap-4 px-2 pt-2">
           <Link href="/blog" className="text-sm font-black text-green-800 underline underline-offset-4">Ler guias revisados</Link>
+          <Link href="/ideias-de-negocios" className="text-sm font-black text-green-800 underline underline-offset-4">Explorar ideias de negócios</Link>
           <Link href="/politica-editorial" className="text-sm font-black text-green-800 underline underline-offset-4">Ver política editorial</Link>
           <Link href="/sobre" className="text-sm font-black text-green-800 underline underline-offset-4">Conhecer o projeto</Link>
         </div>

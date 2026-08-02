@@ -8,7 +8,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { Search, Clock, BookOpen, ChevronRight, Flame } from 'lucide-react';
+import { Search, Clock, BookOpen, ChevronRight, Flame, Lightbulb } from 'lucide-react';
 import { posts, categories, getCategoryStyle, formatDate } from '../data/posts';
 import type { Post } from '../data/posts';
 
@@ -55,6 +55,10 @@ export function BlogList() {
         <h1 className="text-3xl md:text-5xl font-serif italic text-mei-dark mb-4">Guias práticos para a jornada do MEI</h1>
         <p className="text-gray-600 leading-relaxed">Entenda obrigações, decisões financeiras e previdência com contexto, limitações e links para as fontes responsáveis.</p>
       </header>
+      <Link href="/ideias-de-negocios" className="mb-8 bg-amber-50 border border-amber-200 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-amber-300 transition group">
+        <span className="flex items-start gap-3"><Lightbulb className="text-amber-700 shrink-0" aria-hidden="true" /><span><strong className="text-amber-950 block mb-1">Procurando uma ideia para começar?</strong><span className="text-sm text-amber-900 leading-relaxed">Veja planos de validação, custos de teste e ocupações MEI antes de abrir o CNPJ.</span></span></span>
+        <span className="text-xs font-black uppercase tracking-wider text-amber-950 inline-flex items-center gap-2 whitespace-nowrap">Explorar ideias <ChevronRight size={15} className="group-hover:translate-x-1 transition" /></span>
+      </Link>
       {/* Hero Featured Article */}
       {!search && !activeCategory && (
         <Link

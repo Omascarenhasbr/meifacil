@@ -13,6 +13,7 @@ import {
   Clock,
   LayoutDashboard,
   Landmark,
+  Lightbulb,
   Map,
   Menu,
   Receipt,
@@ -26,6 +27,7 @@ export const menuItems = [
   { id: 'home', label: 'Início', path: '/', icon: LayoutDashboard, desc: 'Visão geral' },
   { id: 'quero-ser-mei', label: 'Quero ser MEI', path: '/quero-ser-mei', icon: Rocket, desc: 'Da ideia ao CNPJ' },
   { id: 'ja-sou-mei', label: 'Já sou MEI', path: '/ja-sou-mei', icon: BriefcaseBusiness, desc: 'Rotina e crescimento' },
+  { id: 'ideias', label: 'Ideias de Negócios', path: '/ideias-de-negocios', icon: Lightbulb, desc: 'Modelos para validar' },
   { id: 'guias', label: 'Trilha do MEI', path: '/guia-iniciante', icon: Map, desc: 'Passo a passo' },
   { id: 'das', label: 'Calculadora DAS', path: '/calculadora-das-mei', icon: Calculator, desc: 'Impostos mensais' },
   { id: 'limite', label: 'Limite de Receita', path: '/limite-faturamento-mei', icon: TrendingUp, desc: 'Faturamento anual' },
@@ -53,13 +55,17 @@ export function ClientLayout({ children }: { children: ReactNode }) {
 
   const activeMenuId = pathname === '/'
     ? 'home'
+    : pathname.startsWith('/ideias-de-negocios')
+      ? 'ideias'
     : pathname.startsWith('/blog')
       ? 'blog'
       : menuItems.find((item) => item.path === pathname)?.id;
 
   const currentItem = menuItems.find((item) => item.id === activeMenuId);
   const isInstitutional = institutionalLinks.some((item) => item.href === pathname);
-  const pageHeading = pathname.startsWith('/blog/')
+  const pageHeading = pathname.startsWith('/ideias-de-negocios/')
+    ? 'Plano de validação'
+    : pathname.startsWith('/blog/')
     ? 'Guia prático'
     : isInstitutional
       ? 'MEI Fácil'
@@ -83,6 +89,7 @@ export function ClientLayout({ children }: { children: ReactNode }) {
         <nav className="hidden lg:flex gap-7 text-[11px] font-bold uppercase tracking-wider items-center" aria-label="Navegação principal">
           <Link href="/" className="hover:text-mei-light transition-colors">Início</Link>
           <Link href="/blog" className="hover:text-mei-light transition-colors">Guias</Link>
+          <Link href="/ideias-de-negocios" className="hover:text-mei-light transition-colors">Ideias</Link>
           <Link href="/servicos-oficiais" className="hover:text-mei-light transition-colors">Serviços oficiais</Link>
           <Link href="/sobre" className="hover:text-mei-light transition-colors">Sobre</Link>
           <Link href="/contato" className="hover:text-mei-light transition-colors">Contato</Link>
@@ -172,7 +179,9 @@ export function ClientLayout({ children }: { children: ReactNode }) {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
               <p className="text-[10px] font-mono text-green-700 mb-1 uppercase tracking-widest font-bold">
-                {pathname.startsWith('/blog/') ? (
+                {pathname.startsWith('/ideias-de-negocios/') ? (
+                  <span><Link href="/">Início</Link> / <Link href="/ideias-de-negocios">Ideias de Negócios</Link> / Plano</span>
+                ) : pathname.startsWith('/blog/') ? (
                   <span><Link href="/">Início</Link> / <Link href="/blog">Guias</Link> / Artigo</span>
                 ) : (
                   <span><Link href="/">Início</Link> / {pageHeading}</span>
@@ -180,7 +189,7 @@ export function ClientLayout({ children }: { children: ReactNode }) {
               </p>
               <p className="text-3xl md:text-4xl font-serif italic text-mei-dark">{pageHeading}</p>
             </div>
-            {!isInstitutional && pathname !== '/' && !pathname.startsWith('/blog') && (
+            {!isInstitutional && pathname !== '/' && !pathname.startsWith('/blog') && !pathname.startsWith('/ideias-de-negocios') && (
               <div className="bg-white px-5 py-2 rounded-full border border-gray-200 flex items-center gap-3 shadow-sm self-start">
                 <span className="w-2 h-2 rounded-full bg-red-500" aria-hidden="true" />
                 <span className="text-[10px] font-black uppercase tracking-tighter">DAS: vencimento mensal no dia 20</span>
