@@ -48,7 +48,7 @@ const requiredRoutes = [
   '/', '/quero-ser-mei', '/ja-sou-mei', '/servicos-oficiais', '/guia-iniciante',
   '/calculadora-das-mei', '/limite-faturamento-mei', '/calculadora-preco-hora-autonomo',
   '/emissor-recibo-mei', '/checklist-mensal-mei', '/simulador-aposentadoria-mei',
-  '/blog', '/sobre', '/politica-editorial', '/contato', '/politica-de-privacidade', '/termos-de-uso'
+  '/blog', '/ideias-de-negocios', '/sobre', '/politica-editorial', '/contato', '/politica-de-privacidade', '/termos-de-uso'
 ];
 
 const sitemapPath = join(output, 'sitemap.xml');
