@@ -42,6 +42,7 @@ export const menuItems = [
 const institutionalLinks = [
   { href: '/sobre', label: 'Sobre' },
   { href: '/politica-editorial', label: 'Política editorial' },
+  { href: '/politica-de-publicidade', label: 'Publicidade' },
   { href: '/contato', label: 'Contato' },
   { href: '/politica-de-privacidade', label: 'Privacidade' },
   { href: '/termos-de-uso', label: 'Termos' }

@@ -120,7 +120,7 @@ export function BlogPost({ slug: slugProp = '', onBack, onNavigateToPost, onNavi
               </span>
               <div>
                 <h2 className="!mt-0 !mb-2 text-base!">Sobre a autoria</h2>
-                <p className="text-sm !mb-2">Publicado pela Equipe Editorial MEI Fácil, com revisão de fontes e das premissas exibidas nas ferramentas.</p>
+                <p className="text-sm !mb-2">Pesquisa, redação e revisão documental realizadas pela Equipe Editorial MEI Fácil. As fontes abaixo sustentam as regras principais; quando não há revisão profissional externa assinada, não sugerimos que ela exista.</p>
                 <a href="/politica-editorial" className="text-sm font-bold text-green-800 underline underline-offset-2">Conheça nossa política editorial</a>
               </div>
             </div>

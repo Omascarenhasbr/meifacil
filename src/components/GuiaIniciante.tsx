@@ -1,192 +1,92 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { 
-  CheckCircle2, 
-  Map, 
-  ArrowRight, 
-  CreditCard, 
-  ShieldCheck, 
-  FileText, 
-  AlertCircle,
-  ExternalLink,
-  Store,
-  Wallet,
-  Receipt
-} from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, CheckCircle2, ExternalLink, FileCheck2, Landmark, ListChecks, ShieldCheck } from 'lucide-react';
+
+const officialSources = [
+  { label: 'Portal do Empreendedor — Quero ser MEI', href: 'https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/quero-ser-mei' },
+  { label: 'Portal do Empreendedor — ocupações permitidas', href: 'https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/quero-ser-mei/quais-as-ocupacoes-que-podem-ser-mei' },
+  { label: 'Portal do Empreendedor — formalização do MEI', href: 'https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/quero-ser-mei/formalize-se' },
+  { label: 'Portal do Empreendedor — serviços e obrigações do MEI', href: 'https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei' }
+];
 
 export default function GuiaIniciante() {
-  const [activeTab, setActiveTab] = useState<'abrir' | 'pos-abertura'>('abrir');
-
   return (
-    <div className="max-w-4xl space-y-8">
-      {/* Header */}
-      <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-mei-light/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
-        <div className="relative z-10">
-          <div className="w-12 h-12 bg-mei-light rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-mei-light/30">
-            <Map className="w-6 h-6 text-mei-dark" />
-          </div>
-          <h1 className="text-3xl font-serif italic text-mei-dark mb-4">Trilha do Iniciante MEI</h1>
-          <p className="text-gray-600 max-w-2xl leading-relaxed">
-            Seja bem-vindo ao mundo do empreendedorismo! Preparamos um passo a passo completo e gratuito para você abrir o seu CNPJ sozinho e, em seguida, saber exatamente quais são as suas obrigações para não ter dor de cabeça.
-          </p>
+    <article className="max-w-5xl mx-auto space-y-7 pb-12">
+      <header className="bg-mei-dark text-white rounded-[2.5rem] p-8 md:p-12 overflow-hidden relative">
+        <div className="relative z-10 max-w-3xl">
+          <p className="text-[10px] text-mei-light font-black uppercase tracking-[0.25em] mb-4">Guia completo · Revisado em 28 de agosto de 2026</p>
+          <h1 className="text-4xl md:text-5xl font-serif italic leading-tight mb-5">Como abrir MEI: decisões, formalização e primeiros 30 dias</h1>
+          <p className="text-green-100 text-lg leading-relaxed">Uma trilha verificável para descobrir se o regime combina com sua atividade, evitar cadastros inadequados e começar a rotina do CNPJ nos canais corretos.</p>
         </div>
-      </div>
+        <div className="absolute -bottom-24 -right-16 w-80 h-80 rounded-full bg-mei-light/10" aria-hidden="true" />
+      </header>
 
-      {/* Tabs */}
-      <div className="flex bg-white rounded-2xl p-2 border border-gray-100 shadow-sm">
-        <button 
-          onClick={() => setActiveTab('abrir')}
-          className={`flex-1 py-4 px-6 rounded-xl text-sm font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-3 ${activeTab === 'abrir' ? 'bg-mei-dark text-white shadow-md' : 'text-gray-500 hover:bg-gray-50 hover:text-mei-dark'}`}
-        >
-          <Store className="w-4 h-4" />
-          Passo 1: Como Abrir o MEI
-        </button>
-        <button 
-          onClick={() => setActiveTab('pos-abertura')}
-          className={`flex-1 py-4 px-6 rounded-xl text-sm font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-3 ${activeTab === 'pos-abertura' ? 'bg-mei-light text-mei-dark shadow-md' : 'text-gray-500 hover:bg-gray-50 hover:text-mei-dark'}`}
-        >
-          <CheckCircle2 className="w-4 h-4" />
-          Passo 2: Já sou MEI, e agora?
-        </button>
-      </div>
+      <aside className="bg-amber-50 border border-amber-200 rounded-3xl p-6 flex gap-4 text-sm leading-relaxed text-amber-950">
+        <ShieldCheck className="shrink-0 text-amber-700" aria-hidden="true" />
+        <p><strong>A abertura do MEI é gratuita no Portal do Empreendedor.</strong> Desconfie de cobranças para “ativar”, “registrar” ou “liberar” um CNPJ recém-aberto. Este site não formaliza empresas e nunca solicita senha gov.br.</p>
+      </aside>
 
-      {/* Content */}
-      <AnimatePresence mode="wait">
-        {activeTab === 'abrir' ? (
-          <motion.div 
-            key="abrir"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="space-y-6"
-          >
-            <div className="bg-yellow-50 border border-yellow-200 p-6 rounded-2xl flex items-start gap-4">
-              <AlertCircle className="w-6 h-6 text-yellow-600 shrink-0 mt-1" />
-              <div>
-                <h4 className="font-bold text-yellow-800 mb-2">Aviso Importante: Abrir o MEI é 100% Gratuito!</h4>
-                <p className="text-sm text-yellow-700 leading-relaxed">
-                  Não pague boletos de associações ou empresas cobrando para abrir o seu MEI. O processo no site oficial do Governo é gratuito e fica pronto na hora.
-                </p>
-              </div>
-            </div>
+      <section className="bg-white border border-gray-200 rounded-3xl p-7 md:p-9 prose-mei" aria-labelledby="antes-cnpj">
+        <div className="flex items-center gap-3 mb-4"><ListChecks className="text-green-700" aria-hidden="true" /><h2 id="antes-cnpj" className="!m-0">1. Confirme se o MEI cabe no negócio</h2></div>
+        <p>Não escolha o regime apenas porque ele é simples. Antes do cadastro, confira se a atividade exercida aparece na lista de ocupações permitidas, se a projeção de receita cabe no limite vigente, se você não participa de outra empresa como titular, sócio ou administrador e se a estrutura de pessoal respeita as regras do MEI.</p>
+        <p>A ocupação deve descrever o trabalho real. Cada ocupação está ligada a um CNAE e influencia tributação, nota fiscal e exigências locais. É possível registrar uma ocupação principal e ocupações secundárias permitidas, mas adicionar códigos “por garantia” pode criar obrigações que não correspondem ao negócio.</p>
+        <p>Quem recebe benefício previdenciário, seguro-desemprego, é servidor público ou exerce profissão regulamentada deve verificar os efeitos específicos antes de formalizar. Quando houver dúvida, use o atendimento do Sebrae ou procure orientação contábil.</p>
+      </section>
 
-            <div className="grid gap-4">
-              <StepCard 
-                number={1} 
-                title="Acesse o Portal Gov.br" 
-                desc="O único site oficial para abrir o MEI é o Portal do Empreendedor do Governo Federal. Você precisará de uma conta Gov.br nível Prata ou Ouro (que você consegue acessando com os dados do seu banco)."
-                link="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor"
-                linkText="Acessar Portal Oficial"
-              />
-              <StepCard 
-                number={2} 
-                title="Clique em 'Quero ser MEI'" 
-                desc="Na página inicial, encontre o bloco 'Quero ser MEI' e clique em 'Formalize-se'. O sistema pedirá o seu login Gov.br."
-              />
-              <StepCard 
-                number={3} 
-                title="Preencha os Dados e Escolha a Atividade (CNAE)" 
-                desc="Você precisará informar o Nome Fantasia do seu negócio e escolher as atividades que você exerce. Você pode ter 1 atividade principal e até 15 secundárias. É importante escolher as que mais se aproximam do que você faz."
-              />
-              <StepCard 
-                number={4} 
-                title="Defina o Endereço" 
-                desc="Preencha o CEP de onde você vai trabalhar. Se for trabalhar de casa ou de forma ambulante/internet, marque a opção correspondente."
-              />
-              <StepCard 
-                number={5} 
-                title="Conclua e Emita o CCMEI" 
-                desc="Após aceitar os termos, seu CNPJ será gerado na hora! O sistema vai emitir o CCMEI (Certificado da Condição de Microempreendedor Individual). Salve esse documento (PDF), ele é o 'RG' da sua empresa."
-              />
-            </div>
+      <section className="bg-white border border-gray-200 rounded-3xl p-7 md:p-9 prose-mei" aria-labelledby="validar-ideia">
+        <div className="flex items-center gap-3 mb-4"><CheckCircle2 className="text-green-700" aria-hidden="true" /><h2 id="validar-ideia" className="!m-0">2. Valide cliente, oferta e preço</h2></div>
+        <p>A formalização não cria demanda. Descreva o problema que você resolve, escolha uma oferta pequena e converse com potenciais clientes. Busque sinais mais fortes do que curtidas: pedido, orçamento aceito, reserva ou compra dentro das regras aplicáveis à atividade.</p>
+        <p>Calcule materiais, taxas, deslocamento, tempo não faturável e reserva. Depois projete quantas vendas seriam necessárias por mês. Se a conta só funciona ignorando seu trabalho ou ultrapassa rapidamente o teto do MEI, ajuste a oferta ou avalie outro enquadramento antes de abrir o CNPJ.</p>
+        <div className="flex flex-wrap gap-3 not-prose">
+          <Link href="/ideias-de-negocios" className="inline-flex items-center gap-2 rounded-xl bg-green-50 border border-green-200 text-green-900 px-4 py-3 text-xs font-black uppercase tracking-wider">Ver planos de validação <ArrowRight size={15} /></Link>
+          <Link href="/calculadora-preco-hora-autonomo" className="inline-flex items-center gap-2 rounded-xl bg-gray-100 text-gray-800 px-4 py-3 text-xs font-black uppercase tracking-wider">Calcular preço <ArrowRight size={15} /></Link>
+        </div>
+      </section>
 
-            <button onClick={() => setActiveTab('pos-abertura')} className="w-full py-6 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-2xl font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-colors mt-8">
-              Conseguiu abrir? Veja o próximo passo <ArrowRight className="w-5 h-5" />
-            </button>
-          </motion.div>
-        ) : (
-          <motion.div 
-            key="pos-abertura"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="space-y-6"
-          >
-            <div className="bg-mei-bg border border-mei-light p-6 rounded-2xl flex items-start gap-4">
-              <CheckCircle2 className="w-6 h-6 text-mei-dark shrink-0 mt-1" />
-              <div>
-                <h4 className="font-bold text-mei-dark mb-2">Parabéns pelo seu novo CNPJ! 🎉</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Agora que você é oficialmente uma empresa, você tem alguns direitos (como auxílio-doença e aposentadoria) mas também tem deveres cruciais para não perder o seu MEI e não levar multas.
-                </p>
-              </div>
-            </div>
+      <section className="bg-white border border-gray-200 rounded-3xl p-7 md:p-9" aria-labelledby="passo-formalizacao">
+        <div className="flex items-center gap-3 mb-6"><Landmark className="text-green-700" aria-hidden="true" /><h2 id="passo-formalizacao" className="text-2xl font-bold text-mei-dark">3. Faça a formalização no canal oficial</h2></div>
+        <ol className="space-y-4">
+          {[
+            ['Entre no Portal do Empreendedor', 'Acesse a área “Quero ser MEI” e use sua conta gov.br. Confira o domínio antes de digitar qualquer credencial.'],
+            ['Revise seus dados', 'Verifique informações pessoais, contato, endereço residencial e endereço de exercício da atividade conforme solicitado pelo serviço.'],
+            ['Escolha as ocupações corretas', 'Use a lista oficial e leia a descrição das ocupações. Selecione como principal aquela que melhor representa a maior parte do trabalho.'],
+            ['Leia as declarações', 'Confirme somente condições verdadeiras sobre requisitos, independência, funcionamento e responsabilidade pelas informações.'],
+            ['Conclua e guarde o CCMEI', 'Revise antes de finalizar. Depois, salve o Certificado da Condição de Microempreendedor Individual e confira CNPJ, ocupações e endereços.']
+          ].map(([title, description], index) => (
+            <li key={title} className="grid sm:grid-cols-[48px_1fr] gap-4 bg-gray-50 border border-gray-100 rounded-2xl p-5">
+              <span className="w-11 h-11 rounded-xl bg-mei-dark text-white flex items-center justify-center font-serif italic text-lg">{index + 1}</span>
+              <div><h3 className="font-bold text-mei-dark mb-1">{title}</h3><p className="text-sm text-gray-600 leading-relaxed">{description}</p></div>
+            </li>
+          ))}
+        </ol>
+        <a href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/quero-ser-mei/formalize-se" target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 bg-mei-dark text-white rounded-xl px-5 py-3 text-xs font-black uppercase tracking-wider">Abrir formalização oficial <ExternalLink size={15} /></a>
+      </section>
 
-            <div className="grid gap-4">
-              <StepCard 
-                number={1} 
-                icon={<Wallet className="text-mei-dark w-6 h-6" />}
-                title="Pagar o DAS Mensalmente (Obrigatório)" 
-                desc="O DAS vence mensalmente, em regra no dia 20, e reúne INSS e ICMS/ISS conforme a atividade. Benefícios dependem de carência e outros requisitos. O DAS é devido mesmo sem faturamento no mês."
-              />
-              <StepCard 
-                number={2} 
-                icon={<FileText className="text-mei-dark w-6 h-6" />}
-                title="Declaração Anual (DASN-SIMEI)" 
-                desc="Todo ano, até o dia 31 de maio, você precisa declarar para o governo quanto você faturou no ano anterior. Mesmo que tenha faturado R$ 0,00, a declaração é obrigatória. O atraso gera multa mínima de R$ 50,00."
-              />
-              <StepCard 
-                number={3} 
-                icon={<ShieldCheck className="text-mei-dark w-6 h-6" />}
-                title="Controlar o Faturamento" 
-                desc="O limite de faturamento do MEI em 2026 é rígido (R$ 81.000,00 anuais na regra geral). Anote tudo o que você vende ou presta de serviço. Use o nosso 'Limite de Receita' ali no menu lateral para não se perder."
-              />
-              <StepCard 
-                number={4} 
-                icon={<CreditCard className="text-mei-dark w-6 h-6" />}
-                title="Abrir Conta Pessoa Jurídica (Recomendado)" 
-                desc="É extremamente recomendado separar o dinheiro da empresa do seu dinheiro pessoal. Abra uma conta digital gratuita para o seu CNPJ. Isso facilita a declaração e o controle financeiro."
-              />
-              <StepCard 
-                number={5} 
-                icon={<Receipt className="text-mei-dark w-6 h-6" />}
-                title="Emissão de Notas Fiscais" 
-                desc="Em regra, o MEI emite nota ao vender ou prestar serviço para pessoa jurídica e também quando o consumidor pessoa física solicitar. Venda de produto com envio e regras estaduais podem exigir documento próprio. Para serviço, o MEI usa o Emissor Nacional de NFS-e."
-              />
-            </div>
-            
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
+      <section className="bg-white border border-gray-200 rounded-3xl p-7 md:p-9 prose-mei" aria-labelledby="licenciamento">
+        <div className="flex items-center gap-3 mb-4"><FileCheck2 className="text-green-700" aria-hidden="true" /><h2 id="licenciamento" className="!m-0">4. Verifique licenciamento e endereço</h2></div>
+        <p>Ter CCMEI não significa que toda atividade pode funcionar em qualquer endereço. Prefeitura, Vigilância Sanitária, Corpo de Bombeiros, órgãos ambientais e conselhos profissionais podem ter exigências próprias. Consulte a viabilidade e o licenciamento da atividade no município, inclusive quando o trabalho é realizado em casa, pela internet ou de forma ambulante.</p>
+        <p>Guarde protocolos e orientações recebidas. Não anuncie uma licença que não possui e não trate a dispensa de alvará como dispensa de cumprir regras sanitárias, ambientais, de segurança ou de uso do imóvel.</p>
+      </section>
 
-function StepCard({ number, title, desc, link, linkText, icon }: { number: number, title: string, desc: string, link?: string, linkText?: string, icon?: React.ReactNode }) {
-  return (
-    <div className="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md hover:border-mei-light transition-all flex gap-5">
-      <div className="shrink-0">
-        {icon ? (
-          <div className="w-12 h-12 bg-mei-bg rounded-full flex items-center justify-center font-bold text-mei-dark text-lg border-2 border-mei-light">
-            {icon}
-          </div>
-        ) : (
-          <div className="w-12 h-12 bg-mei-bg rounded-full flex items-center justify-center font-bold text-mei-dark text-lg border-2 border-mei-light">
-            {number}
-          </div>
-        )}
-      </div>
-      <div className="flex-1">
-        <h4 className="text-lg font-bold text-mei-dark mb-2">{title}</h4>
-        <p className="text-sm text-gray-600 leading-relaxed">{desc}</p>
-        
-        {link && (
-          <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-4 text-xs font-bold uppercase tracking-widest text-mei-dark bg-mei-light/20 hover:bg-mei-light/40 px-4 py-2 rounded-lg transition-colors">
-            {linkText} <ExternalLink className="w-3 h-3" />
-          </a>
-        )}
-      </div>
-    </div>
+      <section className="bg-white border border-gray-200 rounded-3xl p-7 md:p-9 prose-mei" aria-labelledby="primeiros-dias">
+        <h2 id="primeiros-dias">5. Organize os primeiros 30 dias</h2>
+        <ul>
+          <li><strong>Separe registros:</strong> anote toda receita bruta, inclusive venda a pessoa física sem nota, e arquive documentos de compra e venda.</li>
+          <li><strong>Entenda o DAS:</strong> a contribuição mensal é devida mesmo sem faturamento. Emita somente no canal oficial e confira o beneficiário antes de pagar.</li>
+          <li><strong>Defina a nota correta:</strong> prestação de serviço e venda de mercadoria usam sistemas diferentes. Recibo comprova pagamento, mas não substitui nota quando ela é obrigatória.</li>
+          <li><strong>Acompanhe o limite:</strong> no ano de abertura, o teto é proporcional aos meses de atividade, contando o mês de abertura.</li>
+          <li><strong>Prepare a declaração anual:</strong> a DASN-SIMEI informa a receita do ano anterior e também é enviada quando não houve faturamento.</li>
+        </ul>
+        <div className="flex flex-wrap gap-3 not-prose">
+          <Link href="/ja-sou-mei" className="inline-flex items-center gap-2 rounded-xl bg-green-50 border border-green-200 text-green-900 px-4 py-3 text-xs font-black uppercase tracking-wider">Abrir jornada mensal <ArrowRight size={15} /></Link>
+          <Link href="/servicos-oficiais" className="inline-flex items-center gap-2 rounded-xl bg-gray-100 text-gray-800 px-4 py-3 text-xs font-black uppercase tracking-wider">Conferir canais oficiais <ArrowRight size={15} /></Link>
+        </div>
+      </section>
+
+      <section className="bg-white border border-gray-200 rounded-3xl p-7 md:p-9 prose-mei" aria-labelledby="fontes-guia">
+        <h2 id="fontes-guia" className="!mt-0">Fontes oficiais consultadas</h2>
+        <p>Esta página resume o caminho e não substitui as condições exibidas pelo serviço oficial no momento da formalização.</p>
+        <ul className="!mb-0">{officialSources.map((source) => <li key={source.href}><a href={source.href} target="_blank" rel="noopener noreferrer">{source.label}</a></li>)}</ul>
+      </section>
+    </article>
   );
 }

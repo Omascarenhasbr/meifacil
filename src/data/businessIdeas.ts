@@ -445,7 +445,7 @@ export const businessIdeas: BusinessIdea[] = [
     `,
     sources: [
       { name: 'Portal do Empreendedor — ocupações permitidas com a letra E', url: 'https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/quero-ser-mei/atividades-permitidas/e' },
-      { name: 'Contrata+Brasil — cartilha de contratação de eletricista', url: 'https://www.gov.br/contratamaisbrasil/pt-br/central-de-conteudo/editais-e-regulamentacao/edital-de-credenciamento-03-2025/anexo-iii-cartilhas/eletricista.pdf' },
+      { name: 'Ministério do Trabalho e Emprego — Norma Regulamentadora nº 10', url: 'https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/norma-regulamentadora-no-10-nr-10' },
       { name: 'Portal do Empreendedor — como escolher ocupações', url: 'https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/quero-ser-mei/quais-as-ocupacoes-que-podem-ser-mei' }
     ],
     relatedTool: { name: 'Calculadora de Precificação', path: '/calculadora-preco-hora-autonomo' },

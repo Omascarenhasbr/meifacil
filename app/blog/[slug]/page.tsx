@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { posts } from '../../../src/data/posts';
 import { BlogPostClient } from './client';
 import { notFound } from 'next/navigation';
+import { AdSenseScript } from '../../../src/components/AdSenseScript';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -33,7 +34,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       authors: ['Equipe Editorial MEI Fácil'],
       url: `/blog/${post.slug}`,
       tags: post.tags,
+      images: [],
     },
+    twitter: {
+      card: 'summary',
+      title: post.seo.metaTitle,
+      description: post.seo.metaDescription,
+      images: []
+    }
   };
 }
 
@@ -60,11 +68,16 @@ export default async function BlogPostPage({ params }: Props) {
       name: 'MEI Fácil',
       url: 'https://meifacil.blog/'
     },
-    citation: post.sources.map((source) => source.url)
+    citation: post.sources.map((source) => source.url),
+    inLanguage: 'pt-BR',
+    isAccessibleForFree: true,
+    articleSection: post.category,
+    keywords: post.tags.join(', ')
   };
 
   return (
     <>
+      <AdSenseScript />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <BlogPostClient slug={slug} />
     </>

@@ -143,6 +143,7 @@ export const DasCalculator = () => {
             <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Atividade</label>
             <div className="relative">
               <select
+                aria-label="Atividade do MEI"
                 value={activity}
                 onChange={e => setActivity(e.target.value)}
                 className="w-full appearance-none bg-gray-50 border-2 border-gray-200 rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-800 outline-none focus:border-mei-light transition-all cursor-pointer pr-10"
@@ -163,6 +164,7 @@ export const DasCalculator = () => {
             <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Tempo de atividade</label>
             <div className="relative">
               <select
+                aria-label="Tempo de atividade do MEI"
                 value={tempo}
                 onChange={e => setTempo(e.target.value)}
                 className="w-full appearance-none bg-gray-50 border-2 border-gray-200 rounded-2xl px-4 py-3.5 text-sm font-bold text-gray-800 outline-none focus:border-mei-light transition-all cursor-pointer pr-10"
@@ -187,6 +189,7 @@ export const DasCalculator = () => {
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-black text-gray-400">R$</span>
               <input
                 type="text"
+                aria-label="Receita bruta acumulada no ano-calendário"
                 inputMode="numeric"
                 value={receita12Raw}
                 onChange={e => setReceita12Raw(maskBRL(e.target.value))}
@@ -206,6 +209,7 @@ export const DasCalculator = () => {
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-black text-gray-400">R$</span>
               <input
                 type="text"
+                aria-label="Receita bruta do mês atual"
                 inputMode="numeric"
                 value={receitaMesRaw}
                 onChange={e => setReceitaMesRaw(maskBRL(e.target.value))}
@@ -358,7 +362,7 @@ export const DasCalculator = () => {
                 <a
                   href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei/pagamento-de-contribuicao-mensal/pagamento-da-contribuicao-mensal-das"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="w-full py-4 bg-mei-light text-mei-dark rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-lg hover:brightness-105 active:scale-95 transition text-center flex items-center justify-center gap-3"
                 >
                   Emitir Guia DAS Oficial

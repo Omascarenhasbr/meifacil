@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BusinessIdeaArticle } from '../../../src/components/BusinessIdeaArticle';
 import { businessIdeas } from '../../../src/data/businessIdeas';
+import { AdSenseScript } from '../../../src/components/AdSenseScript';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -28,7 +29,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       modifiedTime: idea.updatedAt,
       authors: ['Equipe Editorial MEI Fácil'],
       url: `/ideias-de-negocios/${idea.slug}`,
-      tags: idea.tags
+      tags: idea.tags,
+      images: []
+    },
+    twitter: {
+      card: 'summary',
+      title: idea.seo.metaTitle,
+      description: idea.seo.metaDescription,
+      images: []
     }
   };
 }
@@ -49,8 +57,12 @@ export default async function BusinessIdeaPage({ params }: Props) {
     author: { '@type': 'Organization', name: 'Equipe Editorial MEI Fácil', url: 'https://meifacil.blog/sobre' },
     publisher: { '@type': 'Organization', name: 'MEI Fácil', url: 'https://meifacil.blog/' },
     citation: idea.sources.map((source) => source.url),
-    about: { '@type': 'Occupation', name: idea.occupation.name, occupationalCategory: idea.occupation.cnae }
+    about: { '@type': 'Occupation', name: idea.occupation.name, occupationalCategory: idea.occupation.cnae },
+    inLanguage: 'pt-BR',
+    isAccessibleForFree: true,
+    articleSection: idea.category,
+    keywords: idea.tags.join(', ')
   };
 
-  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} /><BusinessIdeaArticle idea={idea} /></>;
+  return <><AdSenseScript /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} /><BusinessIdeaArticle idea={idea} /></>;
 }

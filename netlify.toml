@@ -7,6 +7,14 @@
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 [[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
   for = "/ads.txt"
   [headers.values]
     Content-Type = "text/plain; charset=UTF-8"

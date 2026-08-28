@@ -13,9 +13,11 @@ export default function ContatoPage() {
       eyebrow="Fale conosco"
       title="Contato"
       intro="Use o e-mail para relatar erros, sugerir melhorias ou esclarecer como as ferramentas funcionam."
+      updatedAt="28 de agosto de 2026"
     >
       <h2>Atendimento</h2>
       <p>E-mail: <a href="mailto:suporte@meifacil.app">suporte@meifacil.app</a></p>
+      <p>Esse é o canal editorial e técnico indicado pelo projeto. Mensagens não são tratadas como consulta contábil, jurídica ou previdenciária individual.</p>
       <p>Para facilitar a análise, inclua a URL da página, descreva o que aconteceu e informe navegador e dispositivo quando o assunto for técnico.</p>
 
       <h2>Correção editorial</h2>
@@ -25,7 +27,7 @@ export default function ContatoPage() {
       <p>Não acessamos conta Gov.br, CNPJ, dados bancários ou conta do AdSense do usuário. Também não emitimos guias, não recebemos documentos pessoais e não prestamos consultoria contábil individual.</p>
 
       <h2>Privacidade</h2>
-      <p>Não envie CPF, senha, código de acesso, documento de identidade ou dados completos de clientes. Consulte nossa política de privacidade para entender o funcionamento local das ferramentas.</p>
+      <p>Não envie CPF, senha, código de acesso, documento de identidade ou dados completos de clientes. Consulte nossa <a href="/politica-de-privacidade">Política de Privacidade</a> para entender o funcionamento local das ferramentas.</p>
     </InstitutionalPage>
   );
 }
