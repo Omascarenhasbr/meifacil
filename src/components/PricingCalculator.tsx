@@ -40,6 +40,7 @@ export const PricingCalculator = () => {
                 <div className="relative">
                   <span className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none font-bold text-gray-400">R$</span>
                   <input 
+                    aria-label="Renda líquida mensal desejada"
                     type="number" 
                     value={targetIncome} 
                     onChange={(e) => setTargetIncome(Number(e.target.value))}
@@ -53,6 +54,7 @@ export const PricingCalculator = () => {
                 <div>
                   <label className="block text-xs font-bold text-gray-500 mb-2 uppercase">Custos Fixos (R$)</label>
                   <input 
+                    aria-label="Custos fixos mensais do negócio"
                     type="number" 
                     value={expenses} 
                     onChange={(e) => setExpenses(Number(e.target.value))}
@@ -63,6 +65,7 @@ export const PricingCalculator = () => {
                 <div>
                   <label className="block text-xs font-bold text-gray-500 mb-2 uppercase">Horas no Mês</label>
                   <input 
+                    aria-label="Impostos e taxas em percentual"
                     type="number" 
                     value={workHoursPerMonth} 
                     onChange={(e) => setWorkHoursPerMonth(Number(e.target.value))}
@@ -78,6 +81,7 @@ export const PricingCalculator = () => {
                   <span className="text-sm font-black text-mei-light">{idlePercent}%</span>
                 </div>
                 <input 
+                  aria-label="Horas trabalhadas por dia"
                   type="range" min="0" max="70" step="5"
                   value={idlePercent} 
                   onChange={(e) => setIdlePercent(Number(e.target.value))}
@@ -91,6 +95,7 @@ export const PricingCalculator = () => {
                   {includeDAS && <CheckCircle className="w-4 h-4 text-white" />}
                 </div>
                 <input 
+                  aria-label="Dias trabalhados por mês"
                   type="checkbox" 
                   checked={includeDAS} 
                   onChange={(e) => setIncludeDAS(e.target.checked)}

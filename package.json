@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "tsc --noEmit",
-    "validate": "npm run build && npm run lint && node scripts/validate-export.mjs"
+    "validate": "npm run build && npm run lint && node scripts/validate-export.mjs",
+    "audit:external": "node scripts/check-external-links.mjs"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",

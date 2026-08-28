@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, Compass } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Página não encontrada',
+  description: 'O endereço informado não existe no MEI Fácil.',
+  alternates: { canonical: null },
+  robots: { index: false, follow: false }
+};
 
 export default function NotFound() {
   return (

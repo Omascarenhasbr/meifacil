@@ -41,16 +41,34 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'MEI Fácil',
+    url: 'https://meifacil.blog',
+    description: 'Projeto editorial independente com ferramentas e guias verificáveis para microempreendedores.',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'suporte editorial e técnico',
+      email: 'suporte@meifacil.app',
+      availableLanguage: 'Portuguese'
+    }
+  };
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'MEI Fácil',
+    url: 'https://meifacil.blog',
+    inLanguage: 'pt-BR',
+    publisher: { '@type': 'Organization', name: 'MEI Fácil' }
+  };
+
   return (
     <html lang="pt-BR">
-      <head>
-        <script
-          async
-          crossOrigin="anonymous"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9176810679156928"
-        />
-      </head>
       <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

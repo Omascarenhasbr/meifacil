@@ -61,7 +61,7 @@ export function BusinessIdeaArticle({ idea }: { idea: BusinessIdea }) {
           </section>
 
           <section className="mt-6 p-6 bg-green-50 border border-green-100 rounded-2xl">
-            <div className="flex gap-4"><span className="w-10 h-10 rounded-full bg-mei-dark text-white flex items-center justify-center shrink-0"><ShieldCheck size={18} /></span><div><h2 className="!mt-0 !mb-2 text-base!">Transparência editorial</h2><p className="text-sm !mb-2">Este conteúdo organiza hipóteses para pesquisa e não garante renda, aprovação como MEI ou licença de funcionamento.</p><Link href="/politica-editorial" className="text-sm font-bold text-green-800 underline underline-offset-2">Conheça nossa política editorial</Link></div></div>
+            <div className="flex gap-4"><span className="w-10 h-10 rounded-full bg-mei-dark text-white flex items-center justify-center shrink-0"><ShieldCheck size={18} /></span><div><h2 className="!mt-0 !mb-2 text-base!">Transparência editorial</h2><p className="text-sm !mb-2">Pesquisa, redação e revisão documental realizadas pela Equipe Editorial MEI Fácil. Este conteúdo organiza hipóteses para pesquisa e não garante renda, aprovação como MEI ou licença de funcionamento.</p><Link href="/politica-editorial" className="text-sm font-bold text-green-800 underline underline-offset-2">Conheça nossa política editorial</Link></div></div>
           </section>
 
           <div className="mt-8 flex flex-wrap gap-2">{idea.tags.map((tag) => <span key={tag} className="text-[10px] font-bold text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200 flex items-center gap-1"><Hash size={9} /> {tag}</span>)}</div>

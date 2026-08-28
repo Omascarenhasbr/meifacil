@@ -149,6 +149,7 @@ export function BlogList() {
             <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
+              aria-label="Buscar artigos por título ou assunto"
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Buscar artigos por título ou assunto..."

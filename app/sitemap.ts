@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/ideias-de-negocios',
     '/sobre',
     '/politica-editorial',
+    '/politica-de-publicidade',
     '/contato',
     '/politica-de-privacidade',
     '/termos-de-uso'
@@ -31,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes.map((route) => ({
       url: `${baseUrl}${route}`,
-      lastModified: new Date('2026-08-02'),
+      lastModified: new Date('2026-08-28'),
       changeFrequency: route === '/blog' || route === '/ideias-de-negocios' ? 'weekly' as const : 'monthly' as const,
       priority: route === '' ? 1 : route === '/blog' || route === '/ideias-de-negocios' ? 0.9 : route.startsWith('/politica') || route === '/termos-de-uso' ? 0.3 : 0.7
     })),

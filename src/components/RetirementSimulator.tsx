@@ -59,6 +59,7 @@ export const RetirementSimulator = () => {
                 <label className="text-[10px] font-black text-mei-dark block mb-2 uppercase tracking-widest italic">Ano de Nascimento</label>
                 <input 
                   type="number" 
+                  aria-label="Ano de nascimento"
                   min="1940"
                   max="2010"
                   className="w-full p-5 border-2 rounded-2xl text-2xl font-mono font-black text-center bg-mei-bg border-gray-50 focus:border-mei-dark outline-none transition-all"
@@ -71,6 +72,7 @@ export const RetirementSimulator = () => {
                 <label className="text-[10px] font-black text-mei-dark block mb-2 uppercase tracking-widest italic">Início da Contribuição</label>
                 <input 
                   type="number" 
+                  aria-label="Ano de início das contribuições"
                   min="1960"
                   max="2026"
                   className="w-full p-5 border-2 rounded-2xl text-2xl font-mono font-black text-center bg-mei-bg border-gray-50 focus:border-mei-dark outline-none transition-all"

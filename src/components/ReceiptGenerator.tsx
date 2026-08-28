@@ -75,6 +75,7 @@ export const ReceiptGenerator = () => {
             <div className="space-y-2">
               <label className="text-[10px] font-black text-mei-dark block ml-1 uppercase tracking-widest italic">Seu Nome ou Razão Social</label>
               <input 
+                aria-label="Nome de quem recebeu o pagamento"
                 className="w-full p-4 border-2 rounded-2xl text-sm font-bold bg-mei-bg border-gray-100 focus:border-mei-dark outline-none transition-all" 
                 placeholder="Ex: João da Silva MEI"
                 value={data.emissor} onChange={e => update('emissor', e.target.value)}
@@ -83,6 +84,7 @@ export const ReceiptGenerator = () => {
             <div className="space-y-2">
               <label className="text-[10px] font-black text-mei-dark block ml-1 uppercase tracking-widest italic">CNPJ ou CPF</label>
               <input 
+                aria-label="CNPJ ou CPF de quem recebeu o pagamento"
                 className="w-full p-4 border-2 rounded-2xl text-sm font-bold bg-mei-bg border-gray-100 focus:border-mei-dark outline-none transition-all" 
                 placeholder="00.000.000/0001-00"
                 value={data.cnpj} onChange={e => update('cnpj', e.target.value)}
@@ -100,6 +102,7 @@ export const ReceiptGenerator = () => {
             <div className="space-y-2">
               <label className="text-[10px] font-black text-mei-dark block ml-1 uppercase tracking-widest italic">Cliente (Pagador)</label>
               <input 
+                aria-label="Nome da pessoa ou empresa pagadora"
                 className="w-full p-4 border-2 rounded-2xl text-sm font-bold bg-mei-bg border-gray-100 focus:border-mei-dark outline-none transition-all" 
                 placeholder="Nome da pessoa ou empresa"
                 value={data.cliente} onChange={e => update('cliente', e.target.value)}
@@ -108,6 +111,7 @@ export const ReceiptGenerator = () => {
             <div className="space-y-2">
               <label className="text-[10px] font-black text-mei-dark block ml-1 uppercase tracking-widest italic">Valor Líquido (R$)</label>
               <input 
+                aria-label="Valor recebido"
                 className="w-full p-4 border-2 rounded-2xl text-sm font-bold bg-mei-bg border-gray-100 focus:border-mei-dark outline-none transition-all" 
                 placeholder="0,00"
                 value={data.valor} onChange={e => update('valor', e.target.value)}
@@ -116,6 +120,7 @@ export const ReceiptGenerator = () => {
             <div className="md:col-span-2 space-y-2">
               <label className="text-[10px] font-black text-mei-dark block ml-1 uppercase tracking-widest italic">Descrição do Serviço ou Produto</label>
               <textarea 
+                aria-label="Descrição do serviço ou produto"
                 className="w-full p-4 border-2 rounded-2xl text-sm font-bold bg-mei-bg border-gray-100 h-28 focus:border-mei-dark outline-none transition-all" 
                 placeholder="Descreva detalhadamente o serviço prestado..."
                 value={data.descricao} onChange={e => update('descricao', e.target.value)}

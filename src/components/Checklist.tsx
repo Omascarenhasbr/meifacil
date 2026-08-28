@@ -132,7 +132,7 @@ export const Checklist = () => {
             </div>
             <h4 className="font-bold text-red-800 leading-tight">DASN-SIMEI 2026</h4>
             <p className="text-sm text-red-700 leading-relaxed font-medium">O prazo regular é 31 de maio. A entrega em atraso gera multa e mantém a obrigação pendente.</p>
-            <a href="https://www.gov.br/mei" target="_blank" rel="noreferrer" className="block text-center py-3 bg-red-600 text-white rounded-xl text-xs font-bold hover:bg-red-700 transition">Portal Oficial</a>
+            <a href="https://www.gov.br/mei" target="_blank" rel="noopener noreferrer" className="block text-center py-3 bg-red-600 text-white rounded-xl text-xs font-bold hover:bg-red-700 transition">Portal Oficial</a>
           </div>
 
           <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm space-y-4">
